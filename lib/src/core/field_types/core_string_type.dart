@@ -1,0 +1,13 @@
+import 'package:rive_legacy/src/core/field_types/core_field_type.dart';
+import 'package:rive_common/utilities.dart';
+
+class CoreStringType extends CoreFieldType<String> {
+  @override
+  String deserialize(BinaryReader reader) => reader.readString(explicitLength: true);
+
+  @override
+  void skip(BinaryReader reader) {
+    var length = reader.readVarUint();
+    reader.read(length);
+  }
+}
