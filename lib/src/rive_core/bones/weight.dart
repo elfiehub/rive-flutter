@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
-import 'package:rive_legacy/src/generated/bones/weight_base.dart';
+import 'package:rive/src/generated/bones/weight_base.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/bones/weight_base.dart';
+export 'package:rive/src/generated/bones/weight_base.dart';
 
 class Weight extends WeightBase {
   final Vec2D translation = Vec2D();
@@ -19,15 +19,8 @@ class Weight extends WeightBase {
   @override
   void valuesChanged(int from, int to) {}
 
-  static void deform(
-    double x,
-    double y,
-    int indices,
-    int weights,
-    Mat2D world,
-    Float32List boneTransforms,
-    Vec2D result,
-  ) {
+  static void deform(double x, double y, int indices, int weights, Mat2D world,
+      Float32List boneTransforms, Vec2D result) {
     double xx = 0, xy = 0, yx = 0, yy = 0, tx = 0, ty = 0;
     var rx = world[0] * x + world[2] * y + world[4];
     var ry = world[1] * x + world[3] * y + world[5];

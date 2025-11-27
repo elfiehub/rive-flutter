@@ -1,7 +1,7 @@
-import 'package:rive_legacy/rive.dart';
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/animation.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
+import 'package:rive/rive.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/animation.dart';
+import 'package:rive/src/rive_core/component.dart';
 
 class ArtboardImporter extends ImportStackObject {
   final RuntimeArtboard artboard;
@@ -23,12 +23,14 @@ class ArtboardImporter extends ImportStackObject {
   @override
   bool resolve() {
     for (final object in artboard.objects.skip(1)) {
-      if (object is Component && object.parentId == ComponentBase.parentIdInitialValue) {
+      if (object is Component &&
+          object.parentId == ComponentBase.parentIdInitialValue) {
         object.parent = artboard;
       }
       object?.onAddedDirty();
     }
-    assert(!artboard.children.contains(artboard), 'artboard should never contain itself as a child');
+    assert(!artboard.children.contains(artboard),
+        'artboard should never contain itself as a child');
     for (final object in artboard.objects.toList(growable: false)) {
       if (object == null) {
         continue;

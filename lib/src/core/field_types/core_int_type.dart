@@ -1,4 +1,4 @@
-import 'package:rive_legacy/src/core/field_types/core_field_type.dart';
+import 'package:rive/src/core/field_types/core_field_type.dart';
 import 'package:rive_common/utilities.dart';
 
 class CoreIntType extends CoreFieldType<int> {

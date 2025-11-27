@@ -2,13 +2,17 @@
 
 import 'dart:math';
 
-import 'package:rive_legacy/src/generated/animation/elastic_interpolator_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/interpolator.dart';
-import 'package:rive_legacy/src/rive_core/enum_helper.dart';
+import 'package:rive/src/generated/animation/elastic_interpolator_base.dart';
+import 'package:rive/src/rive_core/animation/interpolator.dart';
+import 'package:rive/src/rive_core/enum_helper.dart';
 
-export 'package:rive_legacy/src/generated/animation/elastic_interpolator_base.dart';
+export 'package:rive/src/generated/animation/elastic_interpolator_base.dart';
 
-enum Easing { easeIn, easeOut, easeInOut }
+enum Easing {
+  easeIn,
+  easeOut,
+  easeInOut,
+}
 
 class ElasticEase {
   final double amplitude;
@@ -16,7 +20,9 @@ class ElasticEase {
   final double period;
 
   ElasticEase(this.amplitude, this.period)
-    : s = amplitude < 1.0 ? period / 4 : period / (2 * pi) * asin(1.0 / amplitude);
+      : s = amplitude < 1.0
+            ? period / 4
+            : period / (2 * pi) * asin(1.0 / amplitude);
 
   double computeActualAmplitude(double time) {
     if (amplitude < 1.0) {
@@ -39,7 +45,10 @@ class ElasticEase {
 
     var actualAmplitude = computeActualAmplitude(time);
 
-    return (actualAmplitude * pow(2, 10 * -time) * sin((time - s) * (2 * pi) / period)) + 1;
+    return (actualAmplitude *
+            pow(2, 10 * -time) *
+            sin((time - s) * (2 * pi) / period)) +
+        1;
   }
 
   double easeIn(double value) {
@@ -47,16 +56,25 @@ class ElasticEase {
 
     var actualAmplitude = computeActualAmplitude(time);
 
-    return -(actualAmplitude * pow(2, 10 * time) * sin((-time - s) * (2 * pi) / period));
+    return -(actualAmplitude *
+        pow(2, 10 * time) *
+        sin((-time - s) * (2 * pi) / period));
   }
 
   double easeInOut(double value) {
     var time = value * 2 - 1;
     var actualAmplitude = computeActualAmplitude(time);
     if (time < 0) {
-      return -0.5 * actualAmplitude * pow(2, 10 * time) * sin((-time - s) * (2 * pi) / period);
+      return -0.5 *
+          actualAmplitude *
+          pow(2, 10 * time) *
+          sin((-time - s) * (2 * pi) / period);
     } else {
-      return 0.5 * (actualAmplitude * pow(2, 10 * -time) * sin((time - s) * (2 * pi) / period)) + 1;
+      return 0.5 *
+              (actualAmplitude *
+                  pow(2, 10 * -time) *
+                  sin((time - s) * (2 * pi) / period)) +
+          1;
     }
   }
 }
@@ -67,7 +85,9 @@ class ElasticInterpolator extends ElasticInterpolatorBase {
   @override
   bool equalParameters(Interpolator other) {
     if (other is ElasticInterpolator) {
-      return easingValue == other.easingValue && amplitude == other.amplitude && period == other.period;
+      return easingValue == other.easingValue &&
+          amplitude == other.amplitude &&
+          period == other.period;
     }
     return false;
   }

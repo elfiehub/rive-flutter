@@ -2,9 +2,9 @@
 // lib/src/generated/viewmodel/viewmodel_property_viewmodel_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/viewmodel/viewmodel_component_base.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_property.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/viewmodel/viewmodel_component_base.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_property.dart';
 
 abstract class ViewModelPropertyViewModelBase extends ViewModelProperty {
   static const int typeKey = 436;
@@ -12,10 +12,10 @@ abstract class ViewModelPropertyViewModelBase extends ViewModelProperty {
   int get coreType => ViewModelPropertyViewModelBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    ViewModelPropertyViewModelBase.typeKey,
-    ViewModelPropertyBase.typeKey,
-    ViewModelComponentBase.typeKey,
-  };
+        ViewModelPropertyViewModelBase.typeKey,
+        ViewModelPropertyBase.typeKey,
+        ViewModelComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// ViewModelReferenceId field with key 565.

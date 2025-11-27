@@ -1,9 +1,9 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/blend_animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/blend_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation_instance.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_instance.dart';
-import 'package:rive_legacy/src/rive_core/state_machine_controller.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/blend_animation.dart';
+import 'package:rive/src/rive_core/animation/blend_state.dart';
+import 'package:rive/src/rive_core/animation/linear_animation_instance.dart';
+import 'package:rive/src/rive_core/animation/state_instance.dart';
+import 'package:rive/src/rive_core/state_machine_controller.dart';
 
 /// Individual animation in a blend state instance.
 class BlendStateAnimationInstance<T extends BlendAnimation> {
@@ -12,19 +12,20 @@ class BlendStateAnimationInstance<T extends BlendAnimation> {
   double mix = 0;
 
   BlendStateAnimationInstance(this.blendAnimation)
-    : animationInstance = LinearAnimationInstance(blendAnimation.animation!);
+      : animationInstance = LinearAnimationInstance(blendAnimation.animation!);
 }
 
 /// Generic blend state instance which works for [BlendState<BlendAnimation>]s
 /// where T represents the BlendState and K the BlendAnimation.
-abstract class BlendStateInstance<T extends BlendState<K>, K extends BlendAnimation> extends StateInstance {
+abstract class BlendStateInstance<T extends BlendState<K>,
+    K extends BlendAnimation> extends StateInstance {
   final List<BlendStateAnimationInstance<K>> animationInstances;
   BlendStateInstance(T state)
-    : animationInstances = state.animations
-          .where((animation) => animation.animation != null)
-          .map(BlendStateAnimationInstance.new)
-          .toList(growable: false),
-      super(state);
+      : animationInstances = state.animations
+            .where((animation) => animation.animation != null)
+            .map(BlendStateAnimationInstance.new)
+            .toList(growable: false),
+        super(state);
 
   @override
   bool get keepGoing => true;
@@ -42,7 +43,10 @@ abstract class BlendStateInstance<T extends BlendState<K>, K extends BlendAnimat
         // Should animations with m_Mix == 0.0 advance? They will trigger events
         // and the event properties (if any) will not be updated by
         // animationInstance.apply.
-        animation.animationInstance.advance(seconds, callbackReporter: controller);
+        animation.animationInstance.advance(
+          seconds,
+          callbackReporter: controller,
+        );
       }
     }
   }
@@ -54,7 +58,8 @@ abstract class BlendStateInstance<T extends BlendState<K>, K extends BlendAnimat
       if (m == 0) {
         continue;
       }
-      animation.animationInstance.animation.apply(animation.animationInstance.time, coreContext: core, mix: m);
+      animation.animationInstance.animation
+          .apply(animation.animationInstance.time, coreContext: core, mix: m);
     }
   }
 }

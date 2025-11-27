@@ -1,8 +1,8 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/cubic_interpolator_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/interpolator.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/cubic_interpolator_base.dart';
+import 'package:rive/src/rive_core/animation/interpolator.dart';
 
-export 'package:rive_legacy/src/generated/animation/cubic_interpolator_base.dart';
+export 'package:rive/src/generated/animation/cubic_interpolator_base.dart';
 
 const int newtonIterations = 4;
 
@@ -29,11 +29,15 @@ abstract class CubicInterface {
 }
 
 // Returns dx/dt given t, x1, and x2, or dy/dt given t, y1, and y2.
-abstract class CubicInterpolator extends CubicInterpolatorBase implements CubicInterface {
+abstract class CubicInterpolator extends CubicInterpolatorBase
+    implements CubicInterface {
   @override
   bool equalParameters(Interpolator other) {
     if (other is CubicInterpolator) {
-      return x1 == other.x1 && x2 == other.x2 && y1 == other.y1 && y2 == other.y2;
+      return x1 == other.x1 &&
+          x2 == other.x2 &&
+          y1 == other.y1 &&
+          y2 == other.y2;
     }
     return false;
   }
@@ -77,13 +81,16 @@ class InterpolatorCubicFactor {
     int currentSample = 1;
     int lastSample = splineTableSize - 1;
 
-    for (; currentSample != lastSample && _values[currentSample] <= x; ++currentSample) {
+    for (;
+        currentSample != lastSample && _values[currentSample] <= x;
+        ++currentSample) {
       intervalStart += sampleStepSize;
     }
     --currentSample;
 
     // Interpolate to provide an initial guess for t
-    var dist = (x - _values[currentSample]) / (_values[currentSample + 1] - _values[currentSample]);
+    var dist = (x - _values[currentSample]) /
+        (_values[currentSample + 1] - _values[currentSample]);
     var guessForT = intervalStart + dist * sampleStepSize;
 
     var initialSlope = getSlope(guessForT, x1, x2);
@@ -111,17 +118,23 @@ class InterpolatorCubicFactor {
         } else {
           intervalStart = currentT;
         }
-      } while (currentX.abs() > subdivisionPrecision && ++i < subdivisionMaxIterations);
+      } while (currentX.abs() > subdivisionPrecision &&
+          ++i < subdivisionMaxIterations);
       return currentT;
     }
   }
 
   static double calcBezier(double aT, double aA1, double aA2) {
-    return (((1.0 - 3.0 * aA2 + 3.0 * aA1) * aT + (3.0 * aA2 - 6.0 * aA1)) * aT + (3.0 * aA1)) * aT;
+    return (((1.0 - 3.0 * aA2 + 3.0 * aA1) * aT + (3.0 * aA2 - 6.0 * aA1)) *
+                aT +
+            (3.0 * aA1)) *
+        aT;
   }
 
-  // Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
+// Returns x(t) given t, x1, and x2, or y(t) given t, y1, and y2.
   static double getSlope(double aT, double aA1, double aA2) {
-    return 3.0 * (1.0 - 3.0 * aA2 + 3.0 * aA1) * aT * aT + 2.0 * (3.0 * aA2 - 6.0 * aA1) * aT + (3.0 * aA1);
+    return 3.0 * (1.0 - 3.0 * aA2 + 3.0 * aA1) * aT * aT +
+        2.0 * (3.0 * aA2 - 6.0 * aA1) * aT +
+        (3.0 * aA1);
   }
 }

@@ -2,9 +2,9 @@
 // lib/src/generated/animation/listener_number_change_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/listener_action_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/listener_input_change.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/listener_action_base.dart';
+import 'package:rive/src/rive_core/animation/listener_input_change.dart';
 
 abstract class ListenerNumberChangeBase extends ListenerInputChange {
   static const int typeKey = 118;
@@ -12,10 +12,10 @@ abstract class ListenerNumberChangeBase extends ListenerInputChange {
   int get coreType => ListenerNumberChangeBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    ListenerNumberChangeBase.typeKey,
-    ListenerInputChangeBase.typeKey,
-    ListenerActionBase.typeKey,
-  };
+        ListenerNumberChangeBase.typeKey,
+        ListenerInputChangeBase.typeKey,
+        ListenerActionBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Value field with key 229.

@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:rive_legacy/rive.dart';
-import 'package:rive_legacy/src/debug.dart';
-import 'package:rive_legacy/src/rive_core/assets/file_asset.dart';
-import 'package:rive_legacy/src/utilities/utilities.dart';
+import 'package:rive/rive.dart';
+import 'package:rive/src/debug.dart';
+import 'package:rive/src/rive_core/assets/file_asset.dart';
+import 'package:rive/src/utilities/utilities.dart';
 
 /// Base class for resolving out of band Rive assets, such as images and fonts.
 ///
@@ -39,17 +39,23 @@ class CDNAssetLoader extends FileAssetLoader {
     if (!url.endsWith('/')) {
       url += '/';
     }
-    url += formatUuid(uuidVariant2(asset.cdnUuid));
+    url += formatUuid(
+      uuidVariant2(asset.cdnUuid),
+    );
 
     final res = await http.get(Uri.parse(url));
 
     if ((res.statusCode / 100).floor() == 2) {
       try {
-        await asset.decode(Uint8List.view(res.bodyBytes.buffer));
+        await asset.decode(
+          Uint8List.view(res.bodyBytes.buffer),
+        );
       } on Exception catch (e) {
-        printDebugMessage('''Unable to parse response ${asset.runtimeType}.
+        printDebugMessage(
+          '''Unable to parse response ${asset.runtimeType}.
   - Url: $url
-  - Exception: $e''');
+  - Exception: $e''',
+        );
         return false;
       }
 
@@ -88,8 +94,13 @@ class LocalAssetLoader extends FileAssetLoader {
   final String? path;
   final AssetBundle _assetBundle;
 
-  LocalAssetLoader({this.audioPath, this.fontPath, this.imagePath, this.path, AssetBundle? assetBundle})
-    : _assetBundle = assetBundle ?? rootBundle;
+  LocalAssetLoader({
+    this.audioPath,
+    this.fontPath,
+    this.imagePath,
+    this.path,
+    AssetBundle? assetBundle,
+  }) : _assetBundle = assetBundle ?? rootBundle;
 
   @override
   Future<bool> load(FileAsset asset, Uint8List? embeddedBytes) async {
@@ -103,26 +114,20 @@ class LocalAssetLoader extends FileAssetLoader {
 
     switch (asset.runtimeType) {
       case AudioAsset:
-        assert(
-          audioPath != null || path != null,
-          '''Audio asset not found. Be sure to provide either `audioPath` or `path` in `LocalAssetLoader`.''',
-        );
+        assert(audioPath != null || path != null,
+            '''Audio asset not found. Be sure to provide either `audioPath` or `path` in `LocalAssetLoader`.''');
         if (audioPath == null && path == null) return false;
         filePath = audioPath ?? path!;
         break;
       case FontAsset:
-        assert(
-          fontPath != null || path != null,
-          '''Font asset not found. Be sure to provide either `fontPath` or `path` in `LocalAssetLoader`.''',
-        );
+        assert(fontPath != null || path != null,
+            '''Font asset not found. Be sure to provide either `fontPath` or `path` in `LocalAssetLoader`.''');
         if (fontPath == null && path == null) return false;
         filePath = fontPath ?? path!;
         break;
       case ImageAsset:
-        assert(
-          imagePath != null || path != null,
-          '''Image asset not found. Be sure to provide either `imagePath` or `path` in `LocalAssetLoader`.''',
-        );
+        assert(imagePath != null || path != null,
+            '''Image asset not found. Be sure to provide either `imagePath` or `path` in `LocalAssetLoader`.''');
         if (imagePath == null && path == null) return false;
         filePath = imagePath ?? path!;
         break;

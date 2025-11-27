@@ -2,9 +2,9 @@
 // lib/src/generated/world_transform_component_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/container_component.dart';
 
 abstract class WorldTransformComponentBase extends ContainerComponent {
   static const int typeKey = 91;
@@ -12,10 +12,10 @@ abstract class WorldTransformComponentBase extends ContainerComponent {
   int get coreType => WorldTransformComponentBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    WorldTransformComponentBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        WorldTransformComponentBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Opacity field with key 18.

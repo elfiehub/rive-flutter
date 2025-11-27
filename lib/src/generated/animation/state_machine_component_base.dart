@@ -2,9 +2,10 @@
 // lib/src/generated/animation/state_machine_component_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
+import 'package:rive/src/core/core.dart';
 
-abstract class StateMachineComponentBase<T extends CoreContext> extends Core<T> {
+abstract class StateMachineComponentBase<T extends CoreContext>
+    extends Core<T> {
   static const int typeKey = 54;
   @override
   int get coreType => StateMachineComponentBase.typeKey;

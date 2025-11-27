@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:rive_legacy/src/generated/shapes/polygon_base.dart';
-import 'package:rive_legacy/src/rive_core/bones/weight.dart';
-import 'package:rive_legacy/src/rive_core/shapes/path_vertex.dart';
-import 'package:rive_legacy/src/rive_core/shapes/straight_vertex.dart';
+import 'package:rive/src/generated/shapes/polygon_base.dart';
+import 'package:rive/src/rive_core/bones/weight.dart';
+import 'package:rive/src/rive_core/shapes/path_vertex.dart';
+import 'package:rive/src/rive_core/shapes/straight_vertex.dart';
 
-export 'package:rive_legacy/src/generated/shapes/polygon_base.dart';
+export 'package:rive/src/generated/shapes/polygon_base.dart';
 
 class Polygon extends PolygonBase {
   @override
@@ -24,12 +24,10 @@ class Polygon extends PolygonBase {
     var angle = -pi / 2;
     var inc = 2 * pi / points;
     for (int i = 0; i < points; i++) {
-      vertexList.add(
-        StraightVertex.procedural()
-          ..x = ox + cos(angle) * halfWidth
-          ..y = oy + sin(angle) * halfHeight
-          ..radius = cornerRadius,
-      );
+      vertexList.add(StraightVertex.procedural()
+        ..x = ox + cos(angle) * halfWidth
+        ..y = oy + sin(angle) * halfHeight
+        ..radius = cornerRadius);
       angle += inc;
     }
     return vertexList;

@@ -1,10 +1,10 @@
 import 'package:collection/collection.dart';
-import 'package:rive_legacy/src/generated/viewmodel/viewmodel_instance_base.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance_value.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance_viewmodel.dart';
+import 'package:rive/src/generated/viewmodel/viewmodel_instance_base.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance_value.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance_viewmodel.dart';
 
-export 'package:rive_legacy/src/generated/viewmodel/viewmodel_instance_base.dart';
+export 'package:rive/src/generated/viewmodel/viewmodel_instance_base.dart';
 
 class ViewModelInstance extends ViewModelInstanceBase {
   List<ViewModelInstanceValue> propertyValues = [];
@@ -50,14 +50,18 @@ class ViewModelInstance extends ViewModelInstanceBase {
     return removePropertyValue(value);
   }
 
-  ViewModelInstanceValue? propertyValueByPropertyId<T extends ViewModelInstanceValue?>(int propertyId) {
-    final propertyValue = propertyValues.firstWhereOrNull((property) => property.viewModelPropertyId == propertyId);
+  ViewModelInstanceValue?
+      propertyValueByPropertyId<T extends ViewModelInstanceValue?>(
+          int propertyId) {
+    final propertyValue = propertyValues.firstWhereOrNull(
+        (property) => property.viewModelPropertyId == propertyId);
     assert(propertyValue is T?);
     return propertyValue;
   }
 
   ViewModelInstanceValue property(int propertyId) {
-    return propertyValues.firstWhere((property) => property.viewModelPropertyId == propertyId);
+    return propertyValues
+        .firstWhere((property) => property.viewModelPropertyId == propertyId);
   }
 
   ViewModelInstanceValue? propertyFromPath(List<int> pathIds, int index) {

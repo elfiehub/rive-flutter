@@ -1,12 +1,12 @@
 import 'dart:math';
 
-import 'package:rive_legacy/src/generated/constraints/transform_constraint_base.dart';
-import 'package:rive_legacy/src/rive_core/constraints/constraint.dart';
-import 'package:rive_legacy/src/rive_core/transform_component.dart';
-import 'package:rive_legacy/src/rive_core/transform_space.dart';
+import 'package:rive/src/generated/constraints/transform_constraint_base.dart';
+import 'package:rive/src/rive_core/constraints/constraint.dart';
+import 'package:rive/src/rive_core/transform_component.dart';
+import 'package:rive/src/rive_core/transform_space.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/constraints/transform_constraint_base.dart';
+export 'package:rive/src/generated/constraints/transform_constraint_base.dart';
 
 /// A constraint copies the transform from the target component to the
 /// constrained component in world or local space.
@@ -14,7 +14,10 @@ class TransformConstraint extends TransformConstraintBase {
   Mat2D get targetTransform {
     var bounds = target!.constraintBounds;
     var local = Mat2D.fromTranslation(
-      Vec2D.fromValues(bounds.left + bounds.width * originX, bounds.top + bounds.height * originY),
+      Vec2D.fromValues(
+        bounds.left + bounds.width * originX,
+        bounds.top + bounds.height * originY,
+      ),
     );
     return Mat2D.multiply(Mat2D(), target!.worldTransform, local);
   }
@@ -66,8 +69,10 @@ class TransformConstraint extends TransformConstraintBase {
   }
 
   @override
-  void originXChanged(double from, double to) => constrainedComponent?.markTransformDirty();
+  void originXChanged(double from, double to) =>
+      constrainedComponent?.markTransformDirty();
 
   @override
-  void originYChanged(double from, double to) => constrainedComponent?.markTransformDirty();
+  void originYChanged(double from, double to) =>
+      constrainedComponent?.markTransformDirty();
 }

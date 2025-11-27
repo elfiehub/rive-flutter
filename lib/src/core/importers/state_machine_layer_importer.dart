@@ -1,7 +1,7 @@
-import 'package:rive_legacy/rive.dart';
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/layer_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_layer.dart';
+import 'package:rive/rive.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/layer_state.dart';
+import 'package:rive/src/rive_core/animation/state_machine_layer.dart';
 
 class StateMachineLayerImporter extends ImportStackObject {
   final StateMachineLayer layer;
@@ -30,7 +30,8 @@ class StateMachineLayerImporter extends ImportStackObject {
         // (which state in this layer). We can use that to find the matching
         // importedState and assign back the core id that will resolve after the
         // entire artboard imports.
-        if (transition.stateToId >= 0 && transition.stateToId < importedStates.length) {
+        if (transition.stateToId >= 0 &&
+            transition.stateToId < importedStates.length) {
           transition.stateTo = importedStates[transition.stateToId];
         }
       }

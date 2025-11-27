@@ -3,52 +3,49 @@ import 'dart:collection';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:rive_legacy/src/asset_loader.dart';
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/core/field_types/core_field_type.dart';
-import 'package:rive_legacy/src/core/importers/viewmodel_instance_importer.dart';
-import 'package:rive_legacy/src/generated/animation/animation_state_base.dart';
-import 'package:rive_legacy/src/generated/animation/any_state_base.dart';
-import 'package:rive_legacy/src/generated/animation/blend_state_transition_base.dart';
-import 'package:rive_legacy/src/generated/animation/entry_state_base.dart';
-import 'package:rive_legacy/src/generated/animation/exit_state_base.dart';
-import 'package:rive_legacy/src/generated/assets/font_asset_base.dart';
-import 'package:rive_legacy/src/generated/nested_artboard_base.dart';
-import 'package:rive_legacy/src/generated/text/text_base.dart';
-import 'package:rive_legacy/src/local_file_io.dart'
-    if (dart.library.js_interop) 'package:rive_legacy/src/local_file_web.dart';
-import 'package:rive_legacy/src/rive_core/animation/blend_state_1d.dart';
-import 'package:rive_legacy/src/rive_core/animation/blend_state_direct.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyed_object.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyed_property.dart';
-import 'package:rive_legacy/src/rive_core/animation/layer_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_state_machine.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_layer.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_layer_component.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_listener.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_transition.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
-import 'package:rive_legacy/src/rive_core/assets/audio_asset.dart';
-import 'package:rive_legacy/src/rive_core/assets/file_asset.dart';
-import 'package:rive_legacy/src/rive_core/assets/image_asset.dart';
-import 'package:rive_legacy/src/rive_core/backboard.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/runtime/exceptions/rive_format_error_exception.dart';
-import 'package:rive_legacy/src/rive_core/runtime/runtime_header.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance.dart';
-import 'package:rive_legacy/src/runtime_nested_artboard.dart';
+import 'package:rive/src/asset_loader.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/core/field_types/core_field_type.dart';
+import 'package:rive/src/core/importers/viewmodel_instance_importer.dart';
+import 'package:rive/src/generated/animation/animation_state_base.dart';
+import 'package:rive/src/generated/animation/any_state_base.dart';
+import 'package:rive/src/generated/animation/blend_state_transition_base.dart';
+import 'package:rive/src/generated/animation/entry_state_base.dart';
+import 'package:rive/src/generated/animation/exit_state_base.dart';
+import 'package:rive/src/generated/assets/font_asset_base.dart';
+import 'package:rive/src/generated/nested_artboard_base.dart';
+import 'package:rive/src/generated/text/text_base.dart';
+import 'package:rive/src/local_file_io.dart'
+    if (dart.library.js_interop) 'package:rive/src/local_file_web.dart';
+import 'package:rive/src/rive_core/animation/blend_state_1d.dart';
+import 'package:rive/src/rive_core/animation/blend_state_direct.dart';
+import 'package:rive/src/rive_core/animation/keyed_object.dart';
+import 'package:rive/src/rive_core/animation/keyed_property.dart';
+import 'package:rive/src/rive_core/animation/layer_state.dart';
+import 'package:rive/src/rive_core/animation/linear_animation.dart';
+import 'package:rive/src/rive_core/animation/nested_state_machine.dart';
+import 'package:rive/src/rive_core/animation/state_machine.dart';
+import 'package:rive/src/rive_core/animation/state_machine_layer.dart';
+import 'package:rive/src/rive_core/animation/state_machine_layer_component.dart';
+import 'package:rive/src/rive_core/animation/state_machine_listener.dart';
+import 'package:rive/src/rive_core/animation/state_transition.dart';
+import 'package:rive/src/rive_core/artboard.dart';
+import 'package:rive/src/rive_core/assets/audio_asset.dart';
+import 'package:rive/src/rive_core/assets/file_asset.dart';
+import 'package:rive/src/rive_core/assets/image_asset.dart';
+import 'package:rive/src/rive_core/backboard.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/runtime/exceptions/rive_format_error_exception.dart';
+import 'package:rive/src/rive_core/runtime/runtime_header.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance.dart';
+import 'package:rive/src/runtime_nested_artboard.dart';
 import 'package:rive_common/rive_text.dart';
 import 'package:rive_common/utilities.dart';
 
 typedef Core<CoreContext>? ObjectGenerator(int coreTypeKey);
 
-Core<CoreContext>? _readRuntimeObject(
-  BinaryReader reader,
-  HashMap<int, CoreFieldType> propertyToField,
-  ObjectGenerator? generator,
-) {
+Core<CoreContext>? _readRuntimeObject(BinaryReader reader,
+    HashMap<int, CoreFieldType> propertyToField, ObjectGenerator? generator) {
   int coreObjectKey = reader.readVarUint();
   Core<CoreContext>? instance = generator?.call(coreObjectKey);
   if (instance == null) {
@@ -74,13 +71,15 @@ Core<CoreContext>? _readRuntimeObject(
     if (fieldType == null || object == null) {
       _skipProperty(reader, propertyKey, propertyToField);
     } else {
-      RiveCoreContext.setObjectProperty(object, propertyKey, fieldType.deserialize(reader));
+      RiveCoreContext.setObjectProperty(
+          object, propertyKey, fieldType.deserialize(reader));
     }
   }
   return object;
 }
 
-int _peekRuntimeObjectType(BinaryReader reader, HashMap<int, CoreFieldType> propertyToField) {
+int _peekRuntimeObjectType(
+    BinaryReader reader, HashMap<int, CoreFieldType> propertyToField) {
   int coreObjectKey = reader.readVarUint();
 
   while (true) {
@@ -95,13 +94,13 @@ int _peekRuntimeObjectType(BinaryReader reader, HashMap<int, CoreFieldType> prop
   return coreObjectKey;
 }
 
-void _skipProperty(BinaryReader reader, int propertyKey, HashMap<int, CoreFieldType> propertyToField) {
-  var field = RiveCoreContext.coreType(propertyKey) ?? propertyToField[propertyKey];
+void _skipProperty(BinaryReader reader, int propertyKey,
+    HashMap<int, CoreFieldType> propertyToField) {
+  var field =
+      RiveCoreContext.coreType(propertyKey) ?? propertyToField[propertyKey];
   if (field == null) {
-    throw UnsupportedError(
-      'Unsupported property key $propertyKey. '
-      'A new runtime is likely necessary to play this file.',
-    );
+    throw UnsupportedError('Unsupported property key $propertyKey. '
+        'A new runtime is likely necessary to play this file.');
   }
   field.skip(reader);
 }
@@ -121,10 +120,11 @@ class RiveFile {
     RiveCoreContext.uintType,
     RiveCoreContext.stringType,
     RiveCoreContext.doubleType,
-    RiveCoreContext.colorType,
+    RiveCoreContext.colorType
   ];
 
-  static HashMap<int, CoreFieldType> _propertyToFieldLookup(RuntimeHeader header) {
+  static HashMap<int, CoreFieldType> _propertyToFieldLookup(
+      RuntimeHeader header) {
     /// Property fields table of contents
     final propertyToField = HashMap<int, CoreFieldType>();
 
@@ -162,7 +162,12 @@ class RiveFile {
     return false;
   }
 
-  RiveFile._(BinaryReader reader, this.header, ObjectGenerator? generator, this._assetLoader) {
+  RiveFile._(
+    BinaryReader reader,
+    this.header,
+    ObjectGenerator? generator,
+    this._assetLoader,
+  ) {
     /// Property fields table of contents
     final propertyToField = _propertyToFieldLookup(header);
 
@@ -174,7 +179,8 @@ class RiveFile {
       if (object == null) {
         // See if there's an artboard on the stack, need to track the null
         // object as it'll still hold an id.
-        var artboardImporter = importStack.latest<ArtboardImporter>(ArtboardBase.typeKey);
+        var artboardImporter =
+            importStack.latest<ArtboardImporter>(ArtboardBase.typeKey);
         if (artboardImporter != null) {
           artboardImporter.addComponent(null);
         }
@@ -201,10 +207,11 @@ class RiveFile {
           {
             // KeyedProperty importer requires a linear animation importer, so
             // make sure there's one on the stack.
-            var linearAnimationImporter = importStack.requireLatest<LinearAnimationImporter>(
-              LinearAnimationBase.typeKey,
-            );
-            stackObject = KeyedPropertyImporter(object as KeyedProperty, linearAnimationImporter.linearAnimation);
+            var linearAnimationImporter =
+                importStack.requireLatest<LinearAnimationImporter>(
+                    LinearAnimationBase.typeKey);
+            stackObject = KeyedPropertyImporter(object as KeyedProperty,
+                linearAnimationImporter.linearAnimation);
             break;
           }
         case StateMachineBase.typeKey:
@@ -214,10 +221,12 @@ class RiveFile {
           stackObject = StateMachineLayerImporter(object as StateMachineLayer);
           break;
         case StateMachineListenerBase.typeKey:
-          stackObject = StateMachineListenerImporter(object as StateMachineListener);
+          stackObject =
+              StateMachineListenerImporter(object as StateMachineListener);
           break;
         case NestedStateMachineBase.typeKey:
-          stackObject = NestedStateMachineImporter(object as NestedStateMachine);
+          stackObject =
+              NestedStateMachineImporter(object as NestedStateMachine);
           break;
         case EntryStateBase.typeKey:
         case AnyStateBase.typeKey:
@@ -231,8 +240,10 @@ class RiveFile {
         case StateTransitionBase.typeKey:
         case BlendStateTransitionBase.typeKey:
           {
-            var stateMachineImporter = importStack.requireLatest<StateMachineImporter>(StateMachineBase.typeKey);
-            stackObject = StateTransitionImporter(object as StateTransition, stateMachineImporter);
+            var stateMachineImporter = importStack
+                .requireLatest<StateMachineImporter>(StateMachineBase.typeKey);
+            stackObject = StateTransitionImporter(
+                object as StateTransition, stateMachineImporter);
             stackType = StateTransitionBase.typeKey;
             break;
           }
@@ -240,12 +251,17 @@ class RiveFile {
         case ImageAssetBase.typeKey:
         case FontAssetBase.typeKey:
           // all these stack objects are resolvers. they get resolved.
-          stackObject = FileAssetImporter(object as FileAsset, _assetLoader);
+          stackObject = FileAssetImporter(
+            object as FileAsset,
+            _assetLoader,
+          );
           stackType = FileAssetBase.typeKey;
           break;
         case ViewModelInstanceBase.typeKey:
           // all these stack objects are resolvers. they get resolved.
-          stackObject = ViewModelInstanceImporter(object as ViewModelInstance);
+          stackObject = ViewModelInstanceImporter(
+            object as ViewModelInstance,
+          );
           stackType = ViewModelInstanceBase.typeKey;
           break;
         default:
@@ -261,10 +277,8 @@ class RiveFile {
       // Special case for StateMachineLayerComponents as the concrete types also
       // add importers.
       if (object is StateMachineLayerComponent) {
-        if (!importStack.makeLatest(
-          StateMachineLayerComponentBase.typeKey,
-          StateMachineLayerComponentImporter(object),
-        )) {
+        if (!importStack.makeLatest(StateMachineLayerComponentBase.typeKey,
+            StateMachineLayerComponentImporter(object))) {
           throw const RiveFormatErrorException('Rive file is corrupt.');
         }
       }
@@ -279,7 +293,8 @@ class RiveFile {
             break;
           case BackboardBase.typeKey:
             if (_backboard != Backboard.unknown) {
-              throw const RiveFormatErrorException('Rive file expects only one backboard.');
+              throw const RiveFormatErrorException(
+                  'Rive file expects only one backboard.');
             }
             _backboard = object as Backboard;
             break;
@@ -305,7 +320,8 @@ class RiveFile {
         if (object.validate()) {
           InternalCoreHelper.markValid(object);
         } else {
-          throw RiveFormatErrorException('Rive file is corrupt. Invalid $object.');
+          throw RiveFormatErrorException(
+              'Rive file is corrupt. Invalid $object.');
         }
       }
     }
@@ -349,7 +365,12 @@ Consider calling `await RiveFile.initialize()` before using `RiveFile.import`'''
       reader,
       RuntimeHeader.read(reader),
       objectGenerator,
-      FallbackAssetLoader([if (assetLoader != null) assetLoader, if (loadCdnAssets) CDNAssetLoader()]),
+      FallbackAssetLoader(
+        [
+          if (assetLoader != null) assetLoader,
+          if (loadCdnAssets) CDNAssetLoader(),
+        ],
+      ),
     );
   }
 
@@ -369,7 +390,8 @@ Consider calling `await RiveFile.initialize()` before using `RiveFile.import`'''
   static Future<void> initialize() async {
     if (!_initializedText) {
       final status = await Font.initialize();
-      if (status == FontInitStatus.success || status == FontInitStatus.alreadyInitialized) {
+      if (status == FontInitStatus.success ||
+          status == FontInitStatus.alreadyInitialized) {
         _initializedText = true;
       }
     }
@@ -415,7 +437,9 @@ Consider calling `await RiveFile.initialize()` before using `RiveFile.import`'''
     bool loadCdnAssets = true,
     ObjectGenerator? objectGenerator,
   }) async {
-    final bytes = await (bundle ?? rootBundle).load(bundleKey);
+    final bytes = await (bundle ?? rootBundle).load(
+      bundleKey,
+    );
 
     return _initTextAndImport(
       bytes,
@@ -479,5 +503,6 @@ Consider calling `await RiveFile.initialize()` before using `RiveFile.import`'''
 
   /// Returns an artboard from the specified name, or null if no artboard with
   /// that name exists in the file
-  Artboard? artboardByName(String name) => _artboards.firstWhereOrNull((a) => a.name == name);
+  Artboard? artboardByName(String name) =>
+      _artboards.firstWhereOrNull((a) => a.name == name);
 }

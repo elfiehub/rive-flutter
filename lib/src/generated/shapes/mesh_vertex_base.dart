@@ -1,10 +1,10 @@
 // Core automatically generated lib/src/generated/shapes/mesh_vertex_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/shapes/vertex.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/shapes/vertex.dart';
 
 abstract class MeshVertexBase extends Vertex {
   static const int typeKey = 108;
@@ -12,11 +12,11 @@ abstract class MeshVertexBase extends Vertex {
   int get coreType => MeshVertexBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    MeshVertexBase.typeKey,
-    VertexBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        MeshVertexBase.typeKey,
+        VertexBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// U field with key 215.

@@ -1,10 +1,10 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyed_object.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/loop.dart';
-import 'package:rive_legacy/src/rive_core/event.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/keyed_object.dart';
+import 'package:rive/src/rive_core/animation/linear_animation.dart';
+import 'package:rive/src/rive_core/animation/loop.dart';
+import 'package:rive/src/rive_core/event.dart';
 
 class LinearAnimationInstance {
   final LinearAnimation animation;
@@ -23,8 +23,9 @@ class LinearAnimationInstance {
   double get lastTotalTime => _lastTotalTime;
 
   LinearAnimationInstance(this.animation, {double speedMultiplier = 1.0})
-    : _time = (speedMultiplier >= 0) ? animation.startTime : animation.endTime,
-      _speedDirection = (speedMultiplier >= 0) ? 1 : -1;
+      : _time =
+            (speedMultiplier >= 0) ? animation.startTime : animation.endTime,
+        _speedDirection = (speedMultiplier >= 0) ? 1 : -1;
 
   /// NOTE: that when time is set, the direction will be changed to 1
   set time(double value) {
@@ -53,10 +54,13 @@ class LinearAnimationInstance {
 
   double get directedSpeed => animation.speed * _direction;
 
-  double get progress => (_time - animation.startTime).abs() / (animation.endTime - animation.startTime).abs();
+  double get progress =>
+      (_time - animation.startTime).abs() /
+      (animation.endTime - animation.startTime).abs();
 
   /// Resets the animation to the starting frame
-  void reset({double speedMultiplier = 1}) => _time = (speedMultiplier >= 0) ? animation.startTime : animation.endTime;
+  void reset({double speedMultiplier = 1}) =>
+      _time = (speedMultiplier >= 0) ? animation.startTime : animation.endTime;
 
   /// Whether the controller driving this animation should keep requesting
   /// frames be drawn.
@@ -83,7 +87,8 @@ class LinearAnimationInstance {
     _spilledTime = 0;
   }
 
-  bool advance(double elapsedSeconds, {KeyedCallbackReporter? callbackReporter}) {
+  bool advance(double elapsedSeconds,
+      {KeyedCallbackReporter? callbackReporter}) {
     var deltaSeconds = elapsedSeconds * animation.speed * _direction;
     _spilledTime = 0;
 
@@ -103,7 +108,12 @@ class LinearAnimationInstance {
     _time += deltaSeconds;
 
     if (callbackReporter != null) {
-      animation.reportKeyedCallbacks(lastTime, _time, reporter: callbackReporter, speedDirection: _speedDirection);
+      animation.reportKeyedCallbacks(
+        lastTime,
+        _time,
+        reporter: callbackReporter,
+        speedDirection: _speedDirection,
+      );
     }
 
     var fps = animation.fps;

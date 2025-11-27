@@ -1,11 +1,11 @@
-import 'package:rive_legacy/src/generated/shapes/points_path_base.dart';
-import 'package:rive_legacy/src/rive_core/bones/skinnable.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/shapes/path_vertex.dart';
+import 'package:rive/src/generated/shapes/points_path_base.dart';
+import 'package:rive/src/rive_core/bones/skinnable.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/shapes/path_vertex.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/shapes/points_path_base.dart';
+export 'package:rive/src/generated/shapes/points_path_base.dart';
 
 class PointsPath extends PointsPathBase with Skinnable<PathVertex> {
   final List<PathVertex> _vertices = [];
@@ -21,7 +21,8 @@ class PointsPath extends PointsPathBase with Skinnable<PathVertex> {
 
   // When bound to bones inversePathTransform should be the identity.
   @override
-  Mat2D get inversePathTransform => skin != null ? Mat2D() : inverseWorldTransform;
+  Mat2D get inversePathTransform =>
+      skin != null ? Mat2D() : inverseWorldTransform;
 
   @override
   List<PathVertex> get vertices => _vertices;

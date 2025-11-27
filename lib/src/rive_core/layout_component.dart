@@ -1,22 +1,22 @@
 import 'dart:math';
 
 import 'package:flutter/rendering.dart';
-import 'package:rive_legacy/src/generated/layout_component_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyframe_interpolator.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
-import 'package:rive_legacy/src/rive_core/bounds_provider.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
-import 'package:rive_legacy/src/rive_core/layout/layout_component_style.dart';
-import 'package:rive_legacy/src/rive_core/node.dart';
-import 'package:rive_legacy/src/rive_core/shapes/paint/shape_paint_mutator.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape_paint_container.dart';
-import 'package:rive_legacy/src/rive_core/world_transform_component.dart';
+import 'package:rive/src/generated/layout_component_base.dart';
+import 'package:rive/src/rive_core/animation/keyframe_interpolator.dart';
+import 'package:rive/src/rive_core/artboard.dart';
+import 'package:rive/src/rive_core/bounds_provider.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/container_component.dart';
+import 'package:rive/src/rive_core/layout/layout_component_style.dart';
+import 'package:rive/src/rive_core/node.dart';
+import 'package:rive/src/rive_core/shapes/paint/shape_paint_mutator.dart';
+import 'package:rive/src/rive_core/shapes/shape_paint_container.dart';
+import 'package:rive/src/rive_core/world_transform_component.dart';
 import 'package:rive_common/layout_engine.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/layout_component_base.dart';
+export 'package:rive/src/generated/layout_component_base.dart';
 
 extension ComponentExtension on Component {
   LayoutComponent? get layoutParent {
@@ -63,7 +63,8 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
   LayoutStyleInterpolation? _inheritedInterpolation;
   double _inheritedInterpolationTime = 0;
 
-  LayoutAnimationStyle get animationStyle => style?.animationStyle ?? LayoutAnimationStyle.none;
+  LayoutAnimationStyle get animationStyle =>
+      style?.animationStyle ?? LayoutAnimationStyle.none;
 
   KeyFrameInterpolator? get interpolator {
     switch (style?.animationStyle) {
@@ -100,18 +101,19 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
   }
 
   void cascadeAnimationStyle(
-    LayoutStyleInterpolation inheritedInterpolation,
-    KeyFrameInterpolator? inheritedInterpolator,
-    double inheritedInterpolationTime,
-  ) {
+      LayoutStyleInterpolation inheritedInterpolation,
+      KeyFrameInterpolator? inheritedInterpolator,
+      double inheritedInterpolationTime) {
     if (style?.animationStyle == LayoutAnimationStyle.inherit) {
-      setInheritedInterpolation(inheritedInterpolation, inheritedInterpolator, inheritedInterpolationTime);
+      setInheritedInterpolation(inheritedInterpolation, inheritedInterpolator,
+          inheritedInterpolationTime);
     } else {
       clearInheritedInterpolation();
     }
     forEachChild((child) {
       if (child is LayoutComponent) {
-        child.cascadeAnimationStyle(interpolation, interpolator, interpolationTime);
+        child.cascadeAnimationStyle(
+            interpolation, interpolator, interpolationTime);
       }
       return false;
     });
@@ -119,11 +121,8 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
 
   // Parent layout component can push their interpolation into the child layout
   // which may be more performant than having the child look up the tree
-  void setInheritedInterpolation(
-    LayoutStyleInterpolation interpolation,
-    KeyFrameInterpolator? interpolator,
-    double interpolationTime,
-  ) {
+  void setInheritedInterpolation(LayoutStyleInterpolation interpolation,
+      KeyFrameInterpolator? interpolator, double interpolationTime) {
     _inheritedInterpolation = interpolation;
     _inheritedInterpolator = interpolator;
     _inheritedInterpolationTime = interpolationTime;
@@ -219,8 +218,10 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
       return false;
     }
     if (animationData.elapsedSeconds >= interpolationTime) {
-      _layoutLocation = Offset(animationData.toBounds.left, animationData.toBounds.top);
-      _layoutSize = Size(animationData.toBounds.width, animationData.toBounds.height);
+      _layoutLocation =
+          Offset(animationData.toBounds.left, animationData.toBounds.top);
+      _layoutSize =
+          Size(animationData.toBounds.width, animationData.toBounds.height);
       animationData.elapsedSeconds = 0;
       markWorldTransformDirty();
       return false;
@@ -235,29 +236,40 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
     var top = _layoutLocation.dy;
     var width = _layoutSize.width;
     var height = _layoutSize.height;
-    if (animationData.toBounds.left != left || animationData.toBounds.top != top) {
+    if (animationData.toBounds.left != left ||
+        animationData.toBounds.top != top) {
       if (interpolation == LayoutStyleInterpolation.linear) {
-        left = animationData.fromBounds.left + f * (animationData.toBounds.left - animationData.fromBounds.left);
-        top = animationData.fromBounds.top + f * (animationData.toBounds.top - animationData.fromBounds.top);
+        left = animationData.fromBounds.left +
+            f * (animationData.toBounds.left - animationData.fromBounds.left);
+        top = animationData.fromBounds.top +
+            f * (animationData.toBounds.top - animationData.fromBounds.top);
       } else {
         if (interpolator != null) {
-          left = interpolator!.transformValue(animationData.fromBounds.left, animationData.toBounds.left, f);
-          top = interpolator!.transformValue(animationData.fromBounds.top, animationData.toBounds.top, f);
+          left = interpolator!.transformValue(
+              animationData.fromBounds.left, animationData.toBounds.left, f);
+          top = interpolator!.transformValue(
+              animationData.fromBounds.top, animationData.toBounds.top, f);
         }
       }
       needsAdvance = true;
       _layoutLocation = Offset(left, top);
       markWorldTransformDirty();
     }
-    if (animationData.toBounds.width != width || animationData.toBounds.height != height) {
+    if (animationData.toBounds.width != width ||
+        animationData.toBounds.height != height) {
       if (interpolation == LayoutStyleInterpolation.linear) {
-        width = animationData.fromBounds.width + f * (animationData.toBounds.width - animationData.fromBounds.width);
-        height =
-            animationData.fromBounds.height + f * (animationData.toBounds.height - animationData.fromBounds.height);
+        width = animationData.fromBounds.width +
+            f * (animationData.toBounds.width - animationData.fromBounds.width);
+        height = animationData.fromBounds.height +
+            f *
+                (animationData.toBounds.height -
+                    animationData.fromBounds.height);
       } else {
         if (interpolator != null) {
-          width = interpolator!.transformValue(animationData.fromBounds.width, animationData.toBounds.width, f);
-          height = interpolator!.transformValue(animationData.fromBounds.height, animationData.toBounds.height, f);
+          width = interpolator!.transformValue(
+              animationData.fromBounds.width, animationData.toBounds.width, f);
+          height = interpolator!.transformValue(animationData.fromBounds.height,
+              animationData.toBounds.height, f);
         }
       }
       needsAdvance = true;
@@ -297,7 +309,9 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
   void _syncStyle(LayoutComponentStyle style) {
     bool setIntrinsicWidth = false;
     bool setIntrinsicHeight = false;
-    if (style.intrinsicallySized && (style.widthUnits == LayoutUnit.auto || style.heightUnits == LayoutUnit.auto)) {
+    if (style.intrinsicallySized &&
+        (style.widthUnits == LayoutUnit.auto ||
+            style.heightUnits == LayoutUnit.auto)) {
       bool foundIntrinsicSize = false;
       Size intrinsicSize = Size.zero;
       forEachChild((child) {
@@ -310,12 +324,17 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
             style.minHeightUnits == LayoutUnit.point ? style.minHeight : 0,
           );
           var maxSize = Size(
-            style.maxWidthUnits == LayoutUnit.point ? style.maxWidth : double.infinity,
-            style.maxHeightUnits == LayoutUnit.point ? style.maxHeight : double.infinity,
+            style.maxWidthUnits == LayoutUnit.point
+                ? style.maxWidth
+                : double.infinity,
+            style.maxHeightUnits == LayoutUnit.point
+                ? style.maxHeight
+                : double.infinity,
           );
 
           var size = (child as Sizable).computeIntrinsicSize(minSize, maxSize);
-          intrinsicSize = Size(max(intrinsicSize.width, size.width), max(intrinsicSize.height, size.height));
+          intrinsicSize = Size(max(intrinsicSize.width, size.width),
+              max(intrinsicSize.height, size.height));
           foundIntrinsicSize = true;
         }
         return true;
@@ -323,25 +342,23 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
       if (foundIntrinsicSize) {
         if (style.widthUnits == LayoutUnit.auto) {
           setIntrinsicWidth = true;
-          layoutStyle.setDimension(
-            LayoutDimension.width,
-            LayoutValue(unit: LayoutUnit.point, value: intrinsicSize.width),
-          );
+          layoutStyle.setDimension(LayoutDimension.width,
+              LayoutValue(unit: LayoutUnit.point, value: intrinsicSize.width));
         }
         if (style.heightUnits == LayoutUnit.auto) {
           setIntrinsicHeight = true;
-          layoutStyle.setDimension(
-            LayoutDimension.height,
-            LayoutValue(unit: LayoutUnit.point, value: intrinsicSize.height),
-          );
+          layoutStyle.setDimension(LayoutDimension.height,
+              LayoutValue(unit: LayoutUnit.point, value: intrinsicSize.height));
         }
       }
     }
     if (!setIntrinsicWidth) {
-      layoutStyle.setDimension(LayoutDimension.width, LayoutValue(unit: style.widthUnits, value: width));
+      layoutStyle.setDimension(LayoutDimension.width,
+          LayoutValue(unit: style.widthUnits, value: width));
     }
     if (!setIntrinsicHeight) {
-      layoutStyle.setDimension(LayoutDimension.height, LayoutValue(unit: style.heightUnits, value: height));
+      layoutStyle.setDimension(LayoutDimension.height,
+          LayoutValue(unit: style.heightUnits, value: height));
     }
 
     final isRow = [
@@ -355,10 +372,14 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
         }
         break;
       case ScaleType.fill:
-        isRow ? layoutStyle.flexGrow = 1 : layoutStyle.alignSelf = LayoutAlign.stretch;
+        isRow
+            ? layoutStyle.flexGrow = 1
+            : layoutStyle.alignSelf = LayoutAlign.stretch;
         break;
       case ScaleType.hug:
-        isRow ? layoutStyle.flexGrow = 0 : layoutStyle.alignSelf = LayoutAlign.auto;
+        isRow
+            ? layoutStyle.flexGrow = 0
+            : layoutStyle.alignSelf = LayoutAlign.auto;
         break;
       default:
         break;
@@ -374,16 +395,23 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
         }
         break;
       case ScaleType.fill:
-        isColumn ? layoutStyle.flexGrow = 1 : layoutStyle.alignSelf = LayoutAlign.stretch;
+        isColumn
+            ? layoutStyle.flexGrow = 1
+            : layoutStyle.alignSelf = LayoutAlign.stretch;
         break;
       case ScaleType.hug:
-        isColumn ? layoutStyle.flexGrow = 0 : layoutStyle.alignSelf = LayoutAlign.auto;
+        isColumn
+            ? layoutStyle.flexGrow = 0
+            : layoutStyle.alignSelf = LayoutAlign.auto;
         break;
       default:
         break;
     }
 
-    final isRowForAlignment = [LayoutFlexDirection.row, LayoutFlexDirection.rowReverse].contains(style.flexDirection);
+    final isRowForAlignment = [
+      LayoutFlexDirection.row,
+      LayoutFlexDirection.rowReverse,
+    ].contains(style.flexDirection);
     switch (style.alignmentType) {
       case LayoutAlignmentType.topLeft:
       case LayoutAlignmentType.topCenter:
@@ -451,42 +479,63 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
         break;
     }
 
-    layoutStyle.setMinDimension(LayoutDimension.width, LayoutValue(unit: style.minWidthUnits, value: style.minWidth));
-    layoutStyle.setMinDimension(
-      LayoutDimension.height,
-      LayoutValue(unit: style.minHeightUnits, value: style.minHeight),
-    );
-    layoutStyle.setMaxDimension(LayoutDimension.width, LayoutValue(unit: style.maxWidthUnits, value: style.maxWidth));
-    layoutStyle.setMaxDimension(
-      LayoutDimension.height,
-      LayoutValue(unit: style.maxHeightUnits, value: style.maxHeight),
-    );
+    layoutStyle.setMinDimension(LayoutDimension.width,
+        LayoutValue(unit: style.minWidthUnits, value: style.minWidth));
+    layoutStyle.setMinDimension(LayoutDimension.height,
+        LayoutValue(unit: style.minHeightUnits, value: style.minHeight));
+    layoutStyle.setMaxDimension(LayoutDimension.width,
+        LayoutValue(unit: style.maxWidthUnits, value: style.maxWidth));
+    layoutStyle.setMaxDimension(LayoutDimension.height,
+        LayoutValue(unit: style.maxHeightUnits, value: style.maxHeight));
 
-    layoutStyle.setGap(LayoutGutter.column, LayoutValue(unit: style.gapHorizontalUnits, value: style.gapHorizontal));
-    layoutStyle.setGap(LayoutGutter.row, LayoutValue(unit: style.gapVerticalUnits, value: style.gapVertical));
+    layoutStyle.setGap(
+        LayoutGutter.column,
+        LayoutValue(
+            unit: style.gapHorizontalUnits, value: style.gapHorizontal));
+    layoutStyle.setGap(LayoutGutter.row,
+        LayoutValue(unit: style.gapVerticalUnits, value: style.gapVertical));
 
-    layoutStyle.setBorder(LayoutEdge.left, LayoutValue(unit: style.borderLeftUnits, value: style.borderLeft));
-    layoutStyle.setBorder(LayoutEdge.top, LayoutValue(unit: style.borderTopUnits, value: style.borderTop));
-    layoutStyle.setBorder(LayoutEdge.right, LayoutValue(unit: style.borderRightUnits, value: style.borderRight));
-    layoutStyle.setBorder(LayoutEdge.bottom, LayoutValue(unit: style.borderBottomUnits, value: style.borderBottom));
+    layoutStyle.setBorder(LayoutEdge.left,
+        LayoutValue(unit: style.borderLeftUnits, value: style.borderLeft));
+    layoutStyle.setBorder(LayoutEdge.top,
+        LayoutValue(unit: style.borderTopUnits, value: style.borderTop));
+    layoutStyle.setBorder(LayoutEdge.right,
+        LayoutValue(unit: style.borderRightUnits, value: style.borderRight));
+    layoutStyle.setBorder(LayoutEdge.bottom,
+        LayoutValue(unit: style.borderBottomUnits, value: style.borderBottom));
 
-    layoutStyle.setMargin(LayoutEdge.left, LayoutValue(unit: style.marginLeftUnits, value: style.marginLeft));
-    layoutStyle.setMargin(LayoutEdge.top, LayoutValue(unit: style.marginTopUnits, value: style.marginTop));
-    layoutStyle.setMargin(LayoutEdge.right, LayoutValue(unit: style.marginRightUnits, value: style.marginRight));
-    layoutStyle.setMargin(LayoutEdge.bottom, LayoutValue(unit: style.marginBottomUnits, value: style.marginBottom));
+    layoutStyle.setMargin(LayoutEdge.left,
+        LayoutValue(unit: style.marginLeftUnits, value: style.marginLeft));
+    layoutStyle.setMargin(LayoutEdge.top,
+        LayoutValue(unit: style.marginTopUnits, value: style.marginTop));
+    layoutStyle.setMargin(LayoutEdge.right,
+        LayoutValue(unit: style.marginRightUnits, value: style.marginRight));
+    layoutStyle.setMargin(LayoutEdge.bottom,
+        LayoutValue(unit: style.marginBottomUnits, value: style.marginBottom));
 
-    layoutStyle.setPadding(LayoutEdge.left, LayoutValue(unit: style.paddingLeftUnits, value: style.paddingLeft));
-    layoutStyle.setPadding(LayoutEdge.top, LayoutValue(unit: style.paddingTopUnits, value: style.paddingTop));
-    layoutStyle.setPadding(LayoutEdge.right, LayoutValue(unit: style.paddingRightUnits, value: style.paddingRight));
-    layoutStyle.setPadding(LayoutEdge.bottom, LayoutValue(unit: style.paddingBottomUnits, value: style.paddingBottom));
+    layoutStyle.setPadding(LayoutEdge.left,
+        LayoutValue(unit: style.paddingLeftUnits, value: style.paddingLeft));
+    layoutStyle.setPadding(LayoutEdge.top,
+        LayoutValue(unit: style.paddingTopUnits, value: style.paddingTop));
+    layoutStyle.setPadding(LayoutEdge.right,
+        LayoutValue(unit: style.paddingRightUnits, value: style.paddingRight));
+    layoutStyle.setPadding(
+        LayoutEdge.bottom,
+        LayoutValue(
+            unit: style.paddingBottomUnits, value: style.paddingBottom));
 
-    layoutStyle.setPosition(LayoutEdge.left, LayoutValue(unit: style.positionLeftUnits, value: style.positionLeft));
-    layoutStyle.setPosition(LayoutEdge.top, LayoutValue(unit: style.positionTopUnits, value: style.positionTop));
-    layoutStyle.setPosition(LayoutEdge.right, LayoutValue(unit: style.positionRightUnits, value: style.positionRight));
+    layoutStyle.setPosition(LayoutEdge.left,
+        LayoutValue(unit: style.positionLeftUnits, value: style.positionLeft));
+    layoutStyle.setPosition(LayoutEdge.top,
+        LayoutValue(unit: style.positionTopUnits, value: style.positionTop));
     layoutStyle.setPosition(
-      LayoutEdge.bottom,
-      LayoutValue(unit: style.positionBottomUnits, value: style.positionBottom),
-    );
+        LayoutEdge.right,
+        LayoutValue(
+            unit: style.positionRightUnits, value: style.positionRight));
+    layoutStyle.setPosition(
+        LayoutEdge.bottom,
+        LayoutValue(
+            unit: style.positionBottomUnits, value: style.positionBottom));
 
     layoutStyle.display = style.display;
     layoutStyle.positionType = style.positionType;
@@ -542,7 +591,12 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
   }
 
   AABB get localBounds {
-    return AABB.fromValues(0, 0, _layoutSize.width, _layoutSize.height);
+    return AABB.fromValues(
+      0,
+      0,
+      _layoutSize.width,
+      _layoutSize.height,
+    );
   }
 
   AABB get layoutBounds {
@@ -578,11 +632,9 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
         return false;
       }
       if (child is Sizable) {
-        (child as Sizable).controlSize(
-          animates && _layoutSize == Size.zero
-              ? Size(animationData.toBounds.width, animationData.toBounds.height)
-              : _layoutSize,
-        );
+        (child as Sizable).controlSize(animates && _layoutSize == Size.zero
+            ? Size(animationData.toBounds.width, animationData.toBounds.height)
+            : _layoutSize);
       }
       return true;
     });
@@ -590,13 +642,13 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
 
   void updateLayoutBounds() {
     final newLayoutBounds = AABB.fromValues(
-      layoutNode.layout.left,
-      layoutNode.layout.top,
-      layoutNode.layout.left + layoutNode.layout.width,
-      layoutNode.layout.top + layoutNode.layout.height,
-    );
+        layoutNode.layout.left,
+        layoutNode.layout.top,
+        layoutNode.layout.left + layoutNode.layout.width,
+        layoutNode.layout.top + layoutNode.layout.height);
     if (animates) {
-      if (!AABB.areEqual(animationData.toBounds, newLayoutBounds) || _forceUpdateLayoutBounds) {
+      if (!AABB.areEqual(animationData.toBounds, newLayoutBounds) ||
+          _forceUpdateLayoutBounds) {
         // This is where we want to set the start/end data for the animation
         // As we advance the animation, update _layoutLocation and _layoutSize
         animationData.fromBounds = layoutBounds;
@@ -604,7 +656,8 @@ class LayoutComponent extends LayoutComponentBase with ShapePaintContainer {
         propagateSize();
         markWorldTransformDirty();
       }
-    } else if (!AABB.areEqual(layoutBounds, newLayoutBounds) || _forceUpdateLayoutBounds) {
+    } else if (!AABB.areEqual(layoutBounds, newLayoutBounds) ||
+        _forceUpdateLayoutBounds) {
       _layoutLocation = Offset(newLayoutBounds.left, newLayoutBounds.top);
       _layoutSize = Size(newLayoutBounds.width, newLayoutBounds.height);
       propagateSize();

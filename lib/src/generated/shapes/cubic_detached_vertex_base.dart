@@ -2,12 +2,12 @@
 // lib/src/generated/shapes/cubic_detached_vertex_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/generated/shapes/path_vertex_base.dart';
-import 'package:rive_legacy/src/generated/shapes/vertex_base.dart';
-import 'package:rive_legacy/src/rive_core/shapes/cubic_vertex.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/generated/shapes/path_vertex_base.dart';
+import 'package:rive/src/generated/shapes/vertex_base.dart';
+import 'package:rive/src/rive_core/shapes/cubic_vertex.dart';
 
 abstract class CubicDetachedVertexBase extends CubicVertex {
   static const int typeKey = 6;
@@ -15,13 +15,13 @@ abstract class CubicDetachedVertexBase extends CubicVertex {
   int get coreType => CubicDetachedVertexBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    CubicDetachedVertexBase.typeKey,
-    CubicVertexBase.typeKey,
-    PathVertexBase.typeKey,
-    VertexBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        CubicDetachedVertexBase.typeKey,
+        CubicVertexBase.typeKey,
+        PathVertexBase.typeKey,
+        VertexBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// InRotation field with key 84.

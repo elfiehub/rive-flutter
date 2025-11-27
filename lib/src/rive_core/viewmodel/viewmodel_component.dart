@@ -1,6 +1,6 @@
-import 'package:rive_legacy/src/generated/viewmodel/viewmodel_component_base.dart';
+import 'package:rive/src/generated/viewmodel/viewmodel_component_base.dart';
 
-export 'package:rive_legacy/src/generated/viewmodel/viewmodel_component_base.dart';
+export 'package:rive/src/generated/viewmodel/viewmodel_component_base.dart';
 
 class ViewModelComponent extends ViewModelComponentBase {
   @override

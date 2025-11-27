@@ -1,26 +1,30 @@
-import 'package:rive_legacy/src/rive_core/animation/animation_reset_factory.dart' as animation_reset_factory;
-import 'package:rive_legacy/src/rive_core/animation/blend_animation_1d.dart';
-import 'package:rive_legacy/src/rive_core/animation/blend_state_1d.dart';
-import 'package:rive_legacy/src/rive_core/animation/blend_state_instance.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
-import 'package:rive_legacy/src/rive_core/layer_state_flags.dart';
-import 'package:rive_legacy/src/rive_core/state_machine_controller.dart';
+import 'package:rive/src/rive_core/animation/animation_reset_factory.dart'
+    as animation_reset_factory;
+import 'package:rive/src/rive_core/animation/blend_animation_1d.dart';
+import 'package:rive/src/rive_core/animation/blend_state_1d.dart';
+import 'package:rive/src/rive_core/animation/blend_state_instance.dart';
+import 'package:rive/src/rive_core/container_component.dart';
+import 'package:rive/src/rive_core/layer_state_flags.dart';
+import 'package:rive/src/rive_core/state_machine_controller.dart';
 
 /// [BlendState1D] mixing logic that runs inside the [StateMachine].
-class BlendState1DInstance extends BlendStateInstance<BlendState1D, BlendAnimation1D> {
+class BlendState1DInstance
+    extends BlendStateInstance<BlendState1D, BlendAnimation1D> {
   late animation_reset_factory.AnimationReset? animationReset;
   BlendState1DInstance(BlendState1D state) : super(state) {
-    animationInstances.sort((a, b) => a.blendAnimation.value.compareTo(b.blendAnimation.value));
+    animationInstances.sort(
+        (a, b) => a.blendAnimation.value.compareTo(b.blendAnimation.value));
 
-    animationReset = state.flags & LayerStateFlags.reset == LayerStateFlags.reset
-        ? animation_reset_factory.fromAnimations(
-            animationInstances
-                .map((animationInstance) => animationInstance.animationInstance.animation)
-                .toList(growable: false),
-            state.context,
-            true,
-          )
-        : null;
+    animationReset =
+        state.flags & LayerStateFlags.reset == LayerStateFlags.reset
+            ? animation_reset_factory.fromAnimations(
+                animationInstances
+                    .map((animationInstance) =>
+                        animationInstance.animationInstance.animation)
+                    .toList(growable: false),
+                state.context,
+                true)
+            : null;
   }
 
   /// Binary find the closest animation index.
@@ -54,17 +58,28 @@ class BlendState1DInstance extends BlendStateInstance<BlendState1D, BlendAnimati
   @override
   void advance(double seconds, StateMachineController controller) {
     super.advance(seconds, controller);
-    dynamic inputValue = controller.getInputValue((state as BlendState1D).inputId);
-    var value = (inputValue is double ? inputValue : (state as BlendState1D).input?.value) ?? 0;
+    dynamic inputValue =
+        controller.getInputValue((state as BlendState1D).inputId);
+    var value = (inputValue is double
+            ? inputValue
+            : (state as BlendState1D).input?.value) ??
+        0;
     int index = animationIndex(value);
-    _to = index >= 0 && index < animationInstances.length ? animationInstances[index] : null;
-    _from = index - 1 >= 0 && index - 1 < animationInstances.length ? animationInstances[index - 1] : null;
+    _to = index >= 0 && index < animationInstances.length
+        ? animationInstances[index]
+        : null;
+    _from = index - 1 >= 0 && index - 1 < animationInstances.length
+        ? animationInstances[index - 1]
+        : null;
 
     double mix, mixFrom;
-    if (_to == null || _from == null || _to!.blendAnimation.value == _from!.blendAnimation.value) {
+    if (_to == null ||
+        _from == null ||
+        _to!.blendAnimation.value == _from!.blendAnimation.value) {
       mix = mixFrom = 1;
     } else {
-      mix = (value - _from!.blendAnimation.value) / (_to!.blendAnimation.value - _from!.blendAnimation.value);
+      mix = (value - _from!.blendAnimation.value) /
+          (_to!.blendAnimation.value - _from!.blendAnimation.value);
       mixFrom = 1.0 - mix;
     }
 

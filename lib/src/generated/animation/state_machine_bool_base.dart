@@ -2,9 +2,9 @@
 // lib/src/generated/animation/state_machine_bool_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/state_machine_component_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_input.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/state_machine_component_base.dart';
+import 'package:rive/src/rive_core/animation/state_machine_input.dart';
 
 abstract class StateMachineBoolBase extends StateMachineInput {
   static const int typeKey = 59;
@@ -12,10 +12,10 @@ abstract class StateMachineBoolBase extends StateMachineInput {
   int get coreType => StateMachineBoolBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    StateMachineBoolBase.typeKey,
-    StateMachineInputBase.typeKey,
-    StateMachineComponentBase.typeKey,
-  };
+        StateMachineBoolBase.typeKey,
+        StateMachineInputBase.typeKey,
+        StateMachineComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Value field with key 141.

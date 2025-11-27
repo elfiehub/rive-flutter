@@ -1,13 +1,14 @@
 import 'dart:collection';
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/state_machine_component_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/state_machine_component_base.dart';
+import 'package:rive/src/rive_core/animation/state_machine.dart';
 
-export 'package:rive_legacy/src/generated/animation/state_machine_component_base.dart';
+export 'package:rive/src/generated/animation/state_machine_component_base.dart';
 
 /// Implemented by state machine inputs and layers.
-abstract class StateMachineComponent extends StateMachineComponentBase<RuntimeArtboard> {
+abstract class StateMachineComponent
+    extends StateMachineComponentBase<RuntimeArtboard> {
   StateMachine? _stateMachine;
   StateMachine? get stateMachine => _stateMachine;
   set stateMachine(StateMachine? machine) {
@@ -46,7 +47,8 @@ abstract class StateMachineComponent extends StateMachineComponentBase<RuntimeAr
 
   @override
   bool import(ImportStack importStack) {
-    var importer = importStack.latest<StateMachineImporter>(StateMachineBase.typeKey);
+    var importer =
+        importStack.latest<StateMachineImporter>(StateMachineBase.typeKey);
     if (importer == null) {
       return false;
     }

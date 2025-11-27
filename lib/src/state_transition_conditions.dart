@@ -1,5 +1,5 @@
 import 'dart:collection';
-import 'package:rive_legacy/src/rive_core/animation/transition_condition.dart';
+import 'package:rive/src/rive_core/animation/transition_condition.dart';
 
 class StateTransitionConditions extends ListBase<TransitionCondition> {
   final List<TransitionCondition?> _values = [];
@@ -15,5 +15,6 @@ class StateTransitionConditions extends ListBase<TransitionCondition> {
   TransitionCondition operator [](int index) => _values[index]!;
 
   @override
-  void operator []=(int index, TransitionCondition value) => _values[index] = value;
+  void operator []=(int index, TransitionCondition value) =>
+      _values[index] = value;
 }

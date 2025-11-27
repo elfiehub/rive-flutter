@@ -1,18 +1,18 @@
 import 'dart:math';
 
 import 'package:collection/collection.dart';
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/text/text_modifier_range_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/cubic_interpolator_component.dart';
-import 'package:rive_legacy/src/rive_core/animation/interpolator.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/enum_helper.dart';
-import 'package:rive_legacy/src/rive_core/text/text_modifier_group.dart';
-import 'package:rive_legacy/src/rive_core/text/text_value_run.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/text/text_modifier_range_base.dart';
+import 'package:rive/src/rive_core/animation/cubic_interpolator_component.dart';
+import 'package:rive/src/rive_core/animation/interpolator.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/enum_helper.dart';
+import 'package:rive/src/rive_core/text/text_modifier_group.dart';
+import 'package:rive/src/rive_core/text/text_value_run.dart';
 import 'package:rive_common/rive_text.dart';
 
-export 'package:rive_legacy/src/generated/text/text_modifier_range_base.dart';
+export 'package:rive/src/generated/text/text_modifier_range_base.dart';
 
 enum TextRangeUnits { characters, charactersExcludingSpaces, words, lines }
 
@@ -23,19 +23,23 @@ enum TextRangeType { percentage, unitIndex }
 enum TextRangeInterpolator { linear, cubic }
 
 class TextModifierRange extends TextModifierRangeBase {
-  TextModifierGroup? get modifierGroup => parent is TextModifierGroup ? parent as TextModifierGroup : null;
+  TextModifierGroup? get modifierGroup =>
+      parent is TextModifierGroup ? parent as TextModifierGroup : null;
 
   /// Marking shape dirty should only be done if this modifer group changes
   /// shaping properties (for now we're just testing and we're hardcoding a
   /// shaping change).
   @override
-  void modifyFromChanged(double from, double to) => modifierGroup?.rangeChanged();
+  void modifyFromChanged(double from, double to) =>
+      modifierGroup?.rangeChanged();
 
   @override
   void modifyToChanged(double from, double to) => modifierGroup?.rangeChanged();
 
   TextRangeInterpolator get interpolatorType =>
-      _interpolator is CubicInterpolatorComponent ? TextRangeInterpolator.cubic : TextRangeInterpolator.linear;
+      _interpolator is CubicInterpolatorComponent
+          ? TextRangeInterpolator.cubic
+          : TextRangeInterpolator.linear;
 
   Interpolator? _interpolator;
   Interpolator? get interpolator => _interpolator;
@@ -64,7 +68,8 @@ class TextModifierRange extends TextModifierRangeBase {
     super.childRemoved(child);
 
     if (child is Interpolator && _interpolator == (child as Interpolator)) {
-      _interpolator = children.firstWhereOrNull((child) => child is Interpolator) as Interpolator?;
+      _interpolator = children
+          .firstWhereOrNull((child) => child is Interpolator) as Interpolator?;
       modifierGroup?.rangeTypeChanged();
     }
   }
@@ -75,10 +80,12 @@ class TextModifierRange extends TextModifierRangeBase {
   double get offsetFalloffTo => falloffTo + offset;
 
   @override
-  void falloffFromChanged(double from, double to) => modifierGroup?.rangeChanged();
+  void falloffFromChanged(double from, double to) =>
+      modifierGroup?.rangeChanged();
 
   @override
-  void falloffToChanged(double from, double to) => modifierGroup?.rangeChanged();
+  void falloffToChanged(double from, double to) =>
+      modifierGroup?.rangeChanged();
 
   @override
   void offsetChanged(double from, double to) => modifierGroup?.rangeChanged();
@@ -99,7 +106,8 @@ class TextModifierRange extends TextModifierRangeBase {
 
   void clearRangeMap() => _rangeMapper = null;
 
-  void computeRange(String text, TextShapeResult? shape, BreakLinesResult? lines, GlyphLookup glyphLookup) {
+  void computeRange(String text, TextShapeResult? shape,
+      BreakLinesResult? lines, GlyphLookup glyphLookup) {
     // Check if range mapper is still valid.
     if (_rangeMapper != null) {
       return;
@@ -112,18 +120,30 @@ class TextModifierRange extends TextModifierRangeBase {
     }
     switch (units) {
       case TextRangeUnits.charactersExcludingSpaces:
-        _rangeMapper = RangeMapper.fromCharacters(text, start, end, glyphLookup, withoutSpaces: true);
+        _rangeMapper = RangeMapper.fromCharacters(
+          text,
+          start,
+          end,
+          glyphLookup,
+          withoutSpaces: true,
+        );
         break;
       case TextRangeUnits.words:
         _rangeMapper = RangeMapper.fromWords(text, start, end);
         break;
       case TextRangeUnits.lines:
         if (shape != null && lines != null) {
-          _rangeMapper = RangeMapper.fromLines(text, start, end, shape, lines, glyphLookup);
+          _rangeMapper = RangeMapper.fromLines(
+              text, start, end, shape, lines, glyphLookup);
         }
         break;
       default:
-        _rangeMapper = RangeMapper.fromCharacters(text, start, end, glyphLookup);
+        _rangeMapper = RangeMapper.fromCharacters(
+          text,
+          start,
+          end,
+          glyphLookup,
+        );
         break;
     }
   }
@@ -282,9 +302,9 @@ class RangeMapper {
   int get unitCount => unitLengths.length;
 
   RangeMapper(List<int> indices, List<int> lengths)
-    : assert(indices.length == lengths.length + 1),
-      unitIndices = Uint32List.fromList(indices),
-      unitLengths = Uint32List.fromList(lengths);
+      : assert(indices.length == lengths.length + 1),
+        unitIndices = Uint32List.fromList(indices),
+        unitLengths = Uint32List.fromList(lengths);
 
   /// Build a RangeMapper from the words in [text].
   static RangeMapper? fromWords(String text, int start, int end) {
@@ -339,12 +359,8 @@ class RangeMapper {
 
   /// Build a RangeMapper from the words in [text].
   static RangeMapper? fromCharacters(
-    String text,
-    int start,
-    int end,
-    GlyphLookup glyphLookup, {
-    bool withoutSpaces = false,
-  }) {
+      String text, int start, int end, GlyphLookup glyphLookup,
+      {bool withoutSpaces = false}) {
     if (text.isEmpty) {
       return null;
     }
@@ -367,14 +383,8 @@ class RangeMapper {
     return RangeMapper(indices, lengths);
   }
 
-  static RangeMapper? fromLines(
-    String text,
-    int start,
-    int end,
-    TextShapeResult shape,
-    BreakLinesResult lines,
-    GlyphLookup glyphLookup,
-  ) {
+  static RangeMapper? fromLines(String text, int start, int end,
+      TextShapeResult shape, BreakLinesResult lines, GlyphLookup glyphLookup) {
     if (text.isEmpty) {
       return null;
     }

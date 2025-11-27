@@ -1,19 +1,23 @@
 import 'dart:ui' as ui;
 
-import 'package:rive_legacy/src/generated/shapes/image_base.dart';
-import 'package:rive_legacy/src/rive_core/assets/file_asset.dart';
-import 'package:rive_legacy/src/rive_core/assets/image_asset.dart';
-import 'package:rive_legacy/src/rive_core/bones/skinnable.dart';
-import 'package:rive_legacy/src/rive_core/bounds_provider.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
-import 'package:rive_legacy/src/rive_core/shapes/mesh.dart';
-import 'package:rive_legacy/src/rive_core/shapes/mesh_vertex.dart';
+import 'package:rive/src/generated/shapes/image_base.dart';
+import 'package:rive/src/rive_core/assets/file_asset.dart';
+import 'package:rive/src/rive_core/assets/image_asset.dart';
+import 'package:rive/src/rive_core/bones/skinnable.dart';
+import 'package:rive/src/rive_core/bounds_provider.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/container_component.dart';
+import 'package:rive/src/rive_core/shapes/mesh.dart';
+import 'package:rive/src/rive_core/shapes/mesh_vertex.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/shapes/image_base.dart';
+export 'package:rive/src/generated/shapes/image_base.dart';
 
-class Image extends ImageBase with FileAssetReferencer<ImageAsset>, SkinnableProvider<MeshVertex>, Sizable {
+class Image extends ImageBase
+    with
+        FileAssetReferencer<ImageAsset>,
+        SkinnableProvider<MeshVertex>,
+        Sizable {
   ui.Image? get image => asset?.image;
   Mesh? _mesh;
   Mesh? get mesh => _mesh;
@@ -30,7 +34,12 @@ class Image extends ImageBase with FileAssetReferencer<ImageAsset>, SkinnablePro
     if (asset == null) {
       return AABB.empty();
     }
-    return AABB.fromValues(-width * originX, -height * originY, -width * originX + width, -height * originY + height);
+    return AABB.fromValues(
+      -width * originX,
+      -height * originY,
+      -width * originX + width,
+      -height * originY + height,
+    );
   }
 
   @override
@@ -52,31 +61,31 @@ class Image extends ImageBase with FileAssetReferencer<ImageAsset>, SkinnablePro
     canvas.save();
     canvas.transform(renderTransform.mat4);
     if (_mesh == null || !_mesh!.draws) {
-      canvas.drawImage(uiImage, ui.Offset(-width * originX, -height * originY), paint);
+      canvas.drawImage(
+          uiImage, ui.Offset(-width * originX, -height * originY), paint);
     } else {
       paint.shader = ui.ImageShader(
-        uiImage,
-        ui.TileMode.clamp,
-        ui.TileMode.clamp,
-        Float64List.fromList(<double>[
-          1 / width,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          1 / height,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          1.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          1.0,
-        ]),
-      );
+          uiImage,
+          ui.TileMode.clamp,
+          ui.TileMode.clamp,
+          Float64List.fromList(<double>[
+            1 / width,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1 / height,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]));
       _mesh!.draw(canvas, paint);
     }
     canvas.restore();

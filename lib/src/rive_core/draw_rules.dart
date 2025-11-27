@@ -1,9 +1,9 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/draw_rules_base.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/draw_target.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/draw_rules_base.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/draw_target.dart';
 
-export 'package:rive_legacy/src/generated/draw_rules_base.dart';
+export 'package:rive/src/generated/draw_rules_base.dart';
 
 class DrawRules extends DrawRulesBase {
   final List<DrawTarget> _targets = [];
@@ -11,7 +11,8 @@ class DrawRules extends DrawRulesBase {
 
   DrawTarget? _activeTarget;
   DrawTarget? get activeTarget => _activeTarget;
-  set activeTarget(DrawTarget? value) => drawTargetId = value?.id ?? Core.missingId;
+  set activeTarget(DrawTarget? value) =>
+      drawTargetId = value?.id ?? Core.missingId;
 
   @override
   void drawTargetIdChanged(int from, int to) {

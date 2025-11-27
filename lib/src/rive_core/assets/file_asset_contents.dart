@@ -1,8 +1,8 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/assets/file_asset_contents_base.dart';
-import 'package:rive_legacy/src/rive_core/assets/file_asset.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/assets/file_asset_contents_base.dart';
+import 'package:rive/src/rive_core/assets/file_asset.dart';
 
-export 'package:rive_legacy/src/generated/assets/file_asset_contents_base.dart';
+export 'package:rive/src/generated/assets/file_asset_contents_base.dart';
 
 /// Stores the data of the bytes into an object that is always imported in
 /// context of a FileAsset.

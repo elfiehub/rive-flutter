@@ -2,15 +2,18 @@
 // lib/src/generated/animation/transition_viewmodel_condition_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_condition.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/transition_condition.dart';
 
 abstract class TransitionViewModelConditionBase extends TransitionCondition {
   static const int typeKey = 482;
   @override
   int get coreType => TransitionViewModelConditionBase.typeKey;
   @override
-  Set<int> get coreTypes => {TransitionViewModelConditionBase.typeKey, TransitionConditionBase.typeKey};
+  Set<int> get coreTypes => {
+        TransitionViewModelConditionBase.typeKey,
+        TransitionConditionBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// LeftComparatorId field with key 648.

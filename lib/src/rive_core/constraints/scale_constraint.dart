@@ -1,10 +1,10 @@
-import 'package:rive_legacy/src/generated/constraints/scale_constraint_base.dart';
-import 'package:rive_legacy/src/rive_core/constraints/constraint.dart';
-import 'package:rive_legacy/src/rive_core/transform_component.dart';
-import 'package:rive_legacy/src/rive_core/transform_space.dart';
+import 'package:rive/src/generated/constraints/scale_constraint_base.dart';
+import 'package:rive/src/rive_core/constraints/constraint.dart';
+import 'package:rive/src/rive_core/transform_component.dart';
+import 'package:rive/src/rive_core/transform_space.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/constraints/scale_constraint_base.dart';
+export 'package:rive/src/generated/constraints/scale_constraint_base.dart';
 
 /// A constraint copies the scale from the target component to the
 /// constrained component in world or local space and applies copy/min/max
@@ -33,7 +33,8 @@ class ScaleConstraint extends ScaleConstraintBase {
       Mat2D.decompose(transformB, componentsB);
 
       if (!doesCopy) {
-        componentsB.scaleX = destSpace == TransformSpace.local ? 1 : componentsA.scaleX;
+        componentsB.scaleX =
+            destSpace == TransformSpace.local ? 1 : componentsA.scaleX;
       } else {
         componentsB.scaleX = componentsB.scaleX * copyFactor;
         if (offset) {
@@ -42,7 +43,8 @@ class ScaleConstraint extends ScaleConstraintBase {
       }
 
       if (!doesCopyY) {
-        componentsB.scaleY = destSpace == TransformSpace.local ? 1 : componentsA.scaleY;
+        componentsB.scaleY =
+            destSpace == TransformSpace.local ? 1 : componentsA.scaleY;
       } else {
         componentsB.scaleY = componentsB.scaleY * copyFactorY;
         if (offset) {
@@ -96,8 +98,10 @@ class ScaleConstraint extends ScaleConstraintBase {
     componentsB.rotation = componentsA.rotation;
     componentsB.x = componentsA.x;
     componentsB.y = componentsA.y;
-    componentsB.scaleX = componentsA.scaleX * ti + componentsB.scaleX * strength;
-    componentsB.scaleY = componentsA.scaleY * ti + componentsB.scaleY * strength;
+    componentsB.scaleX =
+        componentsA.scaleX * ti + componentsB.scaleX * strength;
+    componentsB.scaleY =
+        componentsA.scaleY * ti + componentsB.scaleY * strength;
     componentsB.skew = componentsA.skew;
 
     Mat2D.compose(component.worldTransform, componentsB);

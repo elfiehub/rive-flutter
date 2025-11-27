@@ -2,36 +2,36 @@ import 'dart:collection';
 import 'dart:ui';
 
 import 'package:meta/meta.dart';
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/artboard_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_bool.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_number.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_trigger.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine.dart';
-import 'package:rive_legacy/src/rive_core/backboard.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/data_bind/data_bind.dart';
-import 'package:rive_legacy/src/rive_core/data_bind/data_bind_context.dart';
-import 'package:rive_legacy/src/rive_core/data_bind/data_context.dart';
-import 'package:rive_legacy/src/rive_core/draw_rules.dart';
-import 'package:rive_legacy/src/rive_core/draw_target.dart';
-import 'package:rive_legacy/src/rive_core/drawable.dart';
-import 'package:rive_legacy/src/rive_core/event.dart';
-import 'package:rive_legacy/src/rive_core/joystick.dart';
-import 'package:rive_legacy/src/rive_core/layout_component.dart';
-import 'package:rive_legacy/src/rive_core/nested_artboard.dart';
-import 'package:rive_legacy/src/rive_core/rive_animation_controller.dart';
-import 'package:rive_legacy/src/rive_core/shapes/paint/shape_paint_mutator.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape_paint_container.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/artboard_base.dart';
+import 'package:rive/src/rive_core/animation/animation.dart';
+import 'package:rive/src/rive_core/animation/linear_animation.dart';
+import 'package:rive/src/rive_core/animation/nested_bool.dart';
+import 'package:rive/src/rive_core/animation/nested_number.dart';
+import 'package:rive/src/rive_core/animation/nested_trigger.dart';
+import 'package:rive/src/rive_core/animation/state_machine.dart';
+import 'package:rive/src/rive_core/backboard.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/data_bind/data_bind.dart';
+import 'package:rive/src/rive_core/data_bind/data_bind_context.dart';
+import 'package:rive/src/rive_core/data_bind/data_context.dart';
+import 'package:rive/src/rive_core/draw_rules.dart';
+import 'package:rive/src/rive_core/draw_target.dart';
+import 'package:rive/src/rive_core/drawable.dart';
+import 'package:rive/src/rive_core/event.dart';
+import 'package:rive/src/rive_core/joystick.dart';
+import 'package:rive/src/rive_core/layout_component.dart';
+import 'package:rive/src/rive_core/nested_artboard.dart';
+import 'package:rive/src/rive_core/rive_animation_controller.dart';
+import 'package:rive/src/rive_core/shapes/paint/shape_paint_mutator.dart';
+import 'package:rive/src/rive_core/shapes/shape_paint_container.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance.dart';
 import 'package:rive_common/layout_engine.dart';
 import 'package:rive_common/math.dart';
 import 'package:rive_common/utilities.dart';
 
-export 'package:rive_legacy/src/generated/artboard_base.dart';
+export 'package:rive/src/generated/artboard_base.dart';
 
 class Artboard extends ArtboardBase with ShapePaintContainer {
   final HashSet<LayoutComponent> _dirtyLayout = HashSet<LayoutComponent>();
@@ -43,7 +43,12 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
   @override
   AABB get layoutBounds {
     if (!hasLayoutMeasurements()) {
-      return AABB.fromValues(x, y, x + width, y + height);
+      return AABB.fromValues(
+        x,
+        y,
+        x + width,
+        y + height,
+      );
     }
     return super.layoutBounds;
   }
@@ -118,15 +123,18 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
   final List<DataBind> globalDataBinds = [];
 
   /// List of linear animations in the artboard.
-  Iterable<LinearAnimation> get linearAnimations => _animations.whereType<LinearAnimation>();
+  Iterable<LinearAnimation> get linearAnimations =>
+      _animations.whereType<LinearAnimation>();
 
   /// List of state machines in the artboard.
-  Iterable<StateMachine> get stateMachines => _animations.whereType<StateMachine>();
+  Iterable<StateMachine> get stateMachines =>
+      _animations.whereType<StateMachine>();
 
   int _dirtDepth = 0;
 
   /// Iterate each component and call callback for it.
-  void forEachComponent(void Function(Component) callback) => _components.forEach(callback);
+  void forEachComponent(void Function(Component) callback) =>
+      _components.forEach(callback);
 
   /// Find a component of a specific type with a specific name.
   T? component<T>(String name) {
@@ -245,7 +253,8 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
   }
 
   /// Update any dirty components in this artboard.
-  bool advanceInternal(double elapsedSeconds, {bool nested = false, bool isRoot = false}) {
+  bool advanceInternal(double elapsedSeconds,
+      {bool nested = false, bool isRoot = false}) {
     bool didUpdate = false;
     if (_dirtyLayout.isNotEmpty) {
       var dirtyLayout = _dirtyLayout.toList();
@@ -263,7 +272,8 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
       // Need to sync all layout positions.
       for (final layout in _dependencyOrder.whereType<LayoutComponent>()) {
         layout.updateLayoutBounds();
-        if ((layout == this && super.advance(elapsedSeconds)) || (layout != this && layout.advance(elapsedSeconds))) {
+        if ((layout == this && super.advance(elapsedSeconds)) ||
+            (layout != this && layout.advance(elapsedSeconds))) {
           didUpdate = true;
         }
       }
@@ -364,7 +374,8 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
   @override
   void update(int dirt) {
     if (dirt & ComponentDirt.worldTransform != 0) {
-      var rect = Rect.fromLTWH(width * -originX, height * -originY, width, height);
+      var rect =
+          Rect.fromLTWH(width * -originX, height * -originY, width, height);
       path.reset();
       path.addRect(rect);
 
@@ -469,13 +480,16 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
   }
 
   /// Draw the drawable components in this artboard.
-  void draw(Canvas canvas) {
+  void draw(
+    Canvas canvas,
+  ) {
     canvas.save();
     if (clip) {
       if (_frameOrigin) {
         canvas.clipRect(Rect.fromLTWH(0, 0, width, height));
       } else {
-        canvas.clipRect(Rect.fromLTWH(-width * originX, -height * originY, width, height));
+        canvas.clipRect(
+            Rect.fromLTWH(-width * originX, -height * originY, width, height));
       }
     }
     // Get into artboard's world space. This is because the artboard draws
@@ -496,7 +510,9 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
       fill.draw(canvas, path);
     }
 
-    for (var drawable = firstDrawable; drawable != null; drawable = drawable.prev) {
+    for (var drawable = firstDrawable;
+        drawable != null;
+        drawable = drawable.prev) {
       if (drawable.isHidden || drawable.renderOpacity == 0) {
         continue;
       }
@@ -560,12 +576,14 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
   final Set<RiveAnimationController> _animationControllers = {};
 
   /// Access a read-only iterator of currently applied animation controllers.
-  Iterable<RiveAnimationController> get animationControllers => _animationControllers;
+  Iterable<RiveAnimationController> get animationControllers =>
+      _animationControllers;
 
   /// Add an animation controller to this artboard. Playing will be scheduled if
   /// it's already playing.
   bool addController(RiveAnimationController controller) {
-    if (_animationControllers.contains(controller) || !controller.init(context)) {
+    if (_animationControllers.contains(controller) ||
+        !controller.init(context)) {
       return false;
     }
     controller.isActiveChanged.addListener(_onControllerPlayingChanged);
@@ -749,7 +767,8 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
   Artboard instance() {
     /// Intentionally not implemented in the editor, must be overridden in
     /// runtime version of the artboard.
-    throw UnsupportedError('Instancing the artboard in the editor isn\'t supported');
+    throw UnsupportedError(
+        'Instancing the artboard in the editor isn\'t supported');
   }
 
   @override
@@ -759,7 +778,8 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
 
   @override
   bool import(ImportStack stack) {
-    var backboardImporter = stack.latest<BackboardImporter>(BackboardBase.typeKey);
+    var backboardImporter =
+        stack.latest<BackboardImporter>(BackboardBase.typeKey);
     if (backboardImporter != null) {
       // Backboard isn't strictly required (editor doesn't always export a
       // backboard when serializing for the clipboard, for example).
@@ -784,7 +804,9 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
   void onAddedDirty() {
     super.onAddedDirty();
     dependencyRoot = this;
-    defaultStateMachine = defaultStateMachineId == Core.missingId ? null : context.resolve(defaultStateMachineId);
+    defaultStateMachine = defaultStateMachineId == Core.missingId
+        ? null
+        : context.resolve(defaultStateMachineId);
   }
 
   @override
@@ -792,24 +814,29 @@ class Artboard extends ArtboardBase with ShapePaintContainer {
     defaultStateMachine = to == Core.missingId ? null : context.resolve(to);
   }
 
-  void internalDataContext(DataContext dataContextValue, DataContext? parentDataContext, bool isRoot) {
+  void internalDataContext(DataContext dataContextValue,
+      DataContext? parentDataContext, bool isRoot) {
     dataContext = dataContextValue;
     dataContext!.parent = parentDataContext;
     for (final nestedArtboard in _activeNestedArtboards) {
       final mountedArtboard = nestedArtboard.mountedArtboard;
       if (mountedArtboard != null) {
-        ViewModelInstance? nestedViewModelInstance = dataContext!.getViewModelInstance(nestedArtboard.dataBindPath);
+        ViewModelInstance? nestedViewModelInstance =
+            dataContext!.getViewModelInstance(nestedArtboard.dataBindPath);
         if (nestedViewModelInstance != null) {
-          mountedArtboard.setDataContextFromInstance(nestedViewModelInstance, dataContext, false);
+          mountedArtboard.setDataContextFromInstance(
+              nestedViewModelInstance, dataContext, false);
         } else {
-          mountedArtboard.internalDataContext(dataContext!, dataContext!.parent, false);
+          mountedArtboard.internalDataContext(
+              dataContext!, dataContext!.parent, false);
         }
       }
     }
     computeBindings(isRoot);
   }
 
-  void setDataContextFromInstance(ViewModelInstance viewModelInstance, DataContext? parent, bool isRoot) {
+  void setDataContextFromInstance(
+      ViewModelInstance viewModelInstance, DataContext? parent, bool isRoot) {
     final dataContext = DataContext(viewModelInstance);
     internalDataContext(dataContext, parent, isRoot);
   }

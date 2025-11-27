@@ -1,12 +1,12 @@
 // Core automatically generated lib/src/generated/bones/bone_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/generated/transform_component_base.dart';
-import 'package:rive_legacy/src/generated/world_transform_component_base.dart';
-import 'package:rive_legacy/src/rive_core/bones/skeletal_component.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/generated/transform_component_base.dart';
+import 'package:rive/src/generated/world_transform_component_base.dart';
+import 'package:rive/src/rive_core/bones/skeletal_component.dart';
 
 abstract class BoneBase extends SkeletalComponent {
   static const int typeKey = 40;
@@ -14,13 +14,13 @@ abstract class BoneBase extends SkeletalComponent {
   int get coreType => BoneBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    BoneBase.typeKey,
-    SkeletalComponentBase.typeKey,
-    TransformComponentBase.typeKey,
-    WorldTransformComponentBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        BoneBase.typeKey,
+        SkeletalComponentBase.typeKey,
+        TransformComponentBase.typeKey,
+        WorldTransformComponentBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Length field with key 89.

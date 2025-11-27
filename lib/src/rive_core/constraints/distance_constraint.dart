@@ -1,9 +1,9 @@
-import 'package:rive_legacy/src/generated/constraints/distance_constraint_base.dart';
-import 'package:rive_legacy/src/rive_core/enum_helper.dart';
-import 'package:rive_legacy/src/rive_core/transform_component.dart';
+import 'package:rive/src/generated/constraints/distance_constraint_base.dart';
+import 'package:rive/src/rive_core/enum_helper.dart';
+import 'package:rive/src/rive_core/transform_component.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/constraints/distance_constraint_base.dart';
+export 'package:rive/src/generated/constraints/distance_constraint_base.dart';
 
 /// [DistanceConstraint]'s logical distancing method.
 enum DistanceConstraintMode { closer, further, exact }
@@ -58,6 +58,7 @@ class DistanceConstraint extends DistanceConstraintBase {
   @override
   void modeValueChanged(int from, int to) => markConstraintDirty();
 
-  DistanceConstraintMode get mode => enumAt(DistanceConstraintMode.values, modeValue);
+  DistanceConstraintMode get mode =>
+      enumAt(DistanceConstraintMode.values, modeValue);
   set mode(DistanceConstraintMode value) => modeValue = value.index;
 }

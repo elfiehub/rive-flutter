@@ -1,8 +1,8 @@
-import 'package:rive_legacy/src/generated/text/text_style_feature_base.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
+import 'package:rive/src/generated/text/text_style_feature_base.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
 import 'package:rive_common/rive_text.dart';
 
-export 'package:rive_legacy/src/generated/text/text_style_feature_base.dart';
+export 'package:rive/src/generated/text/text_style_feature_base.dart';
 
 class TextStyleFeature extends TextStyleFeatureBase {
   String get tagName => FontTag.tagToName(tag);

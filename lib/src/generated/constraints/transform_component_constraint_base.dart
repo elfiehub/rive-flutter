@@ -2,24 +2,25 @@
 // lib/src/generated/constraints/transform_component_constraint_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/constraints/constraint_base.dart';
-import 'package:rive_legacy/src/generated/constraints/targeted_constraint_base.dart';
-import 'package:rive_legacy/src/rive_core/constraints/transform_space_constraint.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/constraints/constraint_base.dart';
+import 'package:rive/src/generated/constraints/targeted_constraint_base.dart';
+import 'package:rive/src/rive_core/constraints/transform_space_constraint.dart';
 
-abstract class TransformComponentConstraintBase extends TransformSpaceConstraint {
+abstract class TransformComponentConstraintBase
+    extends TransformSpaceConstraint {
   static const int typeKey = 85;
   @override
   int get coreType => TransformComponentConstraintBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    TransformComponentConstraintBase.typeKey,
-    TransformSpaceConstraintBase.typeKey,
-    TargetedConstraintBase.typeKey,
-    ConstraintBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        TransformComponentConstraintBase.typeKey,
+        TransformSpaceConstraintBase.typeKey,
+        TargetedConstraintBase.typeKey,
+        ConstraintBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// MinMaxSpaceValue field with key 195.

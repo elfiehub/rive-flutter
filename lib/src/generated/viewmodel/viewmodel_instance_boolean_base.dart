@@ -2,16 +2,19 @@
 // lib/src/generated/viewmodel/viewmodel_instance_boolean_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/viewmodel/viewmodel_instance_value_base.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance_value.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/viewmodel/viewmodel_instance_value_base.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance_value.dart';
 
 abstract class ViewModelInstanceBooleanBase extends ViewModelInstanceValue {
   static const int typeKey = 449;
   @override
   int get coreType => ViewModelInstanceBooleanBase.typeKey;
   @override
-  Set<int> get coreTypes => {ViewModelInstanceBooleanBase.typeKey, ViewModelInstanceValueBase.typeKey};
+  Set<int> get coreTypes => {
+        ViewModelInstanceBooleanBase.typeKey,
+        ViewModelInstanceValueBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// PropertyValue field with key 593.

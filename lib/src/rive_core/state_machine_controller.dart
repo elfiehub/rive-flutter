@@ -6,41 +6,43 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/animation_reset_factory.dart' as animation_reset_factory;
-import 'package:rive_legacy/src/rive_core/animation/animation_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/animation_state_instance.dart';
-import 'package:rive_legacy/src/rive_core/animation/any_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/entry_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/exit_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyed_object.dart';
-import 'package:rive_legacy/src/rive_core/animation/layer_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_state_machine.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_instance.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_fire_event.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_layer.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_listener.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_trigger.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_transition.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
-import 'package:rive_legacy/src/rive_core/audio_event.dart';
-import 'package:rive_legacy/src/rive_core/audio_player.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/drawable.dart';
-import 'package:rive_legacy/src/rive_core/event.dart';
-import 'package:rive_legacy/src/rive_core/layer_state_flags.dart';
-import 'package:rive_legacy/src/rive_core/nested_artboard.dart';
-import 'package:rive_legacy/src/rive_core/node.dart';
-import 'package:rive_legacy/src/rive_core/rive_animation_controller.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance.dart';
-import 'package:rive_legacy/src/runtime_event.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/animation_reset_factory.dart'
+    as animation_reset_factory;
+import 'package:rive/src/rive_core/animation/animation_state.dart';
+import 'package:rive/src/rive_core/animation/animation_state_instance.dart';
+import 'package:rive/src/rive_core/animation/any_state.dart';
+import 'package:rive/src/rive_core/animation/entry_state.dart';
+import 'package:rive/src/rive_core/animation/exit_state.dart';
+import 'package:rive/src/rive_core/animation/keyed_object.dart';
+import 'package:rive/src/rive_core/animation/layer_state.dart';
+import 'package:rive/src/rive_core/animation/linear_animation.dart';
+import 'package:rive/src/rive_core/animation/nested_state_machine.dart';
+import 'package:rive/src/rive_core/animation/state_instance.dart';
+import 'package:rive/src/rive_core/animation/state_machine.dart';
+import 'package:rive/src/rive_core/animation/state_machine_fire_event.dart';
+import 'package:rive/src/rive_core/animation/state_machine_layer.dart';
+import 'package:rive/src/rive_core/animation/state_machine_listener.dart';
+import 'package:rive/src/rive_core/animation/state_machine_trigger.dart';
+import 'package:rive/src/rive_core/animation/state_transition.dart';
+import 'package:rive/src/rive_core/artboard.dart';
+import 'package:rive/src/rive_core/audio_event.dart';
+import 'package:rive/src/rive_core/audio_player.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/drawable.dart';
+import 'package:rive/src/rive_core/event.dart';
+import 'package:rive/src/rive_core/layer_state_flags.dart';
+import 'package:rive/src/rive_core/nested_artboard.dart';
+import 'package:rive/src/rive_core/node.dart';
+import 'package:rive/src/rive_core/rive_animation_controller.dart';
+import 'package:rive/src/rive_core/shapes/shape.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance.dart';
+import 'package:rive/src/runtime_event.dart';
 import 'package:rive_common/math.dart';
 
 /// Callback signature for state machine state changes
-typedef OnStateChange = void Function(String stateMachineName, String stateName);
+typedef OnStateChange = void Function(
+    String stateMachineName, String stateName);
 
 /// Callback signature for nested input changes
 typedef OnInputValueChange = void Function(int id, dynamic value);
@@ -72,9 +74,13 @@ class LayerController {
 
   animation_reset_factory.AnimationReset? animationReset;
 
-  LayerController(this.controller, this.layer, {required this.core, this.onLayerStateChange})
-    : assert(layer.anyState != null),
-      anyStateInstance = layer.anyState!.makeInstance() {
+  LayerController(
+    this.controller,
+    this.layer, {
+    required this.core,
+    this.onLayerStateChange,
+  })  : assert(layer.anyState != null),
+        anyStateInstance = layer.anyState!.makeInstance() {
     _changeState(layer.entryState);
   }
 
@@ -92,7 +98,8 @@ class LayerController {
   }
 
   void _changeState(LayerState? state, {StateTransition? transition}) {
-    assert(state is! AnyState, 'We don\'t allow making the AnyState an active state.');
+    assert(state is! AnyState,
+        'We don\'t allow making the AnyState an active state.');
     assert(state != _currentState?.state, 'Cannot change to state to self.');
     var currentState = _currentState;
     if (currentState != null) {
@@ -114,12 +121,18 @@ class LayerController {
     anyStateInstance.dispose();
   }
 
-  bool get isTransitioning => _transition != null && _stateFrom != null && _transition!.duration != 0 && _mix != 1;
+  bool get isTransitioning =>
+      _transition != null &&
+      _stateFrom != null &&
+      _transition!.duration != 0 &&
+      _mix != 1;
 
   void _updateMix(double elapsedSeconds) {
     var transition = _transition;
     if (transition != null && _stateFrom != null && transition.duration != 0) {
-      _mix = (_mix + elapsedSeconds / transition.mixTime(_stateFrom!.state)).clamp(0, 1).toDouble();
+      _mix = (_mix + elapsedSeconds / transition.mixTime(_stateFrom!.state))
+          .clamp(0, 1)
+          .toDouble();
 
       if (_mix == 1 && !_transitionCompleted) {
         _transitionCompleted = true;
@@ -204,16 +217,15 @@ class LayerController {
     return tryChangeState(_currentState, ignoreTriggers);
   }
 
-  StateTransition? _findRandomTransition(
-    StateInstance stateFrom,
-    bool ignoreTriggers,
-    ViewModelInstance? viewModelInstance,
-  ) {
+  StateTransition? _findRandomTransition(StateInstance stateFrom,
+      bool ignoreTriggers, ViewModelInstance? viewModelInstance) {
     double totalWeight = 0;
     final transitions = stateFrom.state.transitions;
     for (final transition in transitions) {
-      var allowed = transition.allowed(stateFrom, controller._inputValues, ignoreTriggers, viewModelInstance);
-      if (allowed == AllowTransition.yes && _canChangeState(transition.stateTo)) {
+      var allowed = transition.allowed(stateFrom, controller._inputValues,
+          ignoreTriggers, viewModelInstance);
+      if (allowed == AllowTransition.yes &&
+          _canChangeState(transition.stateTo)) {
         transition.evaluatedRandomWeight = transition.randomWeight;
         totalWeight += transition.randomWeight;
         // If random is not active we don't search for more candidates
@@ -229,7 +241,8 @@ class LayerController {
       double currentWeight = 0;
       int index = 0;
       while (index < transitions.length) {
-        final transitionWeight = transitions.elementAt(index).evaluatedRandomWeight;
+        final transitionWeight =
+            transitions.elementAt(index).evaluatedRandomWeight;
         if (currentWeight + transitionWeight > random) {
           break;
         }
@@ -243,18 +256,19 @@ class LayerController {
     return null;
   }
 
-  StateTransition? _findAllowedTransition(
-    StateInstance stateFrom,
-    bool ignoreTriggers,
-    ViewModelInstance? viewModelInstance,
-  ) {
-    if (stateFrom.state.flags & LayerStateFlags.random == LayerStateFlags.random) {
-      return _findRandomTransition(stateFrom, ignoreTriggers, viewModelInstance);
+  StateTransition? _findAllowedTransition(StateInstance stateFrom,
+      bool ignoreTriggers, ViewModelInstance? viewModelInstance) {
+    if (stateFrom.state.flags & LayerStateFlags.random ==
+        LayerStateFlags.random) {
+      return _findRandomTransition(
+          stateFrom, ignoreTriggers, viewModelInstance);
     }
     final transitions = stateFrom.state.transitions;
     for (final transition in transitions) {
-      var allowed = transition.allowed(stateFrom, controller._inputValues, ignoreTriggers, viewModelInstance);
-      if (allowed == AllowTransition.yes && _canChangeState(transition.stateTo)) {
+      var allowed = transition.allowed(stateFrom, controller._inputValues,
+          ignoreTriggers, viewModelInstance);
+      if (allowed == AllowTransition.yes &&
+          _canChangeState(transition.stateTo)) {
         return transition;
       } else if (allowed == AllowTransition.waitingForExit) {
         _waitingForExit = true;
@@ -267,7 +281,8 @@ class LayerController {
   // every frame. This generates a more linear and predictable mix of states
   // during transitions.
   void _buildAnimationResetForTransition() {
-    animationReset = animation_reset_factory.fromStates(_stateFrom, _currentState, core);
+    animationReset =
+        animation_reset_factory.fromStates(_stateFrom, _currentState, core);
   }
 
   void _clearAnimationReset() {
@@ -283,7 +298,8 @@ class LayerController {
     }
 
     var outState = _currentState;
-    final transition = _findAllowedTransition(stateFrom, ignoreTriggers, controller._artboard?.viewModelInstance);
+    final transition = _findAllowedTransition(
+        stateFrom, ignoreTriggers, controller._artboard?.viewModelInstance);
     if (transition != null) {
       _clearAnimationReset();
       _changeState(transition.stateTo, transition: transition);
@@ -340,7 +356,8 @@ class LayerController {
   }
 }
 
-class StateMachineController extends RiveAnimationController<CoreContext> implements KeyedCallbackReporter {
+class StateMachineController extends RiveAnimationController<CoreContext>
+    implements KeyedCallbackReporter {
   final StateMachine stateMachine;
   final _inputValues = HashMap<int, dynamic>();
   final layerControllers = <LayerController>[];
@@ -365,7 +382,10 @@ class StateMachineController extends RiveAnimationController<CoreContext> implem
   List<Event> get reportedEvents => _reportedEvents;
 
   /// Constructor that takes a state machine and optional state change callback
-  StateMachineController(this.stateMachine, {@Deprecated('Use `addEventListener` instead.') this.onStateChange});
+  StateMachineController(
+    this.stateMachine, {
+    @Deprecated('Use `addEventListener` instead.') this.onStateChange,
+  });
 
   /// Adds a Rive event listener to this controller.
   ///
@@ -373,7 +393,8 @@ class StateMachineController extends RiveAnimationController<CoreContext> implem
   void addEventListener(OnEvent callback) => _eventListeners.add(callback);
 
   /// Removes listener from this controller.
-  void removeEventListener(OnEvent callback) => _eventListeners.remove(callback);
+  void removeEventListener(OnEvent callback) =>
+      _eventListeners.remove(callback);
 
   void reportEvent(Event event) {
     _reportedEvents.add(event);
@@ -418,6 +439,7 @@ class StateMachineController extends RiveAnimationController<CoreContext> implem
 
   /// Handles state change callbacks
   void _onStateChange(LayerState layerState) =>
+
       /// See https://github.com/flutter/flutter/issues/103561#issuecomment-1129356149
       _ambiguate(SchedulerBinding.instance)?.addPostFrameCallback((_) {
         String stateName = 'unknown';
@@ -451,7 +473,12 @@ class StateMachineController extends RiveAnimationController<CoreContext> implem
     _clearLayerControllers();
 
     for (final layer in stateMachine.layers) {
-      layerControllers.add(LayerController(this, layer, core: core, onLayerStateChange: _onStateChange));
+      layerControllers.add(LayerController(
+        this,
+        layer,
+        core: core,
+        onLayerStateChange: _onStateChange,
+      ));
     }
 
     // Make sure triggers are all reset.
@@ -622,14 +649,22 @@ class StateMachineController extends RiveAnimationController<CoreContext> implem
     }
   }
 
-  HitResult _processEvent(Vec2D position, {PointerEvent? pointerEvent, ListenerType? hitEvent}) {
+  HitResult _processEvent(
+    Vec2D position, {
+    PointerEvent? pointerEvent,
+    ListenerType? hitEvent,
+  }) {
     var artboard = this.artboard;
     if (artboard == null) {
       return HitResult.none;
     }
     if (artboard.frameOrigin) {
       // ignore: parameter_assignments
-      position = position - Vec2D.fromValues(artboard.width * artboard.originX, artboard.height * artboard.originY);
+      position = position -
+          Vec2D.fromValues(
+            artboard.width * artboard.originX,
+            artboard.height * artboard.originY,
+          );
     }
 
     for (final listenerGroup in listenerGroups) {
@@ -642,12 +677,8 @@ class StateMachineController extends RiveAnimationController<CoreContext> implem
     bool hitOpaque = false;
     HitResult hitResult = HitResult.none;
     for (final hitComponent in hitComponents) {
-      hitResult = hitComponent.processEvent(
-        position,
-        hitEvent: hitEvent,
-        pointerEvent: pointerEvent,
-        canHit: !hitOpaque,
-      );
+      hitResult = hitComponent.processEvent(position,
+          hitEvent: hitEvent, pointerEvent: pointerEvent, canHit: !hitOpaque);
       if (hitResult != HitResult.none) {
         hitSomething = true;
         if (hitResult == HitResult.hitOpaque) {
@@ -657,20 +688,28 @@ class StateMachineController extends RiveAnimationController<CoreContext> implem
     }
     return hitSomething
         ? hitOpaque
-              ? HitResult.hitOpaque
-              : HitResult.hit
+            ? HitResult.hitOpaque
+            : HitResult.hit
         : HitResult.none;
   }
 
   /// Hit testing. If any listeners were hit, returns true.
-  bool hitTest(Vec2D position, {PointerEvent? pointerEvent, ListenerType? hitEvent}) {
+  bool hitTest(
+    Vec2D position, {
+    PointerEvent? pointerEvent,
+    ListenerType? hitEvent,
+  }) {
     var artboard = this.artboard;
     if (artboard == null) {
       return false;
     }
     if (artboard.frameOrigin) {
       // ignore: parameter_assignments
-      position = position - Vec2D.fromValues(artboard.width * artboard.originX, artboard.height * artboard.originY);
+      position = position -
+          Vec2D.fromValues(
+            artboard.width * artboard.originX,
+            artboard.height * artboard.originY,
+          );
     }
 
     for (final hitComponent in hitComponents) {
@@ -682,31 +721,56 @@ class StateMachineController extends RiveAnimationController<CoreContext> implem
     return false; // no hit targets found
   }
 
-  HitResult pointerMove(Vec2D position) => _processEvent(position, hitEvent: ListenerType.move);
+  HitResult pointerMove(Vec2D position) => _processEvent(
+        position,
+        hitEvent: ListenerType.move,
+      );
 
   HitResult pointerDown(Vec2D position, PointerDownEvent event) {
-    final hitResult = _processEvent(position, hitEvent: ListenerType.down, pointerEvent: event);
+    final hitResult = _processEvent(
+      position,
+      hitEvent: ListenerType.down,
+      pointerEvent: event,
+    );
     return hitResult;
   }
 
-  HitResult pointerUp(Vec2D position) => _processEvent(position, hitEvent: ListenerType.up);
+  HitResult pointerUp(Vec2D position) => _processEvent(
+        position,
+        hitEvent: ListenerType.up,
+      );
 
-  HitResult pointerExit(Vec2D position) => _processEvent(position, hitEvent: ListenerType.exit);
+  HitResult pointerExit(Vec2D position) => _processEvent(
+        position,
+        hitEvent: ListenerType.exit,
+      );
 
-  HitResult pointerEnter(Vec2D position) => _processEvent(position, hitEvent: ListenerType.enter);
+  HitResult pointerEnter(Vec2D position) => _processEvent(
+        position,
+        hitEvent: ListenerType.enter,
+      );
 
   /// Implementation of interface that reports which time based events have
   /// elapsed on a timeline within this state machine.
   @override
-  void reportKeyedCallback(int objectId, int propertyKey, double elapsedSeconds) {
+  void reportKeyedCallback(
+      int objectId, int propertyKey, double elapsedSeconds) {
     var coreObject = core.resolve(objectId);
     if (coreObject != null) {
-      RiveCoreContext.setCallback(coreObject, propertyKey, CallbackData(this, delay: elapsedSeconds));
+      RiveCoreContext.setCallback(
+        coreObject,
+        propertyKey,
+        CallbackData(this, delay: elapsedSeconds),
+      );
     }
   }
 }
 
-enum HitResult { none, hit, hitOpaque }
+enum HitResult {
+  none,
+  hit,
+  hitOpaque,
+}
 
 class _ListenerGroup {
   final StateMachineListener listener;
@@ -754,7 +818,12 @@ class _ListenerGroup {
 class _HitComponent {
   final Component component;
   final StateMachineController controller;
-  HitResult processEvent(Vec2D position, {PointerEvent? pointerEvent, ListenerType? hitEvent, bool canHit = true}) {
+  HitResult processEvent(
+    Vec2D position, {
+    PointerEvent? pointerEvent,
+    ListenerType? hitEvent,
+    bool canHit = true,
+  }) {
     return HitResult.none;
   }
 
@@ -779,7 +848,8 @@ class _HitShape extends _HitComponent {
   bool hasUpListener = false;
   List<_ListenerGroup> listenerGroups = [];
 
-  _HitShape(this.shape, StateMachineController controller) : super(shape, controller) {
+  _HitShape(this.shape, StateMachineController controller)
+      : super(shape, controller) {
     canEarlyOut = !shape.isTargetOpaque;
   }
 
@@ -822,7 +892,12 @@ class _HitShape extends _HitComponent {
   }
 
   @override
-  HitResult processEvent(Vec2D position, {PointerEvent? pointerEvent, ListenerType? hitEvent, bool canHit = true}) {
+  HitResult processEvent(
+    Vec2D position, {
+    PointerEvent? pointerEvent,
+    ListenerType? hitEvent,
+    bool canHit = true,
+  }) {
     if (canEarlyOut &&
         (hitEvent != ListenerType.down || !hasDownListener) &&
         (hitEvent != ListenerType.up || !hasUpListener)) {
@@ -861,7 +936,8 @@ class _HitShape extends _HitComponent {
       if (isGroupHovered) {
         if (hitEvent == ListenerType.down) {
           listenerGroup.clickPhase = GestureClickPhase.down;
-        } else if (hitEvent == ListenerType.up && listenerGroup.clickPhase == GestureClickPhase.down) {
+        } else if (hitEvent == ListenerType.up &&
+            listenerGroup.clickPhase == GestureClickPhase.down) {
           listenerGroup.clickPhase = GestureClickPhase.clicked;
         }
       } else {
@@ -877,17 +953,21 @@ class _HitShape extends _HitComponent {
       final listener = listenerGroup.listener;
       if (hoverChange &&
           ((isGroupHovered && listener.listenerType == ListenerType.enter) ||
-              (!isGroupHovered && listener.listenerType == ListenerType.exit))) {
-        listener.performChanges(controller, position, listenerGroup.previousPosition);
+              (!isGroupHovered &&
+                  listener.listenerType == ListenerType.exit))) {
+        listener.performChanges(
+            controller, position, listenerGroup.previousPosition);
         controller.isActive = true;
         listenerGroup.consume();
       }
       // Perform changes if:
       // - the click gesture is complete and the listener is of type click
       // - the event type matches the listener type and it is hovering the group
-      if ((listenerGroup.clickPhase == GestureClickPhase.clicked && listener.listenerType == ListenerType.click) ||
+      if ((listenerGroup.clickPhase == GestureClickPhase.clicked &&
+              listener.listenerType == ListenerType.click) ||
           (isGroupHovered && hitEvent == listener.listenerType)) {
-        listener.performChanges(controller, position, listenerGroup.previousPosition);
+        listener.performChanges(
+            controller, position, listenerGroup.previousPosition);
         controller.isActive = true;
         listenerGroup.consume();
       }
@@ -896,21 +976,25 @@ class _HitShape extends _HitComponent {
     }
     return isHovered && canHit
         ? shape.isTargetOpaque
-              ? HitResult.hitOpaque
-              : HitResult.hit
+            ? HitResult.hitOpaque
+            : HitResult.hit
         : HitResult.none;
   }
 
   void addListener(_ListenerGroup listenerGroup) {
     final listener = listenerGroup.listener;
     final listenerType = listener.listenerType;
-    if (listenerType == ListenerType.enter || listenerType == ListenerType.exit || listenerType == ListenerType.move) {
+    if (listenerType == ListenerType.enter ||
+        listenerType == ListenerType.exit ||
+        listenerType == ListenerType.move) {
       canEarlyOut = false;
     } else {
-      if (listenerType == ListenerType.down || listenerType == ListenerType.click) {
+      if (listenerType == ListenerType.down ||
+          listenerType == ListenerType.click) {
         hasDownListener = true;
       }
-      if (listenerType == ListenerType.up || listenerType == ListenerType.click) {
+      if (listenerType == ListenerType.up ||
+          listenerType == ListenerType.click) {
         hasUpListener = true;
       }
     }
@@ -920,7 +1004,8 @@ class _HitShape extends _HitComponent {
 
 class _HitNestedArtboard extends _HitComponent {
   final NestedArtboard nestedArtboard;
-  _HitNestedArtboard(this.nestedArtboard, StateMachineController controller) : super(nestedArtboard, controller);
+  _HitNestedArtboard(this.nestedArtboard, StateMachineController controller)
+      : super(nestedArtboard, controller);
 
   @override
   bool hitTest(Vec2D position) {
@@ -932,7 +1017,8 @@ class _HitNestedArtboard extends _HitComponent {
       // Mounted artboard isn't ready or has a 0 scale transform.
       return false;
     }
-    for (final nestedStateMachine in nestedArtboard.animations.whereType<NestedStateMachine>()) {
+    for (final nestedStateMachine
+        in nestedArtboard.animations.whereType<NestedStateMachine>()) {
       if (nestedStateMachine.hitTest(nestedPosition)) {
         return true; // exit early
       }
@@ -941,7 +1027,12 @@ class _HitNestedArtboard extends _HitComponent {
   }
 
   @override
-  HitResult processEvent(Vec2D position, {PointerEvent? pointerEvent, ListenerType? hitEvent, bool canHit = true}) {
+  HitResult processEvent(
+    Vec2D position, {
+    PointerEvent? pointerEvent,
+    ListenerType? hitEvent,
+    bool canHit = true,
+  }) {
     HitResult hitResult = HitResult.none;
     if (nestedArtboard.isCollapsed) {
       return hitResult;
@@ -951,11 +1042,15 @@ class _HitNestedArtboard extends _HitComponent {
       // Mounted artboard isn't ready or has a 0 scale transform.
       return hitResult;
     }
-    for (final nestedStateMachine in nestedArtboard.animations.whereType<NestedStateMachine>()) {
+    for (final nestedStateMachine
+        in nestedArtboard.animations.whereType<NestedStateMachine>()) {
       if (canHit) {
         switch (hitEvent) {
           case ListenerType.down:
-            hitResult = nestedStateMachine.pointerDown(nestedPosition, pointerEvent as PointerDownEvent);
+            hitResult = nestedStateMachine.pointerDown(
+              nestedPosition,
+              pointerEvent as PointerDownEvent,
+            );
             break;
           case ListenerType.up:
             hitResult = nestedStateMachine.pointerUp(nestedPosition);

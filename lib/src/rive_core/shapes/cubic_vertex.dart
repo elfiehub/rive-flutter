@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 
-import 'package:rive_legacy/src/generated/shapes/cubic_vertex_base.dart';
-import 'package:rive_legacy/src/rive_core/bones/weight.dart';
+import 'package:rive/src/generated/shapes/cubic_vertex_base.dart';
+import 'package:rive/src/rive_core/bones/weight.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/shapes/cubic_vertex_base.dart';
+export 'package:rive/src/generated/shapes/cubic_vertex_base.dart';
 
 abstract class CubicVertex extends CubicVertexBase {
   Vec2D get outPoint;
@@ -23,23 +23,9 @@ abstract class CubicVertex extends CubicVertexBase {
   void deform(Mat2D world, Float32List boneTransforms) {
     super.deform(world, boneTransforms);
 
-    Weight.deform(
-      outPoint.x,
-      outPoint.y,
-      weight!.outIndices,
-      weight!.outValues,
-      world,
-      boneTransforms,
-      weight!.outTranslation,
-    );
-    Weight.deform(
-      inPoint.x,
-      inPoint.y,
-      weight!.inIndices,
-      weight!.inValues,
-      world,
-      boneTransforms,
-      weight!.inTranslation,
-    );
+    Weight.deform(outPoint.x, outPoint.y, weight!.outIndices, weight!.outValues,
+        world, boneTransforms, weight!.outTranslation);
+    Weight.deform(inPoint.x, inPoint.y, weight!.inIndices, weight!.inValues,
+        world, boneTransforms, weight!.inTranslation);
   }
 }

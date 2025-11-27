@@ -2,15 +2,16 @@
 // lib/src/generated/data_bind/bindable_property_color_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/data_bind/bindable_property.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/data_bind/bindable_property.dart';
 
 abstract class BindablePropertyColorBase extends BindableProperty {
   static const int typeKey = 475;
   @override
   int get coreType => BindablePropertyColorBase.typeKey;
   @override
-  Set<int> get coreTypes => {BindablePropertyColorBase.typeKey, BindablePropertyBase.typeKey};
+  Set<int> get coreTypes =>
+      {BindablePropertyColorBase.typeKey, BindablePropertyBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// PropertyValue field with key 638.

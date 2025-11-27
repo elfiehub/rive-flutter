@@ -1,15 +1,15 @@
 import 'dart:ui' as ui;
 
 import 'package:meta/meta.dart';
-import 'package:rive_legacy/src/generated/shapes/paint/linear_gradient_base.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/shapes/paint/gradient_stop.dart';
-import 'package:rive_legacy/src/rive_core/shapes/paint/shape_paint_mutator.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape.dart';
+import 'package:rive/src/generated/shapes/paint/linear_gradient_base.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/shapes/paint/gradient_stop.dart';
+import 'package:rive/src/rive_core/shapes/paint/shape_paint_mutator.dart';
+import 'package:rive/src/rive_core/shapes/shape.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/shapes/paint/linear_gradient_base.dart';
+export 'package:rive/src/generated/shapes/paint/linear_gradient_base.dart';
 
 /// A core linear gradient. Can be added as a child to a [Shape]'s [Fill] or
 /// [Stroke] to paint that Fill or Stroke with a gradient. This is the
@@ -91,8 +91,9 @@ class LinearGradient extends LinearGradientBase with ShapePaintMutator {
     // We rebuild the gradient if the gradient is dirty or we paint in world
     // space and the world space transform has changed, or the local transform
     // has changed. Local transform changes when a stop moves in local space.
-    var rebuildGradient =
-        dirt & ComponentDirt.paint != 0 || localTransformed || (paintsInWorldSpace && worldTransformed);
+    var rebuildGradient = dirt & ComponentDirt.paint != 0 ||
+        localTransformed ||
+        (paintsInWorldSpace && worldTransformed);
     if (rebuildGradient) {
       // build up the color and positions lists
       var colors = <ui.Color>[];
@@ -108,20 +109,18 @@ class LinearGradient extends LinearGradientBase with ShapePaintMutator {
         var world = shapePaintContainer!.worldTransform;
         var worldStart = world * start;
         var worldEnd = world * end;
-        paint.shader = makeGradient(
-          ui.Offset(worldStart.x, worldStart.y),
-          ui.Offset(worldEnd.x, worldEnd.y),
-          colors,
-          colorPositions,
-        );
+        paint.shader = makeGradient(ui.Offset(worldStart.x, worldStart.y),
+            ui.Offset(worldEnd.x, worldEnd.y), colors, colorPositions);
       } else {
-        paint.shader = makeGradient(startOffset, endOffset, colors, colorPositions);
+        paint.shader =
+            makeGradient(startOffset, endOffset, colors, colorPositions);
       }
     }
   }
 
   @protected
-  ui.Gradient makeGradient(ui.Offset start, ui.Offset end, List<ui.Color> colors, List<double> colorPositions) =>
+  ui.Gradient makeGradient(ui.Offset start, ui.Offset end,
+          List<ui.Color> colors, List<double> colorPositions) =>
       ui.Gradient.linear(start, end, colors, colorPositions);
 
   @override
@@ -167,7 +166,8 @@ class LinearGradient extends LinearGradientBase with ShapePaintMutator {
   @override
   void syncColor() {
     super.syncColor();
-    paint.color = const ui.Color(0xFFFFFFFF).withOpacity((opacity * renderOpacity).clamp(0, 1).toDouble());
+    paint.color = const ui.Color(0xFFFFFFFF)
+        .withOpacity((opacity * renderOpacity).clamp(0, 1).toDouble());
   }
 
   @override

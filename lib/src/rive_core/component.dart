@@ -1,17 +1,18 @@
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
-import 'package:rive_legacy/src/rive_core/dependency_helper.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/rive_core/artboard.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/container_component.dart';
+import 'package:rive/src/rive_core/dependency_helper.dart';
 import 'package:rive_common/utilities.dart';
 
-export 'package:rive_legacy/src/generated/component_base.dart';
+export 'package:rive/src/generated/component_base.dart';
 
 abstract class Component extends ComponentBase<RuntimeArtboard>
     implements DependencyGraphNode<Component>, Parentable<Component> {
   Artboard? _artboard;
   dynamic _userData;
-  final DependencyHelper<Artboard, Component> _dependencyHelper = DependencyHelper();
+  final DependencyHelper<Artboard, Component> _dependencyHelper =
+      DependencyHelper();
 
   /// Whether this Component's update processes at all.
   bool get isCollapsed => (dirt & ComponentDirt.collapsed) != 0;
@@ -99,7 +100,9 @@ abstract class Component extends ComponentBase<RuntimeArtboard>
   /// Find the artboard in the hierarchy.
   bool resolveArtboard() {
     int sanity = maxTreeDepth;
-    for (Component? curr = this; curr != null && sanity > 0; curr = curr.parent, sanity--) {
+    for (Component? curr = this;
+        curr != null && sanity > 0;
+        curr = curr.parent, sanity--) {
       visitAncestor(curr);
       if (curr is Artboard) {
         if (artboard != curr) {
@@ -184,7 +187,8 @@ abstract class Component extends ComponentBase<RuntimeArtboard>
   /// [dependent] itself. At edit time this allows the editor to rebuild both
   /// [dependent] and [via] when [dependent] has its dependencies cleared.
   bool addDependent(Component dependent, {Component? via}) {
-    assert(artboard == dependent.artboard, 'Components must be in the same artboard.');
+    assert(artboard == dependent.artboard,
+        'Components must be in the same artboard.');
 
     if (!_dependencyHelper.addDependent(dependent)) {
       return false;

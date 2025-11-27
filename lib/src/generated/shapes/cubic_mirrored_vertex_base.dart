@@ -2,12 +2,12 @@
 // lib/src/generated/shapes/cubic_mirrored_vertex_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/generated/shapes/path_vertex_base.dart';
-import 'package:rive_legacy/src/generated/shapes/vertex_base.dart';
-import 'package:rive_legacy/src/rive_core/shapes/cubic_vertex.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/generated/shapes/path_vertex_base.dart';
+import 'package:rive/src/generated/shapes/vertex_base.dart';
+import 'package:rive/src/rive_core/shapes/cubic_vertex.dart';
 
 abstract class CubicMirroredVertexBase extends CubicVertex {
   static const int typeKey = 35;
@@ -15,13 +15,13 @@ abstract class CubicMirroredVertexBase extends CubicVertex {
   int get coreType => CubicMirroredVertexBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    CubicMirroredVertexBase.typeKey,
-    CubicVertexBase.typeKey,
-    PathVertexBase.typeKey,
-    VertexBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        CubicMirroredVertexBase.typeKey,
+        CubicVertexBase.typeKey,
+        PathVertexBase.typeKey,
+        VertexBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Rotation field with key 82.

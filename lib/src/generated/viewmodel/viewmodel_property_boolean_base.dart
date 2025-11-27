@@ -2,8 +2,8 @@
 // lib/src/generated/viewmodel/viewmodel_property_boolean_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/viewmodel/viewmodel_component_base.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_property.dart';
+import 'package:rive/src/generated/viewmodel/viewmodel_component_base.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_property.dart';
 
 abstract class ViewModelPropertyBooleanBase extends ViewModelProperty {
   static const int typeKey = 448;
@@ -11,8 +11,8 @@ abstract class ViewModelPropertyBooleanBase extends ViewModelProperty {
   int get coreType => ViewModelPropertyBooleanBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    ViewModelPropertyBooleanBase.typeKey,
-    ViewModelPropertyBase.typeKey,
-    ViewModelComponentBase.typeKey,
-  };
+        ViewModelPropertyBooleanBase.typeKey,
+        ViewModelPropertyBase.typeKey,
+        ViewModelComponentBase.typeKey
+      };
 }

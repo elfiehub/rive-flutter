@@ -1,13 +1,13 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_bool.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_input.dart' as core;
-import 'package:rive_legacy/src/rive_core/animation/state_machine_number.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_trigger.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
-import 'package:rive_legacy/src/rive_core/state_machine_controller.dart' as core;
-import 'package:rive_legacy/src/runtime_mounted_artboard.dart';
-export 'package:rive_legacy/src/runtime_mounted_artboard.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/state_machine.dart';
+import 'package:rive/src/rive_core/animation/state_machine_bool.dart';
+import 'package:rive/src/rive_core/animation/state_machine_input.dart' as core;
+import 'package:rive/src/rive_core/animation/state_machine_number.dart';
+import 'package:rive/src/rive_core/animation/state_machine_trigger.dart';
+import 'package:rive/src/rive_core/artboard.dart';
+import 'package:rive/src/rive_core/state_machine_controller.dart' as core;
+import 'package:rive/src/runtime_mounted_artboard.dart';
+export 'package:rive/src/runtime_mounted_artboard.dart';
 
 /// [StateMachine]s supports three input types. The StateMachine mostly
 /// abstracts types by allowing the programmer to query for an input of a
@@ -68,7 +68,12 @@ abstract class SMIInput<T> {
 /// the input which will automatically re-activate the [StateMachineController]
 /// if necessary.
 class SMIBool extends SMIInput<bool> {
-  SMIBool._(StateMachineBool input, StateMachineController controller) : super._(input, SMIType.boolean, controller) {
+  SMIBool._(StateMachineBool input, StateMachineController controller)
+      : super._(
+          input,
+          SMIType.boolean,
+          controller,
+        ) {
     controller.setInputValue(id, input.value);
   }
 }
@@ -78,7 +83,11 @@ class SMIBool extends SMIInput<bool> {
 /// if necessary.
 class SMINumber extends SMIInput<double> {
   SMINumber._(StateMachineNumber input, StateMachineController controller)
-    : super._(input, SMIType.number, controller) {
+      : super._(
+          input,
+          SMIType.number,
+          controller,
+        ) {
     controller.setInputValue(id, input.value);
   }
 }
@@ -88,7 +97,11 @@ class SMINumber extends SMIInput<double> {
 /// necessary.
 class SMITrigger extends SMIInput<bool> {
   SMITrigger._(StateMachineTrigger input, StateMachineController controller)
-    : super._(input, SMIType.trigger, controller) {
+      : super._(
+          input,
+          SMIType.trigger,
+          controller,
+        ) {
     controller.setInputValue(id, false);
   }
 
@@ -99,7 +112,8 @@ class SMITrigger extends SMIInput<bool> {
 
 /// An AnimationController which controls a StateMachine and provides access to
 /// the inputs of the StateMachine.
-class StateMachineController extends core.StateMachineController with RuntimeEventReporter {
+class StateMachineController extends core.StateMachineController
+    with RuntimeEventReporter {
   final List<SMIInput> _inputs = <SMIInput>[];
 
   /// A list of inputs available in the StateMachine.
@@ -138,7 +152,8 @@ class StateMachineController extends core.StateMachineController with RuntimeEve
   }) {
     for (final animation in artboard.animations) {
       if (animation is StateMachine && animation.name == stateMachineName) {
-        final controller = StateMachineController(animation, onStateChange: onStateChange);
+        final controller =
+            StateMachineController(animation, onStateChange: onStateChange);
         if (artboard is RuntimeArtboard) {
           artboard.addNestedEventListener(controller);
         }
@@ -200,10 +215,12 @@ class StateMachineController extends core.StateMachineController with RuntimeEve
   }
 
   @override
-  void addRuntimeEventListener(OnRuntimeEvent callback) => _runtimeEventListeners.add(callback);
+  void addRuntimeEventListener(OnRuntimeEvent callback) =>
+      _runtimeEventListeners.add(callback);
 
   @override
-  void removeRuntimeEventListener(OnRuntimeEvent callback) => _runtimeEventListeners.remove(callback);
+  void removeRuntimeEventListener(OnRuntimeEvent callback) =>
+      _runtimeEventListeners.remove(callback);
 
   @override
   void applyEvents() {

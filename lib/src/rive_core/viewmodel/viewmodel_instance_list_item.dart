@@ -1,6 +1,6 @@
-import 'package:rive_legacy/src/generated/viewmodel/viewmodel_instance_list_item_base.dart';
+import 'package:rive/src/generated/viewmodel/viewmodel_instance_list_item_base.dart';
 
-export 'package:rive_legacy/src/generated/viewmodel/viewmodel_instance_list_item_base.dart';
+export 'package:rive/src/generated/viewmodel/viewmodel_instance_list_item_base.dart';
 
 class ViewModelInstanceListItem extends ViewModelInstanceListItemBase {
   @override

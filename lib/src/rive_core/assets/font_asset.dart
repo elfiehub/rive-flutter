@@ -1,19 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:rive_legacy/src/generated/assets/font_asset_base.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/text/text_style.dart';
+import 'package:rive/src/generated/assets/font_asset_base.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/text/text_style.dart';
 import 'package:rive_common/rive_text.dart';
 
-export 'package:rive_legacy/src/generated/assets/font_asset_base.dart';
+export 'package:rive/src/generated/assets/font_asset_base.dart';
 
 class FontAsset extends FontAssetBase {
   final Set<VoidCallback> _callbacks = {};
 
   /// Call [callback] when the font is ready. Set [notifyAlreadySet] to
   /// specify if you want to be called if the font is already set.
-  bool setFontCallback(VoidCallback callback, {bool notifyAlreadySet = true}) {
+  bool setFontCallback(
+    VoidCallback callback, {
+    bool notifyAlreadySet = true,
+  }) {
     if (font != null) {
       if (notifyAlreadySet) {
         callback();

@@ -1,12 +1,13 @@
-import 'package:rive_legacy/src/generated/animation/cubic_interpolator_component_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/cubic_ease_interpolator.dart';
-import 'package:rive_legacy/src/rive_core/animation/cubic_interpolator.dart';
-import 'package:rive_legacy/src/rive_core/animation/interpolator.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
+import 'package:rive/src/generated/animation/cubic_interpolator_component_base.dart';
+import 'package:rive/src/rive_core/animation/cubic_ease_interpolator.dart';
+import 'package:rive/src/rive_core/animation/cubic_interpolator.dart';
+import 'package:rive/src/rive_core/animation/interpolator.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
 
-export 'package:rive_legacy/src/generated/animation/cubic_interpolator_component_base.dart';
+export 'package:rive/src/generated/animation/cubic_interpolator_component_base.dart';
 
-class CubicInterpolatorComponent extends CubicInterpolatorComponentBase implements Interpolator, CubicInterface {
+class CubicInterpolatorComponent extends CubicInterpolatorComponentBase
+    implements Interpolator, CubicInterface {
   CubicEase _ease = CubicEase.make(0.42, 0, 0.58, 1);
 
   @override
@@ -27,7 +28,10 @@ class CubicInterpolatorComponent extends CubicInterpolatorComponentBase implemen
   @override
   bool equalParameters(Interpolator other) {
     if (other is CubicInterpolatorComponent) {
-      return x1 == other.x1 && x2 == other.x2 && y1 == other.y1 && y2 == other.y2;
+      return x1 == other.x1 &&
+          x2 == other.x2 &&
+          y1 == other.y1 &&
+          y2 == other.y2;
     }
     return false;
   }
@@ -42,7 +46,8 @@ class CubicInterpolatorComponent extends CubicInterpolatorComponentBase implemen
   }
 
   @override
-  double transformValue(double from, double to, double value) => from + (to - from) * _ease.transform(value);
+  double transformValue(double from, double to, double value) =>
+      from + (to - from) * _ease.transform(value);
 
   void _updateStoredCubic() {
     _ease = CubicEase.make(x1, y1, x2, y2);

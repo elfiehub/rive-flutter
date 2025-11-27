@@ -1,5 +1,6 @@
-import 'package:rive_legacy/src/generated/animation/transition_property_comparator_base.dart';
+import 'package:rive/src/generated/animation/transition_property_comparator_base.dart';
 
-export 'package:rive_legacy/src/generated/animation/transition_property_comparator_base.dart';
+export 'package:rive/src/generated/animation/transition_property_comparator_base.dart';
 
-abstract class TransitionPropertyComparator extends TransitionPropertyComparatorBase {}
+abstract class TransitionPropertyComparator
+    extends TransitionPropertyComparatorBase {}

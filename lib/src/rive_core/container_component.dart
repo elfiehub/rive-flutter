@@ -1,10 +1,10 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/draw_rules.dart';
-import 'package:rive_legacy/src/rive_core/drawable.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/draw_rules.dart';
+import 'package:rive/src/rive_core/drawable.dart';
 
-export 'package:rive_legacy/src/core/core.dart';
+export 'package:rive/src/core/core.dart';
 
 typedef bool DescentCallback(Component component);
 
@@ -65,7 +65,8 @@ abstract class ContainerComponent extends ContainerComponentBase {
     deathRow.forEach(context.removeObject);
   }
 
-  void buildDrawOrder(List<Drawable> drawables, DrawRules? rules, List<DrawRules> allRules) {
+  void buildDrawOrder(
+      List<Drawable> drawables, DrawRules? rules, List<DrawRules> allRules) {
     for (final child in children) {
       if (child is ContainerComponent) {
         child.buildDrawOrder(drawables, rules, allRules);

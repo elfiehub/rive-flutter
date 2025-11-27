@@ -2,15 +2,16 @@
 // lib/src/generated/layout/track_sizing_function_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/component.dart';
 
 abstract class TrackSizingFunctionBase extends Component {
   static const int typeKey = 176;
   @override
   int get coreType => TrackSizingFunctionBase.typeKey;
   @override
-  Set<int> get coreTypes => {TrackSizingFunctionBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes =>
+      {TrackSizingFunctionBase.typeKey, ComponentBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// MinTypeTag field with key 459.

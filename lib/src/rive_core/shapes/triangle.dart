@@ -1,9 +1,9 @@
-import 'package:rive_legacy/src/generated/shapes/triangle_base.dart';
-import 'package:rive_legacy/src/rive_core/shapes/path_vertex.dart';
-import 'package:rive_legacy/src/rive_core/shapes/straight_vertex.dart';
+import 'package:rive/src/generated/shapes/triangle_base.dart';
+import 'package:rive/src/rive_core/shapes/path_vertex.dart';
+import 'package:rive/src/rive_core/shapes/straight_vertex.dart';
 
 /// Export the Base class for external use (e.g. rive.dart)
-export 'package:rive_legacy/src/generated/shapes/triangle_base.dart';
+export 'package:rive/src/generated/shapes/triangle_base.dart';
 
 class Triangle extends TriangleBase {
   @override
@@ -20,7 +20,7 @@ class Triangle extends TriangleBase {
         ..y = oy + height,
       StraightVertex.procedural()
         ..x = ox
-        ..y = oy + height,
+        ..y = oy + height
     ];
   }
 }

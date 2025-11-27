@@ -1,13 +1,13 @@
 // Core automatically generated lib/src/generated/shapes/image_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/generated/node_base.dart';
-import 'package:rive_legacy/src/generated/transform_component_base.dart';
-import 'package:rive_legacy/src/generated/world_transform_component_base.dart';
-import 'package:rive_legacy/src/rive_core/drawable.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/generated/node_base.dart';
+import 'package:rive/src/generated/transform_component_base.dart';
+import 'package:rive/src/generated/world_transform_component_base.dart';
+import 'package:rive/src/rive_core/drawable.dart';
 
 abstract class ImageBase extends Drawable {
   static const int typeKey = 100;
@@ -15,14 +15,14 @@ abstract class ImageBase extends Drawable {
   int get coreType => ImageBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    ImageBase.typeKey,
-    DrawableBase.typeKey,
-    NodeBase.typeKey,
-    TransformComponentBase.typeKey,
-    WorldTransformComponentBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        ImageBase.typeKey,
+        DrawableBase.typeKey,
+        NodeBase.typeKey,
+        TransformComponentBase.typeKey,
+        WorldTransformComponentBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// AssetId field with key 206.

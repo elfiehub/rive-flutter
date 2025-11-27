@@ -2,13 +2,13 @@
 // lib/src/generated/shapes/parametric_path_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/generated/node_base.dart';
-import 'package:rive_legacy/src/generated/transform_component_base.dart';
-import 'package:rive_legacy/src/generated/world_transform_component_base.dart';
-import 'package:rive_legacy/src/rive_core/shapes/path.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/generated/node_base.dart';
+import 'package:rive/src/generated/transform_component_base.dart';
+import 'package:rive/src/generated/world_transform_component_base.dart';
+import 'package:rive/src/rive_core/shapes/path.dart';
 
 abstract class ParametricPathBase extends Path {
   static const int typeKey = 15;
@@ -16,14 +16,14 @@ abstract class ParametricPathBase extends Path {
   int get coreType => ParametricPathBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    ParametricPathBase.typeKey,
-    PathBase.typeKey,
-    NodeBase.typeKey,
-    TransformComponentBase.typeKey,
-    WorldTransformComponentBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        ParametricPathBase.typeKey,
+        PathBase.typeKey,
+        NodeBase.typeKey,
+        TransformComponentBase.typeKey,
+        WorldTransformComponentBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Width field with key 20.

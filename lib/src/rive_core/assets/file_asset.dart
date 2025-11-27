@@ -1,12 +1,14 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/assets/file_asset_base.dart';
-import 'package:rive_legacy/src/rive_core/backboard.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/assets/file_asset_base.dart';
+import 'package:rive/src/rive_core/backboard.dart';
 
-export 'package:rive_legacy/src/generated/assets/file_asset_base.dart';
+export 'package:rive/src/generated/assets/file_asset_base.dart';
 
 abstract class FileAsset extends FileAssetBase {
-  late final List<WeakReference<FileAssetReferencer>> _fileAssetReferencers = [];
-  List<WeakReference<FileAssetReferencer>> get fileAssetReferencers => _fileAssetReferencers;
+  late final List<WeakReference<FileAssetReferencer>> _fileAssetReferencers =
+      [];
+  List<WeakReference<FileAssetReferencer>> get fileAssetReferencers =>
+      _fileAssetReferencers;
 
   // this needs to be late to be able to refer to _fileAssetReferencers
   late Finalizer finalizer = Finalizer<void>((_) {
@@ -37,7 +39,8 @@ abstract class FileAsset extends FileAssetBase {
 
   @override
   bool import(ImportStack stack) {
-    var backboardImporter = stack.latest<BackboardImporter>(BackboardBase.typeKey);
+    var backboardImporter =
+        stack.latest<BackboardImporter>(BackboardBase.typeKey);
     if (backboardImporter == null) {
       return false;
     }
@@ -101,7 +104,8 @@ abstract class FileAssetReferencer<T extends FileAsset> {
   int get assetIdPropertyKey;
 
   bool registerWithImporter(ImportStack stack) {
-    var backboardImporter = stack.latest<BackboardImporter>(BackboardBase.typeKey);
+    var backboardImporter =
+        stack.latest<BackboardImporter>(BackboardBase.typeKey);
     if (backboardImporter == null) {
       return false;
     }

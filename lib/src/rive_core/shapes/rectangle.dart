@@ -1,8 +1,8 @@
-import 'package:rive_legacy/src/generated/shapes/rectangle_base.dart';
-import 'package:rive_legacy/src/rive_core/shapes/path_vertex.dart';
-import 'package:rive_legacy/src/rive_core/shapes/straight_vertex.dart';
+import 'package:rive/src/generated/shapes/rectangle_base.dart';
+import 'package:rive/src/rive_core/shapes/path_vertex.dart';
+import 'package:rive/src/rive_core/shapes/straight_vertex.dart';
 
-export 'package:rive_legacy/src/generated/shapes/rectangle_base.dart';
+export 'package:rive/src/generated/shapes/rectangle_base.dart';
 
 class Rectangle extends RectangleBase {
   //

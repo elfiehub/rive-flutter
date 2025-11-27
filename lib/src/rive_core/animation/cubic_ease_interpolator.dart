@@ -1,10 +1,11 @@
-import 'package:rive_legacy/src/generated/animation/cubic_ease_interpolator_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/cubic_interpolator.dart';
+import 'package:rive/src/generated/animation/cubic_ease_interpolator_base.dart';
+import 'package:rive/src/rive_core/animation/cubic_interpolator.dart';
 
 class Cubic extends CubicEase {
   final InterpolatorCubicFactor _x;
   final double y1, y2;
-  Cubic(double x1, this.y1, double x2, this.y2) : _x = InterpolatorCubicFactor(x1, x2);
+  Cubic(double x1, this.y1, double x2, this.y2)
+      : _x = InterpolatorCubicFactor(x1, x2);
 
   @override
   double transform(double f) {
@@ -38,7 +39,8 @@ class CubicEaseInterpolator extends CubicEaseInterpolatorBase {
   double transform(double value) => _ease.transform(value);
 
   @override
-  double transformValue(double from, double to, double value) => from + (to - from) * _ease.transform(value);
+  double transformValue(double from, double to, double value) =>
+      from + (to - from) * _ease.transform(value);
 
   @override
   void updateInterpolator() {

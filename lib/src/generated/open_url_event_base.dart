@@ -1,10 +1,10 @@
 // Core automatically generated lib/src/generated/open_url_event_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/event.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/event.dart';
 
 abstract class OpenUrlEventBase extends Event {
   static const int typeKey = 131;
@@ -12,11 +12,11 @@ abstract class OpenUrlEventBase extends Event {
   int get coreType => OpenUrlEventBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    OpenUrlEventBase.typeKey,
-    EventBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        OpenUrlEventBase.typeKey,
+        EventBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Url field with key 248.

@@ -2,10 +2,10 @@
 // lib/src/generated/animation/transition_number_condition_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/transition_condition_base.dart';
-import 'package:rive_legacy/src/generated/animation/transition_input_condition_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_value_condition.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/transition_condition_base.dart';
+import 'package:rive/src/generated/animation/transition_input_condition_base.dart';
+import 'package:rive/src/rive_core/animation/transition_value_condition.dart';
 
 abstract class TransitionNumberConditionBase extends TransitionValueCondition {
   static const int typeKey = 70;
@@ -13,11 +13,11 @@ abstract class TransitionNumberConditionBase extends TransitionValueCondition {
   int get coreType => TransitionNumberConditionBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    TransitionNumberConditionBase.typeKey,
-    TransitionValueConditionBase.typeKey,
-    TransitionInputConditionBase.typeKey,
-    TransitionConditionBase.typeKey,
-  };
+        TransitionNumberConditionBase.typeKey,
+        TransitionValueConditionBase.typeKey,
+        TransitionInputConditionBase.typeKey,
+        TransitionConditionBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Value field with key 157.

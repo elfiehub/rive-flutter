@@ -1,9 +1,9 @@
 import 'dart:ui' as ui;
 
-import 'package:rive_legacy/src/rive_core/artboard.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape.dart';
+import 'package:rive/src/rive_core/artboard.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/shapes/shape.dart';
 import 'package:rive_common/math.dart';
 
 /// The PathComposer builds the desired world and local paths for the shapes and
@@ -40,11 +40,10 @@ class PathComposer extends Component {
           if (path.isHidden || path.isCollapsed) {
             continue;
           }
-          localPath.addPath(
-            path.uiPath,
-            ui.Offset.zero,
-            matrix4: Mat2D.multiplySkipIdentity(inverseWorld, path.pathTransform).mat4,
-          );
+          localPath.addPath(path.uiPath, ui.Offset.zero,
+              matrix4:
+                  Mat2D.multiplySkipIdentity(inverseWorld, path.pathTransform)
+                      .mat4);
         }
       }
 
@@ -60,7 +59,8 @@ class PathComposer extends Component {
         if (path.isHidden || path.isCollapsed) {
           continue;
         }
-        worldPath.addPath(path.uiPath, ui.Offset.zero, matrix4: path.pathTransform.mat4);
+        worldPath.addPath(path.uiPath, ui.Offset.zero,
+            matrix4: path.pathTransform.mat4);
       }
       shape.markBoundsDirty();
     }

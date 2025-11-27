@@ -1,16 +1,16 @@
 import 'dart:math';
 import 'dart:ui' as ui;
 
-import 'package:rive_legacy/src/generated/constraints/follow_path_constraint_base.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/constraints/constraint.dart';
-import 'package:rive_legacy/src/rive_core/shapes/path.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape.dart';
-import 'package:rive_legacy/src/rive_core/transform_component.dart';
-import 'package:rive_legacy/src/rive_core/transform_space.dart';
+import 'package:rive/src/generated/constraints/follow_path_constraint_base.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/constraints/constraint.dart';
+import 'package:rive/src/rive_core/shapes/path.dart';
+import 'package:rive/src/rive_core/shapes/shape.dart';
+import 'package:rive/src/rive_core/transform_component.dart';
+import 'package:rive/src/rive_core/transform_space.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/constraints/follow_path_constraint_base.dart';
+export 'package:rive/src/generated/constraints/follow_path_constraint_base.dart';
 
 /// A constraint which transforms its constrained TransformComponent to the
 /// targeted path.
@@ -57,14 +57,17 @@ class FollowPathConstraint extends FollowPathConstraintBase {
         return Mat2D();
       }
 
-      Vec2D position = Vec2D.fromValues(tangent.position.dx, tangent.position.dy);
+      Vec2D position =
+          Vec2D.fromValues(tangent.position.dx, tangent.position.dy);
       Mat2D transformB = Mat2D.clone(target!.worldTransform);
 
       if (orient) {
-        Mat2D.fromRotation(transformB, atan2(tangent.vector.dy, tangent.vector.dx));
+        Mat2D.fromRotation(
+            transformB, atan2(tangent.vector.dy, tangent.vector.dx));
       }
       final offsetPosition = offset
-          ? Vec2D.fromValues(constrainedComponent!.transform[4], constrainedComponent!.transform[5])
+          ? Vec2D.fromValues(constrainedComponent!.transform[4],
+              constrainedComponent!.transform[5])
           : Vec2D();
       transformB[4] = position.x + offsetPosition.x;
       transformB[5] = position.y + offsetPosition.y;
@@ -139,7 +142,8 @@ class FollowPathConstraint extends FollowPathConstraintBase {
   void _resetWorldPath(Set<Path> paths) {
     _worldPath.reset();
     for (final path in paths) {
-      _worldPath.addPath(path.uiPath, ui.Offset.zero, matrix4: path.pathTransform.mat4);
+      _worldPath.addPath(path.uiPath, ui.Offset.zero,
+          matrix4: path.pathTransform.mat4);
     }
   }
 
@@ -157,8 +161,8 @@ class FollowPathConstraint extends FollowPathConstraintBase {
   Component? get targetDependencyParent => target is Shape
       ? (target as Shape)
       : target is Path
-      ? (target as Path)
-      : null;
+          ? (target as Path)
+          : null;
 
   @override
   void distanceChanged(double from, double to) => markConstraintDirty();
@@ -170,5 +174,6 @@ class FollowPathConstraint extends FollowPathConstraintBase {
   void offsetChanged(bool from, bool to) => markConstraintDirty();
 
   @override
-  bool validate() => super.validate() && (target == null || target is Shape || target is Path);
+  bool validate() =>
+      super.validate() && (target == null || target is Shape || target is Path);
 }

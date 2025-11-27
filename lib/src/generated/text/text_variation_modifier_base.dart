@@ -2,10 +2,10 @@
 // lib/src/generated/text/text_variation_modifier_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/text/text_modifier_base.dart';
-import 'package:rive_legacy/src/rive_core/text/text_shape_modifier.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/text/text_modifier_base.dart';
+import 'package:rive/src/rive_core/text/text_shape_modifier.dart';
 
 abstract class TextVariationModifierBase extends TextShapeModifier {
   static const int typeKey = 162;
@@ -13,11 +13,11 @@ abstract class TextVariationModifierBase extends TextShapeModifier {
   int get coreType => TextVariationModifierBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    TextVariationModifierBase.typeKey,
-    TextShapeModifierBase.typeKey,
-    TextModifierBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        TextVariationModifierBase.typeKey,
+        TextShapeModifierBase.typeKey,
+        TextModifierBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// AxisTag field with key 320.

@@ -1,13 +1,13 @@
-import 'package:rive_legacy/src/generated/layout/layout_component_style_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyframe_interpolation.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyframe_interpolator.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
-import 'package:rive_legacy/src/rive_core/enum_helper.dart';
-import 'package:rive_legacy/src/rive_core/notifier.dart';
+import 'package:rive/src/generated/layout/layout_component_style_base.dart';
+import 'package:rive/src/rive_core/animation/keyframe_interpolation.dart';
+import 'package:rive/src/rive_core/animation/keyframe_interpolator.dart';
+import 'package:rive/src/rive_core/container_component.dart';
+import 'package:rive/src/rive_core/enum_helper.dart';
+import 'package:rive/src/rive_core/notifier.dart';
 import 'package:rive_common/layout_engine.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/layout/layout_component_style_base.dart';
+export 'package:rive/src/generated/layout/layout_component_style_base.dart';
 
 enum LayoutAlignmentType {
   topLeft,
@@ -21,7 +21,7 @@ enum LayoutAlignmentType {
   bottomRight,
   spaceBetweenStart,
   spaceBetweenCenter,
-  spaceBetweenEnd,
+  spaceBetweenEnd;
 }
 
 enum ScaleType {
@@ -67,12 +67,14 @@ class LayoutComponentStyle extends LayoutComponentStyleBase {
     interpolatorId = value?.id ?? Core.missingId;
   }
 
-  LayoutStyleInterpolation get interpolation => enumAt(LayoutStyleInterpolation.values, interpolationType);
+  LayoutStyleInterpolation get interpolation =>
+      enumAt(LayoutStyleInterpolation.values, interpolationType);
   set interpolation(LayoutStyleInterpolation value) {
     interpolationType = value.index;
   }
 
-  LayoutAnimationStyle get animationStyle => enumAt(LayoutAnimationStyle.values, animationStyleType);
+  LayoutAnimationStyle get animationStyle =>
+      enumAt(LayoutAnimationStyle.values, animationStyleType);
   set animationStyle(LayoutAnimationStyle value) {
     animationStyleType = value.index;
   }
@@ -138,8 +140,10 @@ class LayoutComponentStyle extends LayoutComponentStyleBase {
   LayoutPosition get positionType => LayoutPosition.values[positionTypeValue];
   set positionType(LayoutPosition value) => positionTypeValue = value.index;
 
-  LayoutFlexDirection get flexDirection => LayoutFlexDirection.values[flexDirectionValue];
-  set flexDirection(LayoutFlexDirection value) => flexDirectionValue = value.index;
+  LayoutFlexDirection get flexDirection =>
+      LayoutFlexDirection.values[flexDirectionValue];
+  set flexDirection(LayoutFlexDirection value) =>
+      flexDirectionValue = value.index;
 
   LayoutDirection get direction => LayoutDirection.values[directionValue];
   set direction(LayoutDirection value) => directionValue = value.index;
@@ -178,7 +182,8 @@ class LayoutComponentStyle extends LayoutComponentStyleBase {
   set borderTopUnits(LayoutUnit value) => borderTopUnitsValue = value.index;
 
   LayoutUnit get borderBottomUnits => LayoutUnit.values[borderBottomUnitsValue];
-  set borderBottomUnits(LayoutUnit value) => borderBottomUnitsValue = value.index;
+  set borderBottomUnits(LayoutUnit value) =>
+      borderBottomUnitsValue = value.index;
 
   LayoutUnit get marginLeftUnits => LayoutUnit.values[marginLeftUnitsValue];
   set marginLeftUnits(LayoutUnit value) => marginLeftUnitsValue = value.index;
@@ -190,34 +195,45 @@ class LayoutComponentStyle extends LayoutComponentStyleBase {
   set marginTopUnits(LayoutUnit value) => marginTopUnitsValue = value.index;
 
   LayoutUnit get marginBottomUnits => LayoutUnit.values[marginBottomUnitsValue];
-  set marginBottomUnits(LayoutUnit value) => marginBottomUnitsValue = value.index;
+  set marginBottomUnits(LayoutUnit value) =>
+      marginBottomUnitsValue = value.index;
 
   LayoutUnit get paddingLeftUnits => LayoutUnit.values[paddingLeftUnitsValue];
   set paddingLeftUnits(LayoutUnit value) => paddingLeftUnitsValue = value.index;
 
   LayoutUnit get paddingRightUnits => LayoutUnit.values[paddingRightUnitsValue];
-  set paddingRightUnits(LayoutUnit value) => paddingRightUnitsValue = value.index;
+  set paddingRightUnits(LayoutUnit value) =>
+      paddingRightUnitsValue = value.index;
 
   LayoutUnit get paddingTopUnits => LayoutUnit.values[paddingTopUnitsValue];
   set paddingTopUnits(LayoutUnit value) => paddingTopUnitsValue = value.index;
 
-  LayoutUnit get paddingBottomUnits => LayoutUnit.values[paddingBottomUnitsValue];
-  set paddingBottomUnits(LayoutUnit value) => paddingBottomUnitsValue = value.index;
+  LayoutUnit get paddingBottomUnits =>
+      LayoutUnit.values[paddingBottomUnitsValue];
+  set paddingBottomUnits(LayoutUnit value) =>
+      paddingBottomUnitsValue = value.index;
 
   LayoutUnit get positionLeftUnits => LayoutUnit.values[positionLeftUnitsValue];
-  set positionLeftUnits(LayoutUnit value) => positionLeftUnitsValue = value.index;
+  set positionLeftUnits(LayoutUnit value) =>
+      positionLeftUnitsValue = value.index;
 
-  LayoutUnit get positionRightUnits => LayoutUnit.values[positionRightUnitsValue];
-  set positionRightUnits(LayoutUnit value) => positionRightUnitsValue = value.index;
+  LayoutUnit get positionRightUnits =>
+      LayoutUnit.values[positionRightUnitsValue];
+  set positionRightUnits(LayoutUnit value) =>
+      positionRightUnitsValue = value.index;
 
   LayoutUnit get positionTopUnits => LayoutUnit.values[positionTopUnitsValue];
   set positionTopUnits(LayoutUnit value) => positionTopUnitsValue = value.index;
 
-  LayoutUnit get positionBottomUnits => LayoutUnit.values[positionBottomUnitsValue];
-  set positionBottomUnits(LayoutUnit value) => positionBottomUnitsValue = value.index;
+  LayoutUnit get positionBottomUnits =>
+      LayoutUnit.values[positionBottomUnitsValue];
+  set positionBottomUnits(LayoutUnit value) =>
+      positionBottomUnitsValue = value.index;
 
-  LayoutUnit get gapHorizontalUnits => LayoutUnit.values[gapHorizontalUnitsValue];
-  set gapHorizontalUnits(LayoutUnit value) => gapHorizontalUnitsValue = value.index;
+  LayoutUnit get gapHorizontalUnits =>
+      LayoutUnit.values[gapHorizontalUnitsValue];
+  set gapHorizontalUnits(LayoutUnit value) =>
+      gapHorizontalUnitsValue = value.index;
 
   LayoutUnit get gapVerticalUnits => LayoutUnit.values[gapVerticalUnitsValue];
   set gapVerticalUnits(LayoutUnit value) => gapVerticalUnitsValue = value.index;
@@ -234,17 +250,23 @@ class LayoutComponentStyle extends LayoutComponentStyleBase {
   LayoutUnit get maxHeightUnits => LayoutUnit.values[maxHeightUnitsValue];
   set maxHeightUnits(LayoutUnit value) => maxHeightUnitsValue = value.index;
 
-  ScaleType get widthScaleType => ScaleType.values[widthScaleTypeBits.read(scaleType)];
+  ScaleType get widthScaleType =>
+      ScaleType.values[widthScaleTypeBits.read(scaleType)];
 
-  set widthScaleType(ScaleType value) => scaleType = widthScaleTypeBits.write(scaleType, value.index);
+  set widthScaleType(ScaleType value) =>
+      scaleType = widthScaleTypeBits.write(scaleType, value.index);
 
-  ScaleType get heightScaleType => ScaleType.values[heightScaleTypeBits.read(scaleType)];
+  ScaleType get heightScaleType =>
+      ScaleType.values[heightScaleTypeBits.read(scaleType)];
 
-  set heightScaleType(ScaleType value) => scaleType = heightScaleTypeBits.write(scaleType, value.index);
+  set heightScaleType(ScaleType value) =>
+      scaleType = heightScaleTypeBits.write(scaleType, value.index);
 
-  LayoutAlignmentType get alignmentType => LayoutAlignmentType.values[layoutAlignmentType];
+  LayoutAlignmentType get alignmentType =>
+      LayoutAlignmentType.values[layoutAlignmentType];
 
-  set alignmentType(LayoutAlignmentType value) => layoutAlignmentType = value.index;
+  set alignmentType(LayoutAlignmentType value) =>
+      layoutAlignmentType = value.index;
 
   void markLayoutNodeDirty() {
     valueChanged.notify();
@@ -380,7 +402,8 @@ class LayoutComponentStyle extends LayoutComponentStyleBase {
   void overflowValueChanged(int from, int to) => markLayoutNodeDirty();
 
   @override
-  void intrinsicallySizedValueChanged(bool from, bool to) => markLayoutNodeDirty();
+  void intrinsicallySizedValueChanged(bool from, bool to) =>
+      markLayoutNodeDirty();
 
   @override
   void widthUnitsValueChanged(int from, int to) => markLayoutNodeDirty();
@@ -422,22 +445,26 @@ class LayoutComponentStyle extends LayoutComponentStyleBase {
   void paddingTopUnitsValueChanged(int from, int to) => markLayoutNodeDirty();
 
   @override
-  void paddingBottomUnitsValueChanged(int from, int to) => markLayoutNodeDirty();
+  void paddingBottomUnitsValueChanged(int from, int to) =>
+      markLayoutNodeDirty();
 
   @override
   void positionLeftUnitsValueChanged(int from, int to) => markLayoutNodeDirty();
 
   @override
-  void positionRightUnitsValueChanged(int from, int to) => markLayoutNodeDirty();
+  void positionRightUnitsValueChanged(int from, int to) =>
+      markLayoutNodeDirty();
 
   @override
   void positionTopUnitsValueChanged(int from, int to) => markLayoutNodeDirty();
 
   @override
-  void positionBottomUnitsValueChanged(int from, int to) => markLayoutNodeDirty();
+  void positionBottomUnitsValueChanged(int from, int to) =>
+      markLayoutNodeDirty();
 
   @override
-  void gapHorizontalUnitsValueChanged(int from, int to) => markLayoutNodeDirty();
+  void gapHorizontalUnitsValueChanged(int from, int to) =>
+      markLayoutNodeDirty();
 
   @override
   void gapVerticalUnitsValueChanged(int from, int to) => markLayoutNodeDirty();

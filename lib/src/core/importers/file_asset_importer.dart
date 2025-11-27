@@ -1,15 +1,18 @@
-import 'package:rive_legacy/src/asset_loader.dart';
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/debug.dart';
-import 'package:rive_legacy/src/rive_core/assets/file_asset.dart';
-import 'package:rive_legacy/src/rive_core/assets/file_asset_contents.dart';
+import 'package:rive/src/asset_loader.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/debug.dart';
+import 'package:rive/src/rive_core/assets/file_asset.dart';
+import 'package:rive/src/rive_core/assets/file_asset_contents.dart';
 
 class FileAssetImporter extends ImportStackObject {
   final FileAssetLoader? assetLoader;
   final FileAsset fileAsset;
   Uint8List? embeddedBytes;
 
-  FileAssetImporter(this.fileAsset, this.assetLoader);
+  FileAssetImporter(
+    this.fileAsset,
+    this.assetLoader,
+  );
 
   void resolveContents(FileAssetContents contents) {
     embeddedBytes = contents.bytes;
@@ -23,9 +26,11 @@ class FileAssetImporter extends ImportStackObject {
         fileAsset.decode(embeddedBytes!);
       } else if (!loaded) {
         // TODO: improve error logging
-        printDebugMessage('''Rive asset (${fileAsset.name}) was not able to load:
+        printDebugMessage(
+          '''Rive asset (${fileAsset.name}) was not able to load:
   - Unique file name: ${fileAsset.uniqueFilename}
-  - Asset id: ${fileAsset.id}''');
+  - Asset id: ${fileAsset.id}''',
+        );
       }
     });
     return super.resolve();

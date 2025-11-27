@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:rive_legacy/src/rive_render_box.dart';
+import 'package:rive/src/rive_render_box.dart';
 import 'package:rive_common/math.dart';
 
 /// An abstraction for controlling the composition and rendering of a Rive
@@ -34,10 +34,14 @@ class RiveScene extends LeafRenderObjectWidget {
   /// Alignment for the rendering artboard
   final Alignment alignment;
 
-  const RiveScene({required this.controller, BoxFit? fit, Alignment? alignment, Key? key})
-    : fit = fit ?? BoxFit.contain,
-      alignment = alignment ?? Alignment.center,
-      super(key: key);
+  const RiveScene({
+    required this.controller,
+    BoxFit? fit,
+    Alignment? alignment,
+    Key? key,
+  })  : fit = fit ?? BoxFit.contain,
+        alignment = alignment ?? Alignment.center,
+        super(key: key);
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -47,7 +51,8 @@ class RiveScene extends LeafRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, covariant RiveSceneRenderObject renderObject) {
+  void updateRenderObject(
+      BuildContext context, covariant RiveSceneRenderObject renderObject) {
     renderObject
       ..controller = controller
       ..fit = fit

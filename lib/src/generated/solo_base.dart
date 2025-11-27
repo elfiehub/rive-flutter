@@ -1,12 +1,12 @@
 // Core automatically generated lib/src/generated/solo_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/generated/transform_component_base.dart';
-import 'package:rive_legacy/src/generated/world_transform_component_base.dart';
-import 'package:rive_legacy/src/rive_core/node.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/generated/transform_component_base.dart';
+import 'package:rive/src/generated/world_transform_component_base.dart';
+import 'package:rive/src/rive_core/node.dart';
 
 abstract class SoloBase extends Node {
   static const int typeKey = 147;
@@ -14,13 +14,13 @@ abstract class SoloBase extends Node {
   int get coreType => SoloBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    SoloBase.typeKey,
-    NodeBase.typeKey,
-    TransformComponentBase.typeKey,
-    WorldTransformComponentBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        SoloBase.typeKey,
+        NodeBase.typeKey,
+        TransformComponentBase.typeKey,
+        WorldTransformComponentBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// ActiveComponentId field with key 296.

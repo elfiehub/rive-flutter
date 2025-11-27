@@ -1,9 +1,10 @@
 import 'package:flutter/rendering.dart';
-import 'package:rive_legacy/rive.dart';
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_state_machine.dart';
-import 'package:rive_legacy/src/rive_core/state_machine_controller.dart' as state_machine_core;
+import 'package:rive/rive.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/nested_linear_animation.dart';
+import 'package:rive/src/rive_core/animation/nested_state_machine.dart';
+import 'package:rive/src/rive_core/state_machine_controller.dart'
+    as state_machine_core;
 import 'package:rive_common/math.dart';
 
 extension NestedArtboardRuntimeExtension on NestedArtboard {
@@ -24,8 +25,10 @@ class RuntimeNestedArtboard extends NestedArtboard {
     object.copy(this);
     if (sourceArtboard != null) {
       object.sourceArtboard = sourceArtboard;
-      var runtimeArtboardInstance = sourceArtboard!.instance() as RuntimeArtboard;
-      object.mountedArtboard = RuntimeMountedArtboard(runtimeArtboardInstance, object);
+      var runtimeArtboardInstance =
+          sourceArtboard!.instance() as RuntimeArtboard;
+      object.mountedArtboard =
+          RuntimeMountedArtboard(runtimeArtboardInstance, object);
     }
     return object as K;
   }
@@ -33,34 +36,42 @@ class RuntimeNestedArtboard extends NestedArtboard {
   @override
   void onAdded() {
     super.onAdded();
-    if (mountedArtboard is! RuntimeMountedArtboard || sourceArtboard == null || animations.isEmpty) {
+    if (mountedArtboard is! RuntimeMountedArtboard ||
+        sourceArtboard == null ||
+        animations.isEmpty) {
       return;
     }
-    var runtimeLinearAnimations = sourceArtboard!.linearAnimations.toList(growable: false);
-    var runtimeStateMachines = sourceArtboard!.stateMachines.toList(growable: false);
+    var runtimeLinearAnimations =
+        sourceArtboard!.linearAnimations.toList(growable: false);
+    var runtimeStateMachines =
+        sourceArtboard!.stateMachines.toList(growable: false);
     for (final animation in animations) {
       if (animation is NestedLinearAnimation) {
         var animationId = animation.animationId;
         if (animationId >= 0 && animationId < runtimeLinearAnimations.length) {
           final linearAnimationInstance = LinearAnimationInstance(
-            runtimeLinearAnimations[animationId],
-            context: (mountedArtboard as RuntimeMountedArtboard).artboardInstance,
-          );
-          animation.linearAnimationInstance = RuntimeNestedLinearAnimationInstance(linearAnimationInstance);
+              runtimeLinearAnimations[animationId],
+              context:
+                  (mountedArtboard as RuntimeMountedArtboard).artboardInstance);
+          animation.linearAnimationInstance =
+              RuntimeNestedLinearAnimationInstance(linearAnimationInstance);
           if (mountedArtboard is RuntimeMountedArtboard) {
-            (mountedArtboard as RuntimeMountedArtboard).addEventListener(linearAnimationInstance);
+            (mountedArtboard as RuntimeMountedArtboard)
+                .addEventListener(linearAnimationInstance);
           }
         }
       } else if (animation is NestedStateMachine) {
         var animationId = animation.animationId;
         if (animationId >= 0 && animationId < runtimeStateMachines.length) {
-          final controller = StateMachineController(runtimeStateMachines[animationId]);
+          final controller =
+              StateMachineController(runtimeStateMachines[animationId]);
           animation.stateMachineInstance = RuntimeNestedStateMachineInstance(
             (mountedArtboard as RuntimeMountedArtboard).artboardInstance,
             controller,
           );
           if (mountedArtboard is RuntimeMountedArtboard) {
-            final runtimeMountedArtboard = mountedArtboard as RuntimeMountedArtboard;
+            final runtimeMountedArtboard =
+                mountedArtboard as RuntimeMountedArtboard;
             runtimeMountedArtboard.addEventListener(controller);
           }
         }
@@ -69,19 +80,22 @@ class RuntimeNestedArtboard extends NestedArtboard {
   }
 }
 
-class RuntimeNestedLinearAnimationInstance extends NestedLinearAnimationInstance {
+class RuntimeNestedLinearAnimationInstance
+    extends NestedLinearAnimationInstance {
   final LinearAnimationInstance linearAnimation;
 
   RuntimeNestedLinearAnimationInstance(this.linearAnimation);
 
   @override
   void apply(RuntimeMountedArtboard artboard, double mix) {
-    linearAnimation.animation.apply(linearAnimation.time, coreContext: artboard.artboardInstance, mix: mix);
+    linearAnimation.animation.apply(linearAnimation.time,
+        coreContext: artboard.artboardInstance, mix: mix);
   }
 
   @override
   bool advance(double elapsedSeconds) {
-    linearAnimation.advance(elapsedSeconds * speed, callbackReporter: linearAnimation);
+    linearAnimation.advance(elapsedSeconds * speed,
+        callbackReporter: linearAnimation);
     return linearAnimation.keepGoing;
   }
 
@@ -104,7 +118,8 @@ class RuntimeNestedLinearAnimationInstance extends NestedLinearAnimationInstance
 class RuntimeNestedStateMachineInstance extends NestedStateMachineInstance {
   final StateMachineController stateMachineController;
 
-  RuntimeNestedStateMachineInstance(RuntimeArtboard artboard, this.stateMachineController) {
+  RuntimeNestedStateMachineInstance(
+      RuntimeArtboard artboard, this.stateMachineController) {
     stateMachineController.init(artboard);
   }
 
@@ -117,26 +132,31 @@ class RuntimeNestedStateMachineInstance extends NestedStateMachineInstance {
   bool get isActive => stateMachineController.isActive;
 
   @override
-  ValueListenable<bool> get isActiveChanged => stateMachineController.isActiveChanged;
+  ValueListenable<bool> get isActiveChanged =>
+      stateMachineController.isActiveChanged;
 
   @override
   bool hitTest(Vec2D position) => stateMachineController.hitTest(position);
 
   @override
-  state_machine_core.HitResult pointerDown(Vec2D position, PointerDownEvent event) {
+  state_machine_core.HitResult pointerDown(
+      Vec2D position, PointerDownEvent event) {
     final result = stateMachineController.pointerDown(position, event);
 
     return result;
   }
 
   @override
-  state_machine_core.HitResult pointerMove(Vec2D position) => stateMachineController.pointerMove(position);
+  state_machine_core.HitResult pointerMove(Vec2D position) =>
+      stateMachineController.pointerMove(position);
 
   @override
-  state_machine_core.HitResult pointerUp(Vec2D position) => stateMachineController.pointerUp(position);
+  state_machine_core.HitResult pointerUp(Vec2D position) =>
+      stateMachineController.pointerUp(position);
 
   @override
-  state_machine_core.HitResult pointerExit(Vec2D position) => stateMachineController.pointerExit(position);
+  state_machine_core.HitResult pointerExit(Vec2D position) =>
+      stateMachineController.pointerExit(position);
 
   @override
   dynamic getInputValue(int id) => stateMachineController.getInputValue(id);

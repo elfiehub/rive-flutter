@@ -1,6 +1,6 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/keyframe_uint_base.dart';
-export 'package:rive_legacy/src/generated/animation/keyframe_uint_base.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/keyframe_uint_base.dart';
+export 'package:rive/src/generated/animation/keyframe_uint_base.dart';
 
 /// KeyFrame for animating uint properties.
 class KeyFrameUint extends KeyFrameUintBase {
@@ -13,13 +13,8 @@ class KeyFrameUint extends KeyFrameUintBase {
   }
 
   @override
-  void applyInterpolation(
-    Core<CoreContext> object,
-    int propertyKey,
-    double currentTime,
-    KeyFrameUint nextFrame,
-    double mix,
-  ) {
+  void applyInterpolation(Core<CoreContext> object, int propertyKey,
+      double currentTime, KeyFrameUint nextFrame, double mix) {
     RiveCoreContext.setUint(object, propertyKey, value);
   }
 

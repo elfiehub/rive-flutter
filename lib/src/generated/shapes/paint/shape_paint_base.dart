@@ -2,16 +2,20 @@
 // lib/src/generated/shapes/paint/shape_paint_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/container_component.dart';
 
 abstract class ShapePaintBase extends ContainerComponent {
   static const int typeKey = 21;
   @override
   int get coreType => ShapePaintBase.typeKey;
   @override
-  Set<int> get coreTypes => {ShapePaintBase.typeKey, ContainerComponentBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes => {
+        ShapePaintBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// IsVisible field with key 41.

@@ -2,15 +2,16 @@
 // lib/src/generated/animation/listener_fire_event_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/listener_action.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/listener_action.dart';
 
 abstract class ListenerFireEventBase extends ListenerAction {
   static const int typeKey = 168;
   @override
   int get coreType => ListenerFireEventBase.typeKey;
   @override
-  Set<int> get coreTypes => {ListenerFireEventBase.typeKey, ListenerActionBase.typeKey};
+  Set<int> get coreTypes =>
+      {ListenerFireEventBase.typeKey, ListenerActionBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// EventId field with key 389.

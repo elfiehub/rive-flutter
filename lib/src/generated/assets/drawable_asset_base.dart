@@ -2,16 +2,17 @@
 // lib/src/generated/assets/drawable_asset_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/assets/asset_base.dart';
-import 'package:rive_legacy/src/rive_core/assets/file_asset.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/assets/asset_base.dart';
+import 'package:rive/src/rive_core/assets/file_asset.dart';
 
 abstract class DrawableAssetBase extends FileAsset {
   static const int typeKey = 104;
   @override
   int get coreType => DrawableAssetBase.typeKey;
   @override
-  Set<int> get coreTypes => {DrawableAssetBase.typeKey, FileAssetBase.typeKey, AssetBase.typeKey};
+  Set<int> get coreTypes =>
+      {DrawableAssetBase.typeKey, FileAssetBase.typeKey, AssetBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// Height field with key 207.

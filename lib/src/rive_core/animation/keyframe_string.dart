@@ -1,7 +1,7 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/keyframe_string_base.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/keyframe_string_base.dart';
 
-export 'package:rive_legacy/src/generated/animation/keyframe_id_base.dart';
+export 'package:rive/src/generated/animation/keyframe_id_base.dart';
 
 class KeyFrameString extends KeyFrameStringBase {
   @override
@@ -13,13 +13,8 @@ class KeyFrameString extends KeyFrameStringBase {
   }
 
   @override
-  void applyInterpolation(
-    Core<CoreContext> object,
-    int propertyKey,
-    double currentTime,
-    KeyFrameString nextFrame,
-    double mix,
-  ) {
+  void applyInterpolation(Core<CoreContext> object, int propertyKey,
+      double currentTime, KeyFrameString nextFrame, double mix) {
     RiveCoreContext.setString(object, propertyKey, value);
   }
 

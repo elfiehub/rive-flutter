@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:rive_legacy/src/generated/shapes/star_base.dart';
-import 'package:rive_legacy/src/rive_core/bones/weight.dart';
-import 'package:rive_legacy/src/rive_core/shapes/path_vertex.dart';
-import 'package:rive_legacy/src/rive_core/shapes/straight_vertex.dart';
+import 'package:rive/src/generated/shapes/star_base.dart';
+import 'package:rive/src/rive_core/bones/weight.dart';
+import 'package:rive/src/rive_core/shapes/path_vertex.dart';
+import 'package:rive/src/rive_core/shapes/straight_vertex.dart';
 
-export 'package:rive_legacy/src/generated/shapes/star_base.dart';
+export 'package:rive/src/generated/shapes/star_base.dart';
 
 class Star extends StarBase {
   @override
@@ -25,19 +25,15 @@ class Star extends StarBase {
     var angle = -pi / 2;
     var inc = 2 * pi / actualPoints;
     while (vertexList.length < actualPoints) {
-      vertexList.add(
-        StraightVertex.procedural()
-          ..x = ox + cos(angle) * halfWidth
-          ..y = oy + sin(angle) * halfHeight
-          ..radius = cornerRadius,
-      );
+      vertexList.add(StraightVertex.procedural()
+        ..x = ox + cos(angle) * halfWidth
+        ..y = oy + sin(angle) * halfHeight
+        ..radius = cornerRadius);
       angle += inc;
-      vertexList.add(
-        StraightVertex.procedural()
-          ..x = ox + cos(angle) * innerHalfWidth
-          ..y = oy + sin(angle) * innerHalfHeight
-          ..radius = cornerRadius,
-      );
+      vertexList.add(StraightVertex.procedural()
+        ..x = ox + cos(angle) * innerHalfWidth
+        ..y = oy + sin(angle) * innerHalfHeight
+        ..radius = cornerRadius);
       angle += inc;
     }
     return vertexList;

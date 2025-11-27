@@ -1,15 +1,15 @@
-import 'package:rive_legacy/src/generated/transform_component_base.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/constraints/constraint.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
-import 'package:rive_legacy/src/rive_core/draw_rules.dart';
-import 'package:rive_legacy/src/rive_core/drawable.dart';
-import 'package:rive_legacy/src/rive_core/shapes/clipping_shape.dart';
-import 'package:rive_legacy/src/rive_core/world_transform_component.dart';
+import 'package:rive/src/generated/transform_component_base.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/constraints/constraint.dart';
+import 'package:rive/src/rive_core/container_component.dart';
+import 'package:rive/src/rive_core/draw_rules.dart';
+import 'package:rive/src/rive_core/drawable.dart';
+import 'package:rive/src/rive_core/shapes/clipping_shape.dart';
+import 'package:rive/src/rive_core/world_transform_component.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/transform_component_base.dart';
+export 'package:rive/src/generated/transform_component_base.dart';
 
 abstract class TransformComponent extends TransformComponentBase {
   /// Draw rules saved against this transform component, inherited by children.
@@ -196,7 +196,8 @@ abstract class TransformComponent extends TransformComponentBase {
   }
 
   @override
-  void buildDrawOrder(List<Drawable> drawables, DrawRules? rules, List<DrawRules> allRules) {
+  void buildDrawOrder(
+      List<Drawable> drawables, DrawRules? rules, List<DrawRules> allRules) {
     if (drawRules != null) {
       // ignore: parameter_assignments
       rules = drawRules!;

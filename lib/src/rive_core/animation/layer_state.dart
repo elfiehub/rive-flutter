@@ -1,10 +1,10 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/layer_state_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_instance.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_layer.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_transition.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/layer_state_base.dart';
+import 'package:rive/src/rive_core/animation/state_instance.dart';
+import 'package:rive/src/rive_core/animation/state_machine_layer.dart';
+import 'package:rive/src/rive_core/animation/state_transition.dart';
 
-export 'package:rive_legacy/src/generated/animation/layer_state_base.dart';
+export 'package:rive/src/generated/animation/layer_state_base.dart';
 
 abstract class LayerState extends LayerStateBase {
   final StateTransitions _transitions = StateTransitions();
@@ -17,7 +17,8 @@ abstract class LayerState extends LayerStateBase {
   void onAddedDirty() {}
 
   void internalAddTransition(StateTransition transition) {
-    assert(!_transitions.contains(transition), 'shouldn\'t already contain the transition');
+    assert(!_transitions.contains(transition),
+        'shouldn\'t already contain the transition');
     _transitions.add(transition);
   }
 
@@ -32,7 +33,8 @@ abstract class LayerState extends LayerStateBase {
 
   @override
   bool import(ImportStack stack) {
-    var importer = stack.latest<StateMachineLayerImporter>(StateMachineLayerBase.typeKey);
+    var importer =
+        stack.latest<StateMachineLayerImporter>(StateMachineLayerBase.typeKey);
     if (importer == null) {
       return false;
     }

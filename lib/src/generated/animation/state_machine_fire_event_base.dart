@@ -2,9 +2,10 @@
 // lib/src/generated/animation/state_machine_fire_event_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
+import 'package:rive/src/core/core.dart';
 
-abstract class StateMachineFireEventBase<T extends CoreContext> extends Core<T> {
+abstract class StateMachineFireEventBase<T extends CoreContext>
+    extends Core<T> {
   static const int typeKey = 169;
   @override
   int get coreType => StateMachineFireEventBase.typeKey;

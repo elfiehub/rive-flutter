@@ -1,6 +1,6 @@
-import 'package:rive_legacy/src/generated/assets/drawable_asset_base.dart';
+import 'package:rive/src/generated/assets/drawable_asset_base.dart';
 
-export 'package:rive_legacy/src/generated/assets/drawable_asset_base.dart';
+export 'package:rive/src/generated/assets/drawable_asset_base.dart';
 
 abstract class DrawableAsset extends DrawableAssetBase {
   @override

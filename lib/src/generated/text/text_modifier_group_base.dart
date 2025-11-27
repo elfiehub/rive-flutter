@@ -2,16 +2,20 @@
 // lib/src/generated/text/text_modifier_group_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/container_component.dart';
 
 abstract class TextModifierGroupBase extends ContainerComponent {
   static const int typeKey = 159;
   @override
   int get coreType => TextModifierGroupBase.typeKey;
   @override
-  Set<int> get coreTypes => {TextModifierGroupBase.typeKey, ContainerComponentBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes => {
+        TextModifierGroupBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// ModifierFlags field with key 335.

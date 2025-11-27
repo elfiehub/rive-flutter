@@ -2,10 +2,10 @@
 // lib/src/generated/shapes/paint/stroke_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/shapes/paint/shape_paint.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/shapes/paint/shape_paint.dart';
 
 abstract class StrokeBase extends ShapePaint {
   static const int typeKey = 24;
@@ -13,11 +13,11 @@ abstract class StrokeBase extends ShapePaint {
   int get coreType => StrokeBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    StrokeBase.typeKey,
-    ShapePaintBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        StrokeBase.typeKey,
+        ShapePaintBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Thickness field with key 47.

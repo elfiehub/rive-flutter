@@ -2,20 +2,21 @@
 // lib/src/generated/animation/transition_value_string_comparator_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/transition_comparator_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_value_comparator.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/transition_comparator_base.dart';
+import 'package:rive/src/rive_core/animation/transition_value_comparator.dart';
 
-abstract class TransitionValueStringComparatorBase extends TransitionValueComparator {
+abstract class TransitionValueStringComparatorBase
+    extends TransitionValueComparator {
   static const int typeKey = 486;
   @override
   int get coreType => TransitionValueStringComparatorBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    TransitionValueStringComparatorBase.typeKey,
-    TransitionValueComparatorBase.typeKey,
-    TransitionComparatorBase.typeKey,
-  };
+        TransitionValueStringComparatorBase.typeKey,
+        TransitionValueComparatorBase.typeKey,
+        TransitionComparatorBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Value field with key 654.

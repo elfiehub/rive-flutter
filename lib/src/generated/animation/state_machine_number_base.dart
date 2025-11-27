@@ -2,9 +2,9 @@
 // lib/src/generated/animation/state_machine_number_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/state_machine_component_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_input.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/state_machine_component_base.dart';
+import 'package:rive/src/rive_core/animation/state_machine_input.dart';
 
 abstract class StateMachineNumberBase extends StateMachineInput {
   static const int typeKey = 56;
@@ -12,10 +12,10 @@ abstract class StateMachineNumberBase extends StateMachineInput {
   int get coreType => StateMachineNumberBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    StateMachineNumberBase.typeKey,
-    StateMachineInputBase.typeKey,
-    StateMachineComponentBase.typeKey,
-  };
+        StateMachineNumberBase.typeKey,
+        StateMachineInputBase.typeKey,
+        StateMachineComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Value field with key 140.

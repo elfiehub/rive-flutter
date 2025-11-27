@@ -2,14 +2,15 @@
 /// lib/src/generated/animation/state_machine_event_base.dart.
 /// Do not modify manually.
 
-import 'package:rive_legacy/src/rive_core/animation/state_machine_component.dart';
+import 'package:rive/src/rive_core/animation/state_machine_component.dart';
 
 abstract class StateMachineEventBase extends StateMachineComponent {
   static const int typeKey = 114;
   @override
   int get coreType => StateMachineEventBase.typeKey;
   @override
-  Set<int> get coreTypes => {StateMachineEventBase.typeKey, StateMachineComponentBase.typeKey};
+  Set<int> get coreTypes =>
+      {StateMachineEventBase.typeKey, StateMachineComponentBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// TargetId field with key 224.

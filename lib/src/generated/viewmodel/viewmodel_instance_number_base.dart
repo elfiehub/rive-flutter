@@ -2,16 +2,17 @@
 // lib/src/generated/viewmodel/viewmodel_instance_number_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/viewmodel/viewmodel_instance_value_base.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance_value.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/viewmodel/viewmodel_instance_value_base.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance_value.dart';
 
 abstract class ViewModelInstanceNumberBase extends ViewModelInstanceValue {
   static const int typeKey = 442;
   @override
   int get coreType => ViewModelInstanceNumberBase.typeKey;
   @override
-  Set<int> get coreTypes => {ViewModelInstanceNumberBase.typeKey, ViewModelInstanceValueBase.typeKey};
+  Set<int> get coreTypes =>
+      {ViewModelInstanceNumberBase.typeKey, ViewModelInstanceValueBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// PropertyValue field with key 575.

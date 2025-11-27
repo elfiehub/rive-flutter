@@ -2,15 +2,16 @@
 // lib/src/generated/animation/elastic_interpolator_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyframe_interpolator.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/keyframe_interpolator.dart';
 
 abstract class ElasticInterpolatorBase extends KeyFrameInterpolator {
   static const int typeKey = 174;
   @override
   int get coreType => ElasticInterpolatorBase.typeKey;
   @override
-  Set<int> get coreTypes => {ElasticInterpolatorBase.typeKey, KeyFrameInterpolatorBase.typeKey};
+  Set<int> get coreTypes =>
+      {ElasticInterpolatorBase.typeKey, KeyFrameInterpolatorBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// EasingValue field with key 405.

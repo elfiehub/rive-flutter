@@ -2,15 +2,16 @@
 // lib/src/generated/layout/layout_component_style_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/component.dart';
 
 abstract class LayoutComponentStyleBase extends Component {
   static const int typeKey = 420;
   @override
   int get coreType => LayoutComponentStyleBase.typeKey;
   @override
-  Set<int> get coreTypes => {LayoutComponentStyleBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes =>
+      {LayoutComponentStyleBase.typeKey, ComponentBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// GapHorizontal field with key 498.

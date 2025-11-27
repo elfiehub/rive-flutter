@@ -1,10 +1,10 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/keyed_property_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/interpolating_keyframe.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyed_object.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyframe.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/keyed_property_base.dart';
+import 'package:rive/src/rive_core/animation/interpolating_keyframe.dart';
+import 'package:rive/src/rive_core/animation/keyed_object.dart';
+import 'package:rive/src/rive_core/animation/keyframe.dart';
 
-export 'package:rive_legacy/src/generated/animation/keyed_property_base.dart';
+export 'package:rive/src/generated/animation/keyed_property_base.dart';
 
 abstract class KeyFrameInterface {
   int get frame;
@@ -55,7 +55,8 @@ class KeyFrameList<T extends KeyFrameInterface> {
   }
 }
 
-class KeyedProperty extends KeyedPropertyBase<RuntimeArtboard> with KeyFrameList<KeyFrame> {
+class KeyedProperty extends KeyedPropertyBase<RuntimeArtboard>
+    with KeyFrameList<KeyFrame> {
   @override
   void onAdded() {}
 
@@ -177,7 +178,8 @@ class KeyedProperty extends KeyedPropertyBase<RuntimeArtboard> with KeyFrameList
 
     while (idxTo > idx) {
       var frame = _keyframes[idx];
-      reporter.reportKeyedCallback(objectId, propertyKey, secondsTo - frame.seconds);
+      reporter.reportKeyedCallback(
+          objectId, propertyKey, secondsTo - frame.seconds);
       idx++;
     }
   }
@@ -196,7 +198,8 @@ class KeyedProperty extends KeyedPropertyBase<RuntimeArtboard> with KeyFrameList
       first.apply(object, pk, mix);
     } else {
       if (idx < _keyframes.length) {
-        InterpolatingKeyFrame fromFrame = _keyframes[idx - 1] as InterpolatingKeyFrame;
+        InterpolatingKeyFrame fromFrame =
+            _keyframes[idx - 1] as InterpolatingKeyFrame;
         KeyFrame toFrame = _keyframes[idx];
         if (seconds == toFrame.seconds) {
           toFrame.apply(object, pk, mix);

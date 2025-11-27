@@ -1,13 +1,13 @@
 import 'dart:math';
 
-import 'package:rive_legacy/src/generated/constraints/ik_constraint_base.dart';
-import 'package:rive_legacy/src/rive_core/bones/bone.dart';
-import 'package:rive_legacy/src/rive_core/bones/root_bone.dart';
-import 'package:rive_legacy/src/rive_core/constraints/constraint.dart';
-import 'package:rive_legacy/src/rive_core/transform_component.dart';
+import 'package:rive/src/generated/constraints/ik_constraint_base.dart';
+import 'package:rive/src/rive_core/bones/bone.dart';
+import 'package:rive/src/rive_core/bones/root_bone.dart';
+import 'package:rive/src/rive_core/constraints/constraint.dart';
+import 'package:rive/src/rive_core/transform_component.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/constraints/ik_constraint_base.dart';
+export 'package:rive/src/generated/constraints/ik_constraint_base.dart';
 
 /// A constraint which rotates its constrained bone and the parentBoneCount
 /// bones above it in order to move the tip of the constrained bone towards the
@@ -71,7 +71,10 @@ class IKConstraint extends IKConstraintBase {
     }
     // Now put them in FK order (top to bottom).
     for (final bone in bones.reversed) {
-      nextFKChain.add(_BoneChainLink(index: nextFKChain.length, bone: bone));
+      nextFKChain.add(_BoneChainLink(
+        index: nextFKChain.length,
+        bone: bone,
+      ));
     }
 
     _clearFKChain();
@@ -121,7 +124,8 @@ class IKConstraint extends IKConstraintBase {
       Mat2D.invert(item.parentWorldInverse, parentWorldTransform);
 
       var boneTransform = bone.transform;
-      Mat2D.multiply(boneTransform, item.parentWorldInverse, bone.worldTransform);
+      Mat2D.multiply(
+          boneTransform, item.parentWorldInverse, bone.worldTransform);
       Mat2D.decompose(boneTransform, item.transformComponents);
     }
 
@@ -139,7 +143,9 @@ class IKConstraint extends IKConstraintBase {
           for (int i = 0; i < last; i++) {
             var item = _fkChain[i];
             solve2(item, tip, worldTargetTranslation);
-            for (int j = item.index + 1, end = _fkChain.length - 1; j < end; j++) {
+            for (int j = item.index + 1, end = _fkChain.length - 1;
+                j < end;
+                j++) {
               var fk = _fkChain[j];
               Mat2D.invert(fk.parentWorldInverse, parentWorld(fk.bone));
             }
@@ -181,7 +187,8 @@ class IKConstraint extends IKConstraintBase {
     fk1.angle = r;
   }
 
-  void solve2(_BoneChainLink fk1, _BoneChainLink fk2, Vec2D worldTargetTranslation) {
+  void solve2(
+      _BoneChainLink fk1, _BoneChainLink fk2, Vec2D worldTargetTranslation) {
     Bone b1 = fk1.bone;
     Bone b2 = fk2.bone;
     var firstChild = _fkChain[fk1.index + 1];
@@ -265,7 +272,10 @@ class _BoneChainLink {
   TransformComponents transformComponents = TransformComponents();
   Mat2D parentWorldInverse = Mat2D();
 
-  _BoneChainLink({required this.index, required this.bone});
+  _BoneChainLink({
+    required this.index,
+    required this.bone,
+  });
 }
 
 void _constrainRotation(_BoneChainLink link, double rotation) {

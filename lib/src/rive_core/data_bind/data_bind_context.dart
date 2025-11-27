@@ -1,20 +1,21 @@
-import 'package:rive_legacy/src/generated/data_bind/data_bind_context_base.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/data_bind/data_context.dart';
-import 'package:rive_legacy/src/rive_core/data_bind_flags.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance_color.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance_number.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance_string.dart';
+import 'package:rive/src/generated/data_bind/data_bind_context_base.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/data_bind/data_context.dart';
+import 'package:rive/src/rive_core/data_bind_flags.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance_color.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance_number.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance_string.dart';
 import 'package:rive_common/utilities.dart';
 
-export 'package:rive_legacy/src/generated/data_bind/data_bind_context_base.dart';
+export 'package:rive/src/generated/data_bind/data_bind_context_base.dart';
 
 // ignore: one_member_abstracts
 abstract class DataBindContextInterface {
   bool addDirt(int value, {bool recurse = false});
 }
 
-class DataBindContext extends DataBindContextBase with DataBindContextInterface {
+class DataBindContext extends DataBindContextBase
+    with DataBindContextInterface {
   @override
   void sourcePathIdsChanged(List<int> from, List<int> to) {}
 

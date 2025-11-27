@@ -1,12 +1,12 @@
 import 'dart:collection';
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/linear_animation_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyed_object.dart';
-import 'package:rive_legacy/src/rive_core/animation/loop.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/linear_animation_base.dart';
+import 'package:rive/src/rive_core/animation/keyed_object.dart';
+import 'package:rive/src/rive_core/animation/loop.dart';
+import 'package:rive/src/rive_core/artboard.dart';
 
-export 'package:rive_legacy/src/generated/animation/linear_animation_base.dart';
+export 'package:rive/src/generated/animation/linear_animation_base.dart';
 
 class LinearAnimation extends LinearAnimationBase {
   /// Map objectId to KeyedObject. N.B. this is the id of the object that we
@@ -38,7 +38,8 @@ class LinearAnimation extends LinearAnimationBase {
     return true;
   }
 
-  bool isAnyObjectKeyed(Iterable<Core> objects) => objects.any((element) => _keyedObjects.containsKey(element.id));
+  bool isAnyObjectKeyed(Iterable<Core> objects) =>
+      objects.any((element) => _keyedObjects.containsKey(element.id));
 
   bool isObjectKeyed(Core object) => _keyedObjects.containsKey(object.id);
   bool removeObjectKeys(Core object) {
@@ -60,7 +61,8 @@ class LinearAnimation extends LinearAnimationBase {
   double get startSeconds => (enableWorkArea ? workStart : 0).toDouble() / fps;
 
   /// Returns the seconds where the animation work area ends
-  double get endSeconds => (enableWorkArea ? workEnd : duration).toDouble() / fps;
+  double get endSeconds =>
+      (enableWorkArea ? workEnd : duration).toDouble() / fps;
 
   /// Returns the length of the animation
   double get durationSeconds => endSeconds - startSeconds;
@@ -79,14 +81,20 @@ class LinearAnimation extends LinearAnimationBase {
     bool fromPong = false,
   }) {
     // We have to account for the state machine speed multiplier and the speed
-    double startingTime = ((speed * speedDirection) >= 0) ? startSeconds : endSeconds;
+    double startingTime =
+        ((speed * speedDirection) >= 0) ? startSeconds : endSeconds;
     bool isAtStartFrame = startingTime == secondsFrom;
 
     // Do not report a callback twice if it comes from the "pong" part of a
     // "ping pong" loop
     if (!isAtStartFrame || !fromPong) {
       for (final keyedObject in _keyedObjects.values) {
-        keyedObject.reportKeyedCallbacks(secondsFrom, secondsTo, reporter: reporter, isAtStartFrame: isAtStartFrame);
+        keyedObject.reportKeyedCallbacks(
+          secondsFrom,
+          secondsTo,
+          reporter: reporter,
+          isAtStartFrame: isAtStartFrame,
+        );
       }
     }
   }

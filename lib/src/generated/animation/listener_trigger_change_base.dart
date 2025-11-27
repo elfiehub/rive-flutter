@@ -2,8 +2,8 @@
 // lib/src/generated/animation/listener_trigger_change_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/animation/listener_action_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/listener_input_change.dart';
+import 'package:rive/src/generated/animation/listener_action_base.dart';
+import 'package:rive/src/rive_core/animation/listener_input_change.dart';
 
 abstract class ListenerTriggerChangeBase extends ListenerInputChange {
   static const int typeKey = 115;
@@ -11,8 +11,8 @@ abstract class ListenerTriggerChangeBase extends ListenerInputChange {
   int get coreType => ListenerTriggerChangeBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    ListenerTriggerChangeBase.typeKey,
-    ListenerInputChangeBase.typeKey,
-    ListenerActionBase.typeKey,
-  };
+        ListenerTriggerChangeBase.typeKey,
+        ListenerInputChangeBase.typeKey,
+        ListenerActionBase.typeKey
+      };
 }

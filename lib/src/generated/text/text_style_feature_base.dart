@@ -2,15 +2,16 @@
 // lib/src/generated/text/text_style_feature_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/component.dart';
 
 abstract class TextStyleFeatureBase extends Component {
   static const int typeKey = 164;
   @override
   int get coreType => TextStyleFeatureBase.typeKey;
   @override
-  Set<int> get coreTypes => {TextStyleFeatureBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes =>
+      {TextStyleFeatureBase.typeKey, ComponentBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// Tag field with key 356.

@@ -1,11 +1,11 @@
 // Core automatically generated lib/src/generated/artboard_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/generated/world_transform_component_base.dart';
-import 'package:rive_legacy/src/rive_core/layout_component.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/generated/world_transform_component_base.dart';
+import 'package:rive/src/rive_core/layout_component.dart';
 
 abstract class ArtboardBase extends LayoutComponent {
   static const int typeKey = 1;
@@ -13,12 +13,12 @@ abstract class ArtboardBase extends LayoutComponent {
   int get coreType => ArtboardBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    ArtboardBase.typeKey,
-    LayoutComponentBase.typeKey,
-    WorldTransformComponentBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        ArtboardBase.typeKey,
+        LayoutComponentBase.typeKey,
+        WorldTransformComponentBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// X field with key 9.

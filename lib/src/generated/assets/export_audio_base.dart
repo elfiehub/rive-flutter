@@ -2,16 +2,17 @@
 // lib/src/generated/assets/export_audio_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/assets/asset_base.dart';
-import 'package:rive_legacy/src/rive_core/assets/file_asset.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/assets/asset_base.dart';
+import 'package:rive/src/rive_core/assets/file_asset.dart';
 
 abstract class ExportAudioBase extends FileAsset {
   static const int typeKey = 422;
   @override
   int get coreType => ExportAudioBase.typeKey;
   @override
-  Set<int> get coreTypes => {ExportAudioBase.typeKey, FileAssetBase.typeKey, AssetBase.typeKey};
+  Set<int> get coreTypes =>
+      {ExportAudioBase.typeKey, FileAssetBase.typeKey, AssetBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// Volume field with key 530.

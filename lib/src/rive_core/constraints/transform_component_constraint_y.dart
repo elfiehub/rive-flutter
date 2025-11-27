@@ -1,7 +1,8 @@
-import 'package:rive_legacy/src/generated/constraints/transform_component_constraint_y_base.dart';
-export 'package:rive_legacy/src/generated/constraints/transform_component_constraint_y_base.dart';
+import 'package:rive/src/generated/constraints/transform_component_constraint_y_base.dart';
+export 'package:rive/src/generated/constraints/transform_component_constraint_y_base.dart';
 
-abstract class TransformComponentConstraintY extends TransformComponentConstraintYBase {
+abstract class TransformComponentConstraintY
+    extends TransformComponentConstraintYBase {
   @override
   void minValueYChanged(double from, double to) => markConstraintDirty();
 

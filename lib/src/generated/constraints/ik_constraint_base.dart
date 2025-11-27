@@ -2,10 +2,10 @@
 // lib/src/generated/constraints/ik_constraint_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/constraints/constraint_base.dart';
-import 'package:rive_legacy/src/rive_core/constraints/targeted_constraint.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/constraints/constraint_base.dart';
+import 'package:rive/src/rive_core/constraints/targeted_constraint.dart';
 
 abstract class IKConstraintBase extends TargetedConstraint {
   static const int typeKey = 81;
@@ -13,11 +13,11 @@ abstract class IKConstraintBase extends TargetedConstraint {
   int get coreType => IKConstraintBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    IKConstraintBase.typeKey,
-    TargetedConstraintBase.typeKey,
-    ConstraintBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        IKConstraintBase.typeKey,
+        TargetedConstraintBase.typeKey,
+        ConstraintBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// InvertDirection field with key 174.

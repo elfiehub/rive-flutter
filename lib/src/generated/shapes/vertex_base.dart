@@ -1,16 +1,20 @@
 // Core automatically generated lib/src/generated/shapes/vertex_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/container_component.dart';
 
 abstract class VertexBase extends ContainerComponent {
   static const int typeKey = 107;
   @override
   int get coreType => VertexBase.typeKey;
   @override
-  Set<int> get coreTypes => {VertexBase.typeKey, ContainerComponentBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes => {
+        VertexBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// X field with key 24.

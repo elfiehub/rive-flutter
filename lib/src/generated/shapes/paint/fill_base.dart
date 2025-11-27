@@ -1,10 +1,10 @@
 // Core automatically generated lib/src/generated/shapes/paint/fill_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/shapes/paint/shape_paint.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/shapes/paint/shape_paint.dart';
 
 abstract class FillBase extends ShapePaint {
   static const int typeKey = 20;
@@ -12,11 +12,11 @@ abstract class FillBase extends ShapePaint {
   int get coreType => FillBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    FillBase.typeKey,
-    ShapePaintBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        FillBase.typeKey,
+        ShapePaintBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// FillRule field with key 40.

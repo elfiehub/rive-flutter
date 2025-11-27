@@ -1,12 +1,12 @@
 import 'dart:math';
 
-import 'package:rive_legacy/src/generated/constraints/rotation_constraint_base.dart';
-import 'package:rive_legacy/src/rive_core/constraints/constraint.dart';
-import 'package:rive_legacy/src/rive_core/transform_component.dart';
-import 'package:rive_legacy/src/rive_core/transform_space.dart';
+import 'package:rive/src/generated/constraints/rotation_constraint_base.dart';
+import 'package:rive/src/rive_core/constraints/constraint.dart';
+import 'package:rive/src/rive_core/transform_component.dart';
+import 'package:rive/src/rive_core/transform_space.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/constraints/rotation_constraint_base.dart';
+export 'package:rive/src/generated/constraints/rotation_constraint_base.dart';
 
 /// A constraint copies the rotation from the target component to the
 /// constrained component in world or local space and applies copy/min/max
@@ -37,7 +37,8 @@ class RotationConstraint extends RotationConstraintBase {
       Mat2D.decompose(transformB, componentsB);
 
       if (!doesCopy) {
-        componentsB.rotation = destSpace == TransformSpace.local ? 0 : componentsA.rotation;
+        componentsB.rotation =
+            destSpace == TransformSpace.local ? 0 : componentsA.rotation;
       } else {
         componentsB.rotation = componentsB.rotation * copyFactor;
         if (offset) {

@@ -1,27 +1,27 @@
 import 'dart:collection';
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/state_transition_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/animation_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/animation_state_instance.dart';
-import 'package:rive_legacy/src/rive_core/animation/cubic_interpolator.dart';
-import 'package:rive_legacy/src/rive_core/animation/entry_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/interpolator.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyframe_interpolation.dart';
-import 'package:rive_legacy/src/rive_core/animation/layer_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation_instance.dart';
-import 'package:rive_legacy/src/rive_core/animation/loop.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_instance.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_condition.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_input_condition.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_trigger_condition.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_viewmodel_condition.dart';
-import 'package:rive_legacy/src/rive_core/enum_helper.dart';
-import 'package:rive_legacy/src/rive_core/state_transition_flags.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/state_transition_base.dart';
+import 'package:rive/src/rive_core/animation/animation_state.dart';
+import 'package:rive/src/rive_core/animation/animation_state_instance.dart';
+import 'package:rive/src/rive_core/animation/cubic_interpolator.dart';
+import 'package:rive/src/rive_core/animation/entry_state.dart';
+import 'package:rive/src/rive_core/animation/interpolator.dart';
+import 'package:rive/src/rive_core/animation/keyframe_interpolation.dart';
+import 'package:rive/src/rive_core/animation/layer_state.dart';
+import 'package:rive/src/rive_core/animation/linear_animation.dart';
+import 'package:rive/src/rive_core/animation/linear_animation_instance.dart';
+import 'package:rive/src/rive_core/animation/loop.dart';
+import 'package:rive/src/rive_core/animation/state_instance.dart';
+import 'package:rive/src/rive_core/animation/transition_condition.dart';
+import 'package:rive/src/rive_core/animation/transition_input_condition.dart';
+import 'package:rive/src/rive_core/animation/transition_trigger_condition.dart';
+import 'package:rive/src/rive_core/animation/transition_viewmodel_condition.dart';
+import 'package:rive/src/rive_core/enum_helper.dart';
+import 'package:rive/src/rive_core/state_transition_flags.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance.dart';
 
-export 'package:rive_legacy/src/generated/animation/state_transition_base.dart';
+export 'package:rive/src/generated/animation/state_transition_base.dart';
 
 enum AllowTransition { no, waitingForExit, yes }
 
@@ -46,6 +46,7 @@ class StateTransition extends StateTransitionBase {
   @override
   bool validate() {
     return super.validate() &&
+
         // need this last so runtimes get it which makes the whole
         // allowTransitionFrom thing above a little weird.
         stateTo != null;
@@ -74,7 +75,8 @@ class StateTransition extends StateTransitionBase {
   bool get isDisabled => (flags & StateTransitionFlags.disabled) != 0;
   bool get pauseOnExit => (flags & StateTransitionFlags.pauseOnExit) != 0;
   bool get enableExitTime => (flags & StateTransitionFlags.enableExitTime) != 0;
-  bool get enableEarlyExit => (flags & StateTransitionFlags.enableEarlyExit) != 0;
+  bool get enableEarlyExit =>
+      (flags & StateTransitionFlags.enableEarlyExit) != 0;
 
   /// The amount of time to mix the outgoing animation onto the incoming one
   /// when changing state. Only applies when going out from an AnimationState.
@@ -102,7 +104,8 @@ class StateTransition extends StateTransitionBase {
 
   /// Provide the animation to use for computing percentage durations for exit
   /// time.
-  LinearAnimation? exitTimeAnimation(LayerState stateFrom) => stateFrom is AnimationState ? stateFrom.animation : null;
+  LinearAnimation? exitTimeAnimation(LayerState stateFrom) =>
+      stateFrom is AnimationState ? stateFrom.animation : null;
 
   /// Computes the exit time in seconds of the [stateFrom]. Set [absolute] to
   /// true if you want the returned time to be relative to the entire animation.
@@ -126,7 +129,8 @@ class StateTransition extends StateTransitionBase {
 
   @override
   bool import(ImportStack importStack) {
-    var importer = importStack.latest<LayerStateImporter>(LayerStateBase.typeKey);
+    var importer =
+        importStack.latest<LayerStateImporter>(LayerStateBase.typeKey);
     if (importer == null) {
       return false;
     }
@@ -172,11 +176,10 @@ class StateTransition extends StateTransitionBase {
   /// Returns true when this transition can be taken from [stateFrom] with the
   /// given [inputValues].
   AllowTransition allowed(
-    StateInstance stateFrom,
-    HashMap<int, dynamic> inputValues,
-    bool ignoreTriggers,
-    ViewModelInstance? viewModelInstance,
-  ) {
+      StateInstance stateFrom,
+      HashMap<int, dynamic> inputValues,
+      bool ignoreTriggers,
+      ViewModelInstance? viewModelInstance) {
     if (isDisabled) {
       return AllowTransition.no;
     }
@@ -184,7 +187,8 @@ class StateTransition extends StateTransitionBase {
       if (condition is TransitionViewModelCondition) {
         return AllowTransition.no;
       } else if (condition is TransitionInputCondition &&
-          ((ignoreTriggers && condition is TransitionTriggerCondition) || !condition.evaluate(inputValues))) {
+          ((ignoreTriggers && condition is TransitionTriggerCondition) ||
+              !condition.evaluate(inputValues))) {
         return AllowTransition.no;
       }
     }
@@ -200,9 +204,11 @@ class StateTransition extends StateTransitionBase {
         var time = exitAnimation.totalTime;
         var exitTime = exitTimeSeconds(stateFrom.state);
         var animationFrom = exitAnimation.animation;
-        if (exitTime <= animationFrom.durationSeconds && animationFrom.loop != Loop.oneShot) {
+        if (exitTime <= animationFrom.durationSeconds &&
+            animationFrom.loop != Loop.oneShot) {
           // Get exit time relative to the loop lastTime was in.
-          exitTime += (lastTime / animationFrom.durationSeconds).floor() * animationFrom.durationSeconds;
+          exitTime += (lastTime / animationFrom.durationSeconds).floor() *
+              animationFrom.durationSeconds;
         }
         // Sometimes the time never reaches exitTime due to precision
         // differences on diff platforms
@@ -219,7 +225,8 @@ class StateTransition extends StateTransitionBase {
     // (only valid when exiting from an Animation).
     bool useExitTime = enableExitTime && stateFrom is AnimationStateInstance;
     if (pauseOnExit && useExitTime) {
-      stateFrom.animationInstance.time = exitTimeSeconds(stateFrom.state, absolute: true);
+      stateFrom.animationInstance.time =
+          exitTimeSeconds(stateFrom.state, absolute: true);
       return true;
     }
     return useExitTime;
@@ -228,7 +235,8 @@ class StateTransition extends StateTransitionBase {
   // No interpolation on Entry states.
   bool get canInterpolate => stateTo is! EntryState;
 
-  KeyFrameInterpolation get interpolation => enumAt(KeyFrameInterpolation.values, interpolationType);
+  KeyFrameInterpolation get interpolation =>
+      enumAt(KeyFrameInterpolation.values, interpolationType);
   set interpolation(KeyFrameInterpolation value) {
     if (canInterpolate) {
       interpolationType = value.index;

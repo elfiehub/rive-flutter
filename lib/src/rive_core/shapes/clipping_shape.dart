@@ -1,12 +1,12 @@
 import 'dart:ui';
 
-import 'package:rive_legacy/src/generated/shapes/clipping_shape_base.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/enum_helper.dart';
-import 'package:rive_legacy/src/rive_core/node.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape.dart';
+import 'package:rive/src/generated/shapes/clipping_shape_base.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/enum_helper.dart';
+import 'package:rive/src/rive_core/node.dart';
+import 'package:rive/src/rive_core/shapes/shape.dart';
 
-export 'package:rive_legacy/src/generated/shapes/clipping_shape_base.dart';
+export 'package:rive/src/generated/shapes/clipping_shape_base.dart';
 
 class ClippingShape extends ClippingShapeBase {
   final Path clippingPath = Path();
@@ -78,7 +78,8 @@ class ClippingShape extends ClippingShapeBase {
       clippingPath.fillType = fillType;
       for (final shape in _shapes) {
         if (!shape.fillInWorld) {
-          clippingPath.addPath(shape.fillPath, Offset.zero, matrix4: shape.worldTransform.mat4);
+          clippingPath.addPath(shape.fillPath, Offset.zero,
+              matrix4: shape.worldTransform.mat4);
         } else {
           clippingPath.addPath(shape.fillPath, Offset.zero);
         }

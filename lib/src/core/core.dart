@@ -1,40 +1,40 @@
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
-import 'package:rive_legacy/src/rive_core/runtime/exceptions/rive_format_error_exception.dart';
+import 'package:rive/src/rive_core/runtime/exceptions/rive_format_error_exception.dart';
 
 export 'dart:typed_data';
 
 export 'package:flutter/foundation.dart';
-export 'package:rive_legacy/src/animation_list.dart';
-export 'package:rive_legacy/src/asset_list.dart';
-export 'package:rive_legacy/src/blend_animations.dart';
-export 'package:rive_legacy/src/container_children.dart';
-export 'package:rive_legacy/src/core/field_types/core_callback_type.dart';
-export 'package:rive_legacy/src/core/importers/artboard_importer.dart';
-export 'package:rive_legacy/src/core/importers/backboard_importer.dart';
-export 'package:rive_legacy/src/core/importers/file_asset_importer.dart';
-export 'package:rive_legacy/src/core/importers/keyed_object_importer.dart';
-export 'package:rive_legacy/src/core/importers/keyed_property_importer.dart';
-export 'package:rive_legacy/src/core/importers/layer_state_importer.dart';
-export 'package:rive_legacy/src/core/importers/linear_animation_importer.dart';
-export 'package:rive_legacy/src/core/importers/nested_state_machine_importer.dart';
-export 'package:rive_legacy/src/core/importers/state_machine_importer.dart';
-export 'package:rive_legacy/src/core/importers/state_machine_layer_component_importer.dart';
-export 'package:rive_legacy/src/core/importers/state_machine_layer_importer.dart';
-export 'package:rive_legacy/src/core/importers/state_machine_listener_importer.dart';
-export 'package:rive_legacy/src/core/importers/state_transition_importer.dart';
-export 'package:rive_legacy/src/data_enum_values.dart';
-export 'package:rive_legacy/src/event_list.dart';
-export 'package:rive_legacy/src/generated/rive_core_context.dart';
-export 'package:rive_legacy/src/layer_component_events.dart';
-export 'package:rive_legacy/src/listener_actions.dart';
-export 'package:rive_legacy/src/runtime_artboard.dart';
-export 'package:rive_legacy/src/state_machine_components.dart';
-export 'package:rive_legacy/src/state_transition_conditions.dart';
-export 'package:rive_legacy/src/state_transitions.dart';
-export 'package:rive_legacy/src/viewmodel_list_items.dart';
-export 'package:rive_legacy/src/viewmodel_properties.dart';
+export 'package:rive/src/animation_list.dart';
+export 'package:rive/src/asset_list.dart';
+export 'package:rive/src/blend_animations.dart';
+export 'package:rive/src/container_children.dart';
+export 'package:rive/src/core/field_types/core_callback_type.dart';
+export 'package:rive/src/core/importers/artboard_importer.dart';
+export 'package:rive/src/core/importers/backboard_importer.dart';
+export 'package:rive/src/core/importers/file_asset_importer.dart';
+export 'package:rive/src/core/importers/keyed_object_importer.dart';
+export 'package:rive/src/core/importers/keyed_property_importer.dart';
+export 'package:rive/src/core/importers/layer_state_importer.dart';
+export 'package:rive/src/core/importers/linear_animation_importer.dart';
+export 'package:rive/src/core/importers/nested_state_machine_importer.dart';
+export 'package:rive/src/core/importers/state_machine_importer.dart';
+export 'package:rive/src/core/importers/state_machine_layer_component_importer.dart';
+export 'package:rive/src/core/importers/state_machine_layer_importer.dart';
+export 'package:rive/src/core/importers/state_machine_listener_importer.dart';
+export 'package:rive/src/core/importers/state_transition_importer.dart';
+export 'package:rive/src/data_enum_values.dart';
+export 'package:rive/src/event_list.dart';
+export 'package:rive/src/generated/rive_core_context.dart';
+export 'package:rive/src/layer_component_events.dart';
+export 'package:rive/src/listener_actions.dart';
+export 'package:rive/src/runtime_artboard.dart';
+export 'package:rive/src/state_machine_components.dart';
+export 'package:rive/src/state_transition_conditions.dart';
+export 'package:rive/src/state_transitions.dart';
+export 'package:rive/src/viewmodel_list_items.dart';
+export 'package:rive/src/viewmodel_properties.dart';
 
 typedef PropertyChangeCallback = void Function(dynamic from, dynamic to);
 typedef BatchAddCallback = void Function();
@@ -145,9 +145,8 @@ class ImportStack {
     var object = latest<T>(coreType);
     if (object == null) {
       throw RiveFormatErrorException(
-        'Rive file is corrupt. Couldn\'t find expected object of type '
-        '$coreType in import stack.',
-      );
+          'Rive file is corrupt. Couldn\'t find expected object of type '
+          '$coreType in import stack.');
     }
     return object;
   }

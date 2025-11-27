@@ -2,16 +2,20 @@
 // lib/src/generated/constraints/targeted_constraint_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/rive_core/constraints/constraint.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/rive_core/constraints/constraint.dart';
 
 abstract class TargetedConstraintBase extends Constraint {
   static const int typeKey = 80;
   @override
   int get coreType => TargetedConstraintBase.typeKey;
   @override
-  Set<int> get coreTypes => {TargetedConstraintBase.typeKey, ConstraintBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes => {
+        TargetedConstraintBase.typeKey,
+        ConstraintBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// TargetId field with key 173.

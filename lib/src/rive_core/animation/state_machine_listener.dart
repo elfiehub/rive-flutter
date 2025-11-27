@@ -1,16 +1,16 @@
 import 'dart:collection';
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/state_machine_listener_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/listener_action.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_machine_component.dart';
-import 'package:rive_legacy/src/rive_core/event.dart';
-import 'package:rive_legacy/src/rive_core/state_machine_controller.dart';
-import 'package:rive_legacy/src/rive_core/world_transform_component.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/state_machine_listener_base.dart';
+import 'package:rive/src/rive_core/animation/listener_action.dart';
+import 'package:rive/src/rive_core/animation/state_machine.dart';
+import 'package:rive/src/rive_core/animation/state_machine_component.dart';
+import 'package:rive/src/rive_core/event.dart';
+import 'package:rive/src/rive_core/state_machine_controller.dart';
+import 'package:rive/src/rive_core/world_transform_component.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/animation/state_machine_listener_base.dart';
+export 'package:rive/src/generated/animation/state_machine_listener_base.dart';
 
 enum ListenerType { enter, exit, down, up, move, event, click }
 
@@ -44,7 +44,8 @@ class StateMachineListener extends StateMachineListenerBase {
   }
 
   @override
-  String get name => super.name.isEmpty ? (_target?.name ?? 'Listener') : super.name;
+  String get name =>
+      super.name.isEmpty ? (_target?.name ?? 'Listener') : super.name;
   @override
   void listenerTypeValueChanged(int from, int to) {}
 
@@ -52,7 +53,8 @@ class StateMachineListener extends StateMachineListenerBase {
   set listenerType(ListenerType value) => listenerTypeValue = value.index;
 
   @override
-  ListBase<StateMachineComponent> machineComponentList(StateMachine machine) => machine.listeners;
+  ListBase<StateMachineComponent> machineComponentList(StateMachine machine) =>
+      machine.listeners;
 
   @override
   void targetIdChanged(int from, int to) {
@@ -83,7 +85,8 @@ class StateMachineListener extends StateMachineListenerBase {
     return removed;
   }
 
-  void performChanges(StateMachineController controller, Vec2D position, Vec2D previousPosition) {
+  void performChanges(StateMachineController controller, Vec2D position,
+      Vec2D previousPosition) {
     for (final action in actions) {
       action.perform(controller, position, previousPosition);
     }

@@ -1,8 +1,8 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/core/importers/artboard_import_stack_object.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_transition.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_condition.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_input_condition.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/core/importers/artboard_import_stack_object.dart';
+import 'package:rive/src/rive_core/animation/state_transition.dart';
+import 'package:rive/src/rive_core/animation/transition_condition.dart';
+import 'package:rive/src/rive_core/animation/transition_input_condition.dart';
 
 class StateTransitionImporter extends ArtboardImportStackObject {
   final StateMachineImporter stateMachineImporter;

@@ -2,11 +2,11 @@
 // lib/src/generated/animation/blend_state_1d_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/layer_state_base.dart';
-import 'package:rive_legacy/src/generated/animation/state_machine_layer_component_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/blend_animation_1d.dart';
-import 'package:rive_legacy/src/rive_core/animation/blend_state.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/layer_state_base.dart';
+import 'package:rive/src/generated/animation/state_machine_layer_component_base.dart';
+import 'package:rive/src/rive_core/animation/blend_animation_1d.dart';
+import 'package:rive/src/rive_core/animation/blend_state.dart';
 
 abstract class BlendState1DBase extends BlendState<BlendAnimation1D> {
   static const int typeKey = 76;
@@ -14,11 +14,11 @@ abstract class BlendState1DBase extends BlendState<BlendAnimation1D> {
   int get coreType => BlendState1DBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    BlendState1DBase.typeKey,
-    BlendStateBase.typeKey,
-    LayerStateBase.typeKey,
-    StateMachineLayerComponentBase.typeKey,
-  };
+        BlendState1DBase.typeKey,
+        BlendStateBase.typeKey,
+        LayerStateBase.typeKey,
+        StateMachineLayerComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// InputId field with key 167.

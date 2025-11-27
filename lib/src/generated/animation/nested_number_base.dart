@@ -2,16 +2,20 @@
 // lib/src/generated/animation/nested_number_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_input.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/rive_core/animation/nested_input.dart';
 
 abstract class NestedNumberBase extends NestedInput {
   static const int typeKey = 124;
   @override
   int get coreType => NestedNumberBase.typeKey;
   @override
-  Set<int> get coreTypes => {NestedNumberBase.typeKey, NestedInputBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes => {
+        NestedNumberBase.typeKey,
+        NestedInputBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// NestedValue field with key 239.

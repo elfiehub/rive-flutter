@@ -1,18 +1,19 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/interpolating_keyframe_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/cubic_interpolator.dart';
-import 'package:rive_legacy/src/rive_core/animation/cubic_value_interpolator.dart';
-import 'package:rive_legacy/src/rive_core/animation/interpolator.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyframe_interpolation.dart';
-import 'package:rive_legacy/src/rive_core/enum_helper.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/interpolating_keyframe_base.dart';
+import 'package:rive/src/rive_core/animation/cubic_interpolator.dart';
+import 'package:rive/src/rive_core/animation/cubic_value_interpolator.dart';
+import 'package:rive/src/rive_core/animation/interpolator.dart';
+import 'package:rive/src/rive_core/animation/keyframe_interpolation.dart';
+import 'package:rive/src/rive_core/enum_helper.dart';
 
-export 'package:rive_legacy/src/generated/animation/interpolating_keyframe_base.dart';
+export 'package:rive/src/generated/animation/interpolating_keyframe_base.dart';
 
 abstract class InterpolatingKeyFrame extends InterpolatingKeyFrameBase {
   @override
   bool get canInterpolate => true;
 
-  KeyFrameInterpolation get interpolation => enumAt(KeyFrameInterpolation.values, interpolationType);
+  KeyFrameInterpolation get interpolation =>
+      enumAt(KeyFrameInterpolation.values, interpolationType);
   set interpolation(KeyFrameInterpolation value) {
     interpolationType = value.index;
   }
@@ -48,12 +49,16 @@ abstract class InterpolatingKeyFrame extends InterpolatingKeyFrameBase {
     switch (interpolation) {
       case KeyFrameInterpolation.cubicValue:
         if (interpolator is! CubicValueInterpolator) {
-          interpolation = canInterpolate ? KeyFrameInterpolation.linear : KeyFrameInterpolation.hold;
+          interpolation = canInterpolate
+              ? KeyFrameInterpolation.linear
+              : KeyFrameInterpolation.hold;
         }
         break;
       case KeyFrameInterpolation.cubic:
         if (interpolator is! CubicInterpolator) {
-          interpolation = canInterpolate ? KeyFrameInterpolation.linear : KeyFrameInterpolation.hold;
+          interpolation = canInterpolate
+              ? KeyFrameInterpolation.linear
+              : KeyFrameInterpolation.hold;
         }
         break;
       default:

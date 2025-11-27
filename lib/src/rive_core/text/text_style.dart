@@ -1,24 +1,24 @@
 import 'dart:collection';
 import 'dart:ui' as ui;
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/text/text_style_base.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
-import 'package:rive_legacy/src/rive_core/assets/file_asset.dart';
-import 'package:rive_legacy/src/rive_core/assets/font_asset.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/shapes/paint/shape_paint.dart';
-import 'package:rive_legacy/src/rive_core/shapes/paint/shape_paint_mutator.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape_paint_container.dart';
-import 'package:rive_legacy/src/rive_core/text/text.dart';
-import 'package:rive_legacy/src/rive_core/text/text_style_axis.dart';
-import 'package:rive_legacy/src/rive_core/text/text_style_feature.dart';
-import 'package:rive_legacy/src/rive_core/text/text_value_run.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/text/text_style_base.dart';
+import 'package:rive/src/rive_core/artboard.dart';
+import 'package:rive/src/rive_core/assets/file_asset.dart';
+import 'package:rive/src/rive_core/assets/font_asset.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/shapes/paint/shape_paint.dart';
+import 'package:rive/src/rive_core/shapes/paint/shape_paint_mutator.dart';
+import 'package:rive/src/rive_core/shapes/shape_paint_container.dart';
+import 'package:rive/src/rive_core/text/text.dart';
+import 'package:rive/src/rive_core/text/text_style_axis.dart';
+import 'package:rive/src/rive_core/text/text_style_feature.dart';
+import 'package:rive/src/rive_core/text/text_value_run.dart';
 import 'package:rive_common/math.dart';
 import 'package:rive_common/rive_text.dart';
 
-export 'package:rive_legacy/src/generated/text/text_style_base.dart';
+export 'package:rive/src/generated/text/text_style_base.dart';
 
 class TextVariationHelper extends Component {
   final TextStyle style;
@@ -54,7 +54,8 @@ class TextVariationHelper extends Component {
   }
 }
 
-class TextStyle extends TextStyleBase with ShapePaintContainer, FileAssetReferencer<FontAsset> {
+class TextStyle extends TextStyleBase
+    with ShapePaintContainer, FileAssetReferencer<FontAsset> {
   final Set<TextValueRun> _referencers = {};
   Text? get text => parent as Text?;
   final Set<TextStyleAxis> _variations = {};
@@ -71,13 +72,24 @@ class TextStyle extends TextStyleBase with ShapePaintContainer, FileAssetReferen
   Iterable<FontTag> get fontFeatures => asset?.font?.features ?? [];
 
   Font? _makeFontVariation() => asset?.font?.withOptions(
-    _variations.map((axis) => FontAxisCoord(axis.tag, axis.axisValue)),
-    _features.map((feature) => FontFeature(feature.tag, feature.featureValue)),
-  );
+        _variations.map(
+          (axis) => FontAxisCoord(
+            axis.tag,
+            axis.axisValue,
+          ),
+        ),
+        _features.map(
+          (feature) => FontFeature(
+            feature.tag,
+            feature.featureValue,
+          ),
+        ),
+      );
 
   Font? get font => _variationHelper?.font ?? asset?.font;
 
-  List<ShapePaint> get shapePaints => fills.cast<ShapePaint>().toList() + strokes.cast<ShapePaint>().toList();
+  List<ShapePaint> get shapePaints =>
+      fills.cast<ShapePaint>().toList() + strokes.cast<ShapePaint>().toList();
 
   /// An identifier used by the shaper to remap style ids as text runs are
   /// converted to glyph runs.
@@ -112,8 +124,7 @@ class TextStyle extends TextStyleBase with ShapePaintContainer, FileAssetReferen
   }
 
   @override
-  String toString() =>
-      'TextStyle(id: $id, size: $fontSize'
+  String toString() => 'TextStyle(id: $id, size: $fontSize'
       ')';
 
   @override
@@ -131,7 +142,8 @@ class TextStyle extends TextStyleBase with ShapePaintContainer, FileAssetReferen
     }
 
     super.asset = value;
-    if (asset?.setFontCallback(_fontDecoded, notifyAlreadySet: false) ?? false) {
+    if (asset?.setFontCallback(_fontDecoded, notifyAlreadySet: false) ??
+        false) {
       // Already decoded.
       _markShapeDirty();
       _variationHelper?.addDirt(ComponentDirt.textShape);
@@ -170,7 +182,8 @@ class TextStyle extends TextStyleBase with ShapePaintContainer, FileAssetReferen
   void onFillsChanged() => text?.markPaintDirty();
 
   @override
-  void onPaintMutatorChanged(ShapePaintMutator mutator) => text?.markPaintDirty();
+  void onPaintMutatorChanged(ShapePaintMutator mutator) =>
+      text?.markPaintDirty();
 
   @override
   void onStrokesChanged() => text?.markPaintDirty();
@@ -267,12 +280,23 @@ class TextStyle extends TextStyleBase with ShapePaintContainer, FileAssetReferen
         continue;
       }
       var paint = shapePaint.paint;
-      canvas.drawPath(_renderPath, paint);
+      canvas.drawPath(
+        _renderPath,
+        paint,
+      );
       if (_opacityPaths.entries.isNotEmpty) {
         var oldColor = paint.color;
         for (final entry in _opacityPaths.entries) {
-          paint.color = ui.Color.fromRGBO(oldColor.red, oldColor.green, oldColor.blue, oldColor.opacity * entry.key);
-          canvas.drawPath(entry.value, paint);
+          paint.color = ui.Color.fromRGBO(
+            oldColor.red,
+            oldColor.green,
+            oldColor.blue,
+            oldColor.opacity * entry.key,
+          );
+          canvas.drawPath(
+            entry.value,
+            paint,
+          );
         }
         paint.color = oldColor;
       }

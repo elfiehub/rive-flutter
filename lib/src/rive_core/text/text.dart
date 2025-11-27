@@ -1,29 +1,46 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:rive_legacy/src/generated/text/text_base.dart';
-import 'package:rive_legacy/src/rive_core/bounds_provider.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
-import 'package:rive_legacy/src/rive_core/enum_helper.dart';
-import 'package:rive_legacy/src/rive_core/layout_component.dart';
-import 'package:rive_legacy/src/rive_core/text/styled_text.dart';
-import 'package:rive_legacy/src/rive_core/text/text_modifier_group.dart';
-import 'package:rive_legacy/src/rive_core/text/text_style.dart' as rive;
-import 'package:rive_legacy/src/rive_core/text/text_style_container.dart';
-import 'package:rive_legacy/src/rive_core/text/text_value_run.dart';
+import 'package:rive/src/generated/text/text_base.dart';
+import 'package:rive/src/rive_core/bounds_provider.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/container_component.dart';
+import 'package:rive/src/rive_core/enum_helper.dart';
+import 'package:rive/src/rive_core/layout_component.dart';
+import 'package:rive/src/rive_core/text/styled_text.dart';
+import 'package:rive/src/rive_core/text/text_modifier_group.dart';
+import 'package:rive/src/rive_core/text/text_style.dart' as rive;
+import 'package:rive/src/rive_core/text/text_style_container.dart';
+import 'package:rive/src/rive_core/text/text_value_run.dart';
 import 'package:rive_common/math.dart';
 import 'package:rive_common/rive_text.dart';
 
-export 'package:rive_legacy/src/generated/text/text_base.dart';
+export 'package:rive/src/generated/text/text_base.dart';
 
-enum TextSizing { autoWidth, autoHeight, fixed }
+enum TextSizing {
+  autoWidth,
+  autoHeight,
+  fixed,
+}
 
-enum TextOverflow { visible, hidden, clipped, ellipsis, fit }
+enum TextOverflow {
+  visible,
+  hidden,
+  clipped,
+  ellipsis,
+  fit,
+}
 
-enum TextOrigin { top, baseline }
+enum TextOrigin {
+  top,
+  baseline,
+}
 
-enum VerticalTextAlign { top, bottom, middle }
+enum VerticalTextAlign {
+  top,
+  bottom,
+  middle,
+}
 
 class Text extends TextBase with TextStyleContainer implements Sizable {
   Path? _clipRenderPath;
@@ -102,7 +119,11 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
     return null;
   }
 
-  StyledText makeStyled(Font defaultFont, {bool forEditing = false, bool withModifiers = true}) {
+  StyledText makeStyled(
+    Font defaultFont, {
+    bool forEditing = false,
+    bool withModifiers = true,
+  }) {
     List<TextRun> textRuns = [];
     final buffer = StringBuffer();
     int runIndex = 0;
@@ -112,16 +133,14 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
         continue;
       }
       buffer.write(run.text);
-      textRuns.add(
-        TextRun(
-          font: run.style?.font ?? defaultFont,
-          fontSize: run.style?.fontSize ?? 16,
-          lineHeight: run.style?.lineHeight ?? -1,
-          letterSpacing: run.style?.letterSpacing ?? 0,
-          unicharCount: run.text.codeUnits.length,
-          styleId: runIndex++,
-        ),
-      );
+      textRuns.add(TextRun(
+        font: run.style?.font ?? defaultFont,
+        fontSize: run.style?.fontSize ?? 16,
+        lineHeight: run.style?.lineHeight ?? -1,
+        letterSpacing: run.style?.letterSpacing ?? 0,
+        unicharCount: run.text.codeUnits.length,
+        styleId: runIndex++,
+      ));
     }
     if (withModifiers) {
       // Make sure to split on glyphs from TextModifiers.
@@ -133,14 +152,12 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
     // Couldn't fit anything?
     if (textRuns.isEmpty && runs.isNotEmpty) {
       var run = runs.first;
-      textRuns.add(
-        TextRun(
-          font: run.style?.font ?? defaultFont,
-          fontSize: run.style?.fontSize ?? 16,
-          unicharCount: run.text.codeUnits.length,
-          styleId: 0,
-        ),
-      );
+      textRuns.add(TextRun(
+        font: run.style?.font ?? defaultFont,
+        fontSize: run.style?.fontSize ?? 16,
+        unicharCount: run.text.codeUnits.length,
+        styleId: 0,
+      ));
     }
 
     // We keep an empty space at the end of the buffer if it's for editing
@@ -175,7 +192,8 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
 
   void _syncRuns() {
     _runs = children.whereType<TextValueRun>().toList(growable: false);
-    _modifierGroups = children.whereType<TextModifierGroup>().toList(growable: false);
+    _modifierGroups =
+        children.whereType<TextModifierGroup>().toList(growable: false);
 
     updateStyles();
   }
@@ -187,10 +205,13 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
   }
 
   Mat2D get originTransform => Mat2D.multiply(
-    Mat2D(),
-    worldTransform,
-    Mat2D.fromTranslate(_bounds.minX - _bounds.width * originX, _bounds.minY - _bounds.height * originY),
-  );
+        Mat2D(),
+        worldTransform,
+        Mat2D.fromTranslate(
+          _bounds.minX - _bounds.width * originX,
+          _bounds.minY - _bounds.height * originY,
+        ),
+      );
 
   double verticalAlignOffset = 0;
 
@@ -200,16 +221,17 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
 
   @override
   AABB get localBounds => AABB.fromLTWH(
-    _bounds.minX - _bounds.width * originX,
-    _bounds.minY - _bounds.height * originY,
-    _bounds.width,
-    _bounds.height,
-  );
+        _bounds.minX - _bounds.width * originX,
+        _bounds.minY - _bounds.height * originY,
+        _bounds.width,
+        _bounds.height,
+      );
 
   @override
   AABB get constraintBounds => localBounds;
 
-  void forEachGlyph(bool Function(LineRunGlyph, double, double, GlyphLine) callback) {
+  void forEachGlyph(
+      bool Function(LineRunGlyph, double, double, GlyphLine) callback) {
     var lines = _lines;
     var shape = _shape;
     if (lines == null || shape == null) {
@@ -252,10 +274,16 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
       return Size.zero;
     }
     var styled = makeStyled(defaultFont, withModifiers: false);
-    var shape = defaultFont.shape(styled.value, styled.runs);
+    var shape = defaultFont.shape(
+      styled.value,
+      styled.runs,
+    );
     _cleanupShapes.add(shape);
 
-    var lines = shape.breakLines(min(maxSize.width, sizing == TextSizing.autoWidth ? -1 : width), align, wrap);
+    var lines = shape.breakLines(
+        min(maxSize.width, sizing == TextSizing.autoWidth ? -1 : width),
+        align,
+        wrap);
 
     double y = 0;
     double computedHeight = 0;
@@ -264,13 +292,16 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
     int ellipsisLine = -1;
 
     double maxWidth = 0;
-    if (textOrigin == TextOrigin.baseline && lines.isNotEmpty && lines.first.isNotEmpty) {
+    if (textOrigin == TextOrigin.baseline &&
+        lines.isNotEmpty &&
+        lines.first.isNotEmpty) {
       y -= lines.first.first.baseline;
       minY = y;
     }
 
-    var wantEllipsis =
-        overflow == TextOverflow.ellipsis && sizing == TextSizing.fixed && verticalAlign == VerticalTextAlign.top;
+    var wantEllipsis = overflow == TextOverflow.ellipsis &&
+        sizing == TextSizing.fixed &&
+        verticalAlign == VerticalTextAlign.top;
 
     // We iterate in a pre-path building pass to compute dimensions.
     outer:
@@ -302,22 +333,35 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
     late AABB bounds;
     switch (sizing) {
       case TextSizing.autoWidth:
-        bounds = AABB.fromValues(0.0, minY, maxWidth, max(minY, computedHeight));
+        bounds = AABB.fromValues(
+          0.0,
+          minY,
+          maxWidth,
+          max(minY, computedHeight),
+        );
         break;
       case TextSizing.autoHeight:
-        bounds = AABB.fromValues(0.0, minY, width, max(minY, computedHeight));
+        bounds = AABB.fromValues(
+          0.0,
+          minY,
+          width,
+          max(minY, computedHeight),
+        );
         break;
       case TextSizing.fixed:
-        bounds = AABB.fromValues(0.0, minY, width, minY + height);
+        bounds = AABB.fromValues(
+          0.0,
+          minY,
+          width,
+          minY + height,
+        );
         break;
     }
     lines.dispose();
 
     _measuredSizeMax = maxSize;
-    return _measuredSize = Size(
-      min(maxSize.width, bounds.width.ceilToDouble()),
-      min(maxSize.height, bounds.height.ceilToDouble()),
-    );
+    return _measuredSize = Size(min(maxSize.width, bounds.width.ceilToDouble()),
+        min(maxSize.height, bounds.height.ceilToDouble()));
   }
 
   void _buildRenderStyles() {
@@ -337,15 +381,16 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
     int ellipsisLine = -1;
     bool isEllipsisLineLast = false;
     double maxWidth = 0;
-    if (textOrigin == TextOrigin.baseline && lines.isNotEmpty && lines.first.isNotEmpty) {
+    if (textOrigin == TextOrigin.baseline &&
+        lines.isNotEmpty &&
+        lines.first.isNotEmpty) {
       y -= lines.first.first.baseline;
       minY = y;
     }
 
     // If we want an ellipsis we need to find the line to put the
     // ellipsis on (line before the one that overflows).
-    var wantEllipsis =
-        overflow == TextOverflow.ellipsis &&
+    var wantEllipsis = overflow == TextOverflow.ellipsis &&
         effectiveSizing == TextSizing.fixed &&
         verticalAlign == VerticalTextAlign.top;
 
@@ -389,7 +434,12 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
 
     switch (effectiveSizing) {
       case TextSizing.autoWidth:
-        _bounds = AABB.fromValues(0.0, minY, maxWidth, max(minY, y - paragraphSpacing));
+        _bounds = AABB.fromValues(
+          0.0,
+          minY,
+          maxWidth,
+          max(minY, y - paragraphSpacing),
+        );
         break;
       case TextSizing.autoHeight:
         _bounds = AABB.fromValues(
@@ -400,7 +450,12 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
         );
         break;
       case TextSizing.fixed:
-        _bounds = AABB.fromValues(0.0, minY, effectiveWidth == 0 ? maxWidth : effectiveWidth, minY + effectiveHeight);
+        _bounds = AABB.fromValues(
+          0.0,
+          minY,
+          effectiveWidth == 0 ? maxWidth : effectiveWidth,
+          minY + effectiveHeight,
+        );
         break;
     }
 
@@ -422,16 +477,18 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
       } else {
         _clipRenderPath = Path();
       }
-      _clipRenderPath?.addRect(
-        localBounds.rect.translate(_bounds.width * originX, verticalAlignOffset + _bounds.height * originY),
-      );
+      _clipRenderPath?.addRect(localBounds.rect.translate(
+          _bounds.width * originX,
+          verticalAlignOffset + _bounds.height * originY));
     } else {
       _clipRenderPath?.reset();
       _clipRenderPath = null;
     }
 
     y = 0;
-    if (textOrigin == TextOrigin.baseline && lines.isNotEmpty && lines.first.isNotEmpty) {
+    if (textOrigin == TextOrigin.baseline &&
+        lines.isNotEmpty &&
+        lines.first.isNotEmpty) {
       y -= lines.first.first.baseline;
     }
     paragraphIndex = 0;
@@ -499,15 +556,14 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
 
         double x = line.startX;
         minX = min(x, minX);
-        for (final glyphInfo
-            in lineIndex == ellipsisLine
-                ? line.glyphsWithEllipsis(
-                    effectiveWidth,
-                    paragraph: paragraph,
-                    isLastLine: isEllipsisLineLast,
-                    cleanupShapes: _cleanupShapes,
-                  )
-                : line.glyphs(paragraph)) {
+        for (final glyphInfo in lineIndex == ellipsisLine
+            ? line.glyphsWithEllipsis(
+                effectiveWidth,
+                paragraph: paragraph,
+                isLastLine: isEllipsisLineLast,
+                cleanupShapes: _cleanupShapes,
+              )
+            : line.glyphs(paragraph)) {
           var run = glyphInfo.run;
           var font = run.font;
 
@@ -517,16 +573,18 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
           late Float64List pathTransform;
           if (haveModifiers) {
             var centerX = glyphInfo.center;
-            var transform = Mat2D.fromScaleAndTranslation(glyphInfo.run.fontSize, glyphInfo.run.fontSize, -centerX, 0);
+            var transform = Mat2D.fromScaleAndTranslation(
+                glyphInfo.run.fontSize, glyphInfo.run.fontSize, -centerX, 0);
             for (final modifier in _modifierGroups) {
-              transform = modifier.transform(modifier.glyphCoverage(glyphInfo), transform);
+              transform = modifier.transform(
+                  modifier.glyphCoverage(glyphInfo), transform);
             }
             var offset = glyphInfo.offset;
             transform = Mat2D.multiply(
-              transform,
-              Mat2D.fromTranslate(centerX + x + offset.x, y + line.baseline + offset.y),
-              transform,
-            );
+                transform,
+                Mat2D.fromTranslate(
+                    centerX + x + offset.x, y + line.baseline + offset.y),
+                transform);
             pathTransform = transform.mat4;
           } else {
             pathTransform = glyphInfo.pathTransform(x, y + line.baseline).mat4;
@@ -538,7 +596,8 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
             if (haveModifiers) {
               for (final modifier in _modifierGroups) {
                 if (modifier.modifiesOpacity) {
-                  opacity = modifier.computeOpacity(opacity, modifier.glyphCoverage(glyphInfo));
+                  opacity = modifier.computeOpacity(
+                      opacity, modifier.glyphCoverage(glyphInfo));
                 }
               }
             }
@@ -565,13 +624,15 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
     double xOffset = -_bounds.width * originX;
     double yOffset = -_bounds.height * originY;
     if (overflow == TextOverflow.fit) {
-      double xScale = (effectiveSizing != TextSizing.autoWidth && maxWidth > _bounds.width)
-          ? _bounds.width / maxWidth
-          : 1;
+      double xScale =
+          (effectiveSizing != TextSizing.autoWidth && maxWidth > _bounds.width)
+              ? _bounds.width / maxWidth
+              : 1;
       double baseline = fitFromBaseline ? lines[0][0].baseline : 0;
-      double yScale = (effectiveSizing == TextSizing.fixed && totalHeight > _bounds.height)
-          ? (_bounds.height - baseline) / (totalHeight - baseline)
-          : 1;
+      double yScale =
+          (effectiveSizing == TextSizing.fixed && totalHeight > _bounds.height)
+              ? (_bounds.height - baseline) / (totalHeight - baseline)
+              : 1;
       if (xScale != 1 || yScale != 1) {
         scale = max(0, xScale > yScale ? yScale : xScale);
         yOffset += baseline * (1 - scale);
@@ -668,7 +729,8 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
       return;
     }
 
-    double breakWidth = effectiveSizing == TextSizing.autoWidth ? -1 : effectiveWidth;
+    double breakWidth =
+        effectiveSizing == TextSizing.autoWidth ? -1 : effectiveWidth;
 
     // Question (max): is it safer to simply skip computing Shape if we
     // have no default font?
@@ -683,12 +745,17 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
       // TODO: we could not re-compute this shape if the rangeMappers are all
       // still valid. We'd only have to run group.computeCoverage below.
       _modifierStyledText = makeStyled(defaultFont, withModifiers: false);
-      _modifierShape = defaultFont.shape(_modifierStyledText!.value, _modifierStyledText!.runs);
+      _modifierShape = defaultFont.shape(
+        _modifierStyledText!.value,
+        _modifierStyledText!.runs,
+      );
       _modifierLines = _modifierShape?.breakLines(breakWidth, align, wrap);
-      _glyphLookup = GlyphLookup.fromShape(_modifierShape!, _modifierStyledText!.value.length);
+      _glyphLookup = GlyphLookup.fromShape(
+          _modifierShape!, _modifierStyledText!.value.length);
       _unicharCount = _modifierStyledText!.value.length;
       for (final group in _modifierGroups) {
-        group.computeRangeMap(_modifierStyledText!.value, _modifierShape!, _modifierLines!, _glyphLookup!);
+        group.computeRangeMap(_modifierStyledText!.value, _modifierShape!,
+            _modifierLines!, _glyphLookup!);
         group.computeCoverage(_unicharCount);
       }
     } else {
@@ -700,7 +767,10 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
     bool haveModifiers = _modifierGroups.isNotEmpty;
 
     var styled = makeStyled(defaultFont, withModifiers: haveModifiers);
-    _shape = defaultFont.shape(styled.value, styled.runs);
+    _shape = defaultFont.shape(
+      styled.value,
+      styled.runs,
+    );
     _unicharCount = styled.value.length;
     _cleanupShapes.add(_shape!);
     _lines = _shape?.breakLines(breakWidth, align, wrap);
@@ -714,7 +784,8 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
     }
   }
 
-  bool get modifierRangesNeedShape => _modifierGroups.any((group) => group.needsShape);
+  bool get modifierRangesNeedShape =>
+      _modifierGroups.any((group) => group.needsShape);
 
   bool _computeShapeWhenNecessary(int dirt) {
     if (dirt & ComponentDirt.path != 0) {
@@ -735,7 +806,8 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
   @override
   void update(int dirt) {
     super.update(dirt);
-    bool rebuildRenderStyles = _computeShapeWhenNecessary(dirt) || (dirt & ComponentDirt.paint != 0);
+    bool rebuildRenderStyles =
+        _computeShapeWhenNecessary(dirt) || (dirt & ComponentDirt.paint != 0);
     // Could optimize this to do what the C++ runtime does by propagating
     // opacity to the styles instead of rebuilding render styles.
     if (dirt & ComponentDirt.worldTransform != 0) {
@@ -790,7 +862,8 @@ class Text extends TextBase with TextStyleContainer implements Sizable {
   }
 
   TextSizing get sizing => TextSizing.values[sizingValue];
-  TextSizing get effectiveSizing => _layoutHeight != null ? TextSizing.fixed : TextSizing.values[sizingValue];
+  TextSizing get effectiveSizing =>
+      _layoutHeight != null ? TextSizing.fixed : TextSizing.values[sizingValue];
   TextWrap get wrap => TextWrap.values[wrapValue];
 
   set sizing(TextSizing value) => sizingValue = value.index;

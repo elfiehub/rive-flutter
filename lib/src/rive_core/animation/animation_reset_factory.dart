@@ -1,12 +1,12 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/animation_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/blend_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyed_object.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyed_property.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyframe_color.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyframe_double.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_instance.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/animation_state.dart';
+import 'package:rive/src/rive_core/animation/blend_state.dart';
+import 'package:rive/src/rive_core/animation/keyed_object.dart';
+import 'package:rive/src/rive_core/animation/keyed_property.dart';
+import 'package:rive/src/rive_core/animation/keyframe_color.dart';
+import 'package:rive/src/rive_core/animation/keyframe_double.dart';
+import 'package:rive/src/rive_core/animation/linear_animation.dart';
+import 'package:rive/src/rive_core/animation/state_instance.dart';
 import 'package:rive_common/utilities.dart';
 
 bool _isDouble(int propertyKey, Core object) {
@@ -122,11 +122,13 @@ class _KeyedObject {
   final KeyedObject data;
   final Set<int> visitedProperties = {};
   _KeyedObject(this.data);
-  void addProperties(List<KeyedProperty> props, Core object, bool storeAsBaseline) {
+  void addProperties(
+      List<KeyedProperty> props, Core object, bool storeAsBaseline) {
     for (final property in props) {
       if (!visitedProperties.contains(property.propertyKey)) {
         visitedProperties.add(property.propertyKey);
-        if (_isColor(property.propertyKey, object) || _isDouble(property.propertyKey, object)) {
+        if (_isColor(property.propertyKey, object) ||
+            _isDouble(property.propertyKey, object)) {
           properties.add(_KeyedProperty(property, storeAsBaseline));
         }
       }
@@ -150,7 +152,8 @@ class _AnimationsData {
 
   List<_KeyedObject> keyedObjects = [];
   Map<int, _KeyedObject> visitedObjects = {};
-  _AnimationsData(List<LinearAnimation> animations, CoreContext core, bool useFirstAsBaseline) {
+  _AnimationsData(List<LinearAnimation> animations, CoreContext core,
+      bool useFirstAsBaseline) {
     bool isFirstAnimation = useFirstAsBaseline;
     for (final animation in animations) {
       animation.keyedObjects.forEach((keyedObject) {
@@ -160,7 +163,8 @@ class _AnimationsData {
           visitedObjects[objectIntId] = _KeyedObject(keyedObject);
           keyedObjects.add(visitedObjects[objectIntId]!);
         }
-        visitedObjects[objectIntId]!.addProperties(keyedObject.keyedProperties.toList(), object!, isFirstAnimation);
+        visitedObjects[objectIntId]!.addProperties(
+            keyedObject.keyedProperties.toList(), object!, isFirstAnimation);
       });
       isFirstAnimation = false;
     }
@@ -187,20 +191,22 @@ class _AnimationsData {
           if (_isColor(property.propertyKey, object!)) {
             animationReset.writePropertyKey(property.propertyKey);
             if (property.isBaseline) {
-              animationReset.writeColor((property.property.keyframes.first as KeyFrameColor).value);
-            } else {
               animationReset.writeColor(
-                RiveCoreContext.getColor(core.resolve(keyedObject.data.objectId), property.propertyKey),
-              );
+                  (property.property.keyframes.first as KeyFrameColor).value);
+            } else {
+              animationReset.writeColor(RiveCoreContext.getColor(
+                  core.resolve(keyedObject.data.objectId),
+                  property.propertyKey));
             }
           } else if (_isDouble(property.propertyKey, object)) {
             animationReset.writePropertyKey(property.propertyKey);
             if (property.isBaseline) {
-              animationReset.writeDouble((property.property.keyframes.first as KeyFrameDouble).value);
-            } else {
               animationReset.writeDouble(
-                RiveCoreContext.getDouble(core.resolve(keyedObject.data.objectId), property.propertyKey),
-              );
+                  (property.property.keyframes.first as KeyFrameDouble).value);
+            } else {
+              animationReset.writeDouble(RiveCoreContext.getDouble(
+                  core.resolve(keyedObject.data.objectId),
+                  property.propertyKey));
             }
           }
         }
@@ -212,7 +218,8 @@ class _AnimationsData {
 
 List<AnimationReset> _pool = [];
 
-AnimationReset fromAnimations(List<LinearAnimation> animations, CoreContext core, bool useFirstAsBaseline) {
+AnimationReset fromAnimations(List<LinearAnimation> animations,
+    CoreContext core, bool useFirstAsBaseline) {
   final animationData = _AnimationsData(animations, core, useFirstAsBaseline);
   AnimationReset? animationReset;
   for (final pooled in _pool) {
@@ -232,7 +239,8 @@ AnimationReset fromAnimations(List<LinearAnimation> animations, CoreContext core
   return animationReset;
 }
 
-List<LinearAnimation> _fromState(StateInstance? stateInstance, CoreContext core) {
+List<LinearAnimation> _fromState(
+    StateInstance? stateInstance, CoreContext core) {
   List<LinearAnimation> animations = [];
   if (stateInstance != null) {
     final state = stateInstance.state;
@@ -240,7 +248,8 @@ List<LinearAnimation> _fromState(StateInstance? stateInstance, CoreContext core)
       animations.add(state.animation!);
     } else if (state is BlendState) {
       state.animations.forEach((blend1DAnimation) {
-        final animation = core.resolve<LinearAnimation>(blend1DAnimation.animationId);
+        final animation =
+            core.resolve<LinearAnimation>(blend1DAnimation.animationId);
         if (animation != null) {
           animations.add(animation);
         }
@@ -250,7 +259,8 @@ List<LinearAnimation> _fromState(StateInstance? stateInstance, CoreContext core)
   return animations;
 }
 
-AnimationReset fromStates(StateInstance? stateFrom, StateInstance? currentState, CoreContext core) {
+AnimationReset fromStates(
+    StateInstance? stateFrom, StateInstance? currentState, CoreContext core) {
   List<LinearAnimation> animations = [];
   animations.addAll(_fromState(currentState, core));
   animations.addAll(_fromState(stateFrom, core));

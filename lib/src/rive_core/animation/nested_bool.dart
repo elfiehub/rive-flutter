@@ -1,5 +1,5 @@
-import 'package:rive_legacy/src/generated/animation/nested_bool_base.dart';
-export 'package:rive_legacy/src/generated/animation/nested_bool_base.dart';
+import 'package:rive/src/generated/animation/nested_bool_base.dart';
+export 'package:rive/src/generated/animation/nested_bool_base.dart';
 
 class NestedBool extends NestedBoolBase {
   @override

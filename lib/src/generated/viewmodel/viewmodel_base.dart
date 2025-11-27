@@ -2,15 +2,16 @@
 // lib/src/generated/viewmodel/viewmodel_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_component.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_component.dart';
 
 abstract class ViewModelBase extends ViewModelComponent {
   static const int typeKey = 435;
   @override
   int get coreType => ViewModelBase.typeKey;
   @override
-  Set<int> get coreTypes => {ViewModelBase.typeKey, ViewModelComponentBase.typeKey};
+  Set<int> get coreTypes =>
+      {ViewModelBase.typeKey, ViewModelComponentBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// DefaultInstanceId field with key 564.

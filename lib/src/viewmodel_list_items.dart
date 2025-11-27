@@ -1,8 +1,9 @@
 import 'dart:collection';
 
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance_list_item.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance_list_item.dart';
 
-class ViewModelListItems<T extends ViewModelInstanceListItem> extends ListBase<T> {
+class ViewModelListItems<T extends ViewModelInstanceListItem>
+    extends ListBase<T> {
   final List<T?> _values = [];
   List<T> get values => _values.cast<T>();
 

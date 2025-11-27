@@ -1,6 +1,6 @@
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance_value.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance_viewmodel.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance_value.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance_viewmodel.dart';
 
 class DataContext {
   final ViewModelInstance viewModelInstance;
@@ -14,10 +14,10 @@ class DataContext {
         ViewModelInstance? viewModelInstanceTarget = viewModelInstance;
         int index = 1;
         while (index < path.length - 1) {
-          viewModelInstanceTarget =
-              (viewModelInstanceTarget!.propertyValueByPropertyId<ViewModelInstanceViewModel>(path[index])
-                      as ViewModelInstanceViewModel)
-                  .referenceViewModelInstance;
+          viewModelInstanceTarget = (viewModelInstanceTarget!
+                  .propertyValueByPropertyId<ViewModelInstanceViewModel>(
+                      path[index]) as ViewModelInstanceViewModel)
+              .referenceViewModelInstance;
           if (viewModelInstanceTarget == null) {
             return parent?.getViewModelProperty(path);
           }
@@ -34,13 +34,14 @@ class DataContext {
       ViewModelInstance? viewModelInstanceTarget = viewModelInstance;
       int index = 1;
       while (index < path.length) {
-        final viewModelInstanceViewModel =
-            viewModelInstanceTarget!.propertyValueByPropertyId<ViewModelInstanceViewModel?>(path[index])
-                as ViewModelInstanceViewModel?;
+        final viewModelInstanceViewModel = viewModelInstanceTarget!
+            .propertyValueByPropertyId<ViewModelInstanceViewModel?>(
+                path[index]) as ViewModelInstanceViewModel?;
         if (viewModelInstanceViewModel == null) {
           return parent?.getViewModelInstance(path);
         }
-        viewModelInstanceTarget = viewModelInstanceViewModel.referenceViewModelInstance;
+        viewModelInstanceTarget =
+            viewModelInstanceViewModel.referenceViewModelInstance;
         if (viewModelInstanceTarget == null) {
           return parent?.getViewModelInstance(path);
         }

@@ -1,13 +1,13 @@
 // Core automatically generated lib/src/generated/nested_artboard_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/generated/node_base.dart';
-import 'package:rive_legacy/src/generated/transform_component_base.dart';
-import 'package:rive_legacy/src/generated/world_transform_component_base.dart';
-import 'package:rive_legacy/src/rive_core/drawable.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/generated/node_base.dart';
+import 'package:rive/src/generated/transform_component_base.dart';
+import 'package:rive/src/generated/world_transform_component_base.dart';
+import 'package:rive/src/rive_core/drawable.dart';
 
 abstract class NestedArtboardBase extends Drawable {
   static const int typeKey = 92;
@@ -15,14 +15,14 @@ abstract class NestedArtboardBase extends Drawable {
   int get coreType => NestedArtboardBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    NestedArtboardBase.typeKey,
-    DrawableBase.typeKey,
-    NodeBase.typeKey,
-    TransformComponentBase.typeKey,
-    WorldTransformComponentBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        NestedArtboardBase.typeKey,
+        DrawableBase.typeKey,
+        NodeBase.typeKey,
+        TransformComponentBase.typeKey,
+        WorldTransformComponentBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// ArtboardId field with key 197.

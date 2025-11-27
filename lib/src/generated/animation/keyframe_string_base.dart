@@ -2,16 +2,20 @@
 // lib/src/generated/animation/keyframe_string_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/keyframe_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/interpolating_keyframe.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/keyframe_base.dart';
+import 'package:rive/src/rive_core/animation/interpolating_keyframe.dart';
 
 abstract class KeyFrameStringBase extends InterpolatingKeyFrame {
   static const int typeKey = 142;
   @override
   int get coreType => KeyFrameStringBase.typeKey;
   @override
-  Set<int> get coreTypes => {KeyFrameStringBase.typeKey, InterpolatingKeyFrameBase.typeKey, KeyFrameBase.typeKey};
+  Set<int> get coreTypes => {
+        KeyFrameStringBase.typeKey,
+        InterpolatingKeyFrameBase.typeKey,
+        KeyFrameBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Value field with key 280.

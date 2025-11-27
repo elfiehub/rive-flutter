@@ -2,9 +2,9 @@
 // lib/src/generated/animation/blend_state_transition_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/state_machine_layer_component_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/state_transition.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/state_machine_layer_component_base.dart';
+import 'package:rive/src/rive_core/animation/state_transition.dart';
 
 abstract class BlendStateTransitionBase extends StateTransition {
   static const int typeKey = 78;
@@ -12,10 +12,10 @@ abstract class BlendStateTransitionBase extends StateTransition {
   int get coreType => BlendStateTransitionBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    BlendStateTransitionBase.typeKey,
-    StateTransitionBase.typeKey,
-    StateMachineLayerComponentBase.typeKey,
-  };
+        BlendStateTransitionBase.typeKey,
+        StateTransitionBase.typeKey,
+        StateMachineLayerComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// ExitBlendAnimationId field with key 171.

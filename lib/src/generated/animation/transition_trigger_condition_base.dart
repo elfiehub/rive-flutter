@@ -2,8 +2,8 @@
 // lib/src/generated/animation/transition_trigger_condition_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/animation/transition_condition_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_input_condition.dart';
+import 'package:rive/src/generated/animation/transition_condition_base.dart';
+import 'package:rive/src/rive_core/animation/transition_input_condition.dart';
 
 abstract class TransitionTriggerConditionBase extends TransitionInputCondition {
   static const int typeKey = 68;
@@ -11,8 +11,8 @@ abstract class TransitionTriggerConditionBase extends TransitionInputCondition {
   int get coreType => TransitionTriggerConditionBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    TransitionTriggerConditionBase.typeKey,
-    TransitionInputConditionBase.typeKey,
-    TransitionConditionBase.typeKey,
-  };
+        TransitionTriggerConditionBase.typeKey,
+        TransitionInputConditionBase.typeKey,
+        TransitionConditionBase.typeKey
+      };
 }

@@ -1,11 +1,11 @@
 import 'dart:collection';
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
-import 'package:rive_legacy/src/rive_core/assets/file_asset.dart';
-import 'package:rive_legacy/src/rive_core/backboard.dart';
-import 'package:rive_legacy/src/rive_core/nested_artboard.dart';
-import 'package:rive_legacy/src/runtime_nested_artboard.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/artboard.dart';
+import 'package:rive/src/rive_core/assets/file_asset.dart';
+import 'package:rive/src/rive_core/backboard.dart';
+import 'package:rive/src/rive_core/nested_artboard.dart';
+import 'package:rive/src/runtime_nested_artboard.dart';
 
 class BackboardImporter extends ImportStackObject {
   final Backboard backboard;
@@ -17,11 +17,13 @@ class BackboardImporter extends ImportStackObject {
   BackboardImporter(this.artboardLookup, this.backboard);
 
   void addArtboard(Artboard object) {}
-  void addNestedArtboard(NestedArtboard nestedArtboard) => nestedArtboards.add(nestedArtboard);
+  void addNestedArtboard(NestedArtboard nestedArtboard) =>
+      nestedArtboards.add(nestedArtboard);
 
   void addFileAsset(FileAsset fileAsset) => fileAssets.add(fileAsset);
 
-  void addFileAssetReferencer(FileAssetReferencer referencer) => fileAssetReferencers.add(referencer);
+  void addFileAssetReferencer(FileAssetReferencer referencer) =>
+      fileAssetReferencers.add(referencer);
 
   @override
   bool resolve() {

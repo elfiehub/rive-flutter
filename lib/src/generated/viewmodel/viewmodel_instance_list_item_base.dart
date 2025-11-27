@@ -2,9 +2,10 @@
 // lib/src/generated/viewmodel/viewmodel_instance_list_item_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
+import 'package:rive/src/core/core.dart';
 
-abstract class ViewModelInstanceListItemBase<T extends CoreContext> extends Core<T> {
+abstract class ViewModelInstanceListItemBase<T extends CoreContext>
+    extends Core<T> {
   static const int typeKey = 427;
   @override
   int get coreType => ViewModelInstanceListItemBase.typeKey;

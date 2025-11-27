@@ -1,14 +1,14 @@
 // Core automatically generated lib/src/generated/shapes/polygon_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/generated/node_base.dart';
-import 'package:rive_legacy/src/generated/shapes/path_base.dart';
-import 'package:rive_legacy/src/generated/transform_component_base.dart';
-import 'package:rive_legacy/src/generated/world_transform_component_base.dart';
-import 'package:rive_legacy/src/rive_core/shapes/parametric_path.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/generated/node_base.dart';
+import 'package:rive/src/generated/shapes/path_base.dart';
+import 'package:rive/src/generated/transform_component_base.dart';
+import 'package:rive/src/generated/world_transform_component_base.dart';
+import 'package:rive/src/rive_core/shapes/parametric_path.dart';
 
 abstract class PolygonBase extends ParametricPath {
   static const int typeKey = 51;
@@ -16,15 +16,15 @@ abstract class PolygonBase extends ParametricPath {
   int get coreType => PolygonBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    PolygonBase.typeKey,
-    ParametricPathBase.typeKey,
-    PathBase.typeKey,
-    NodeBase.typeKey,
-    TransformComponentBase.typeKey,
-    WorldTransformComponentBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        PolygonBase.typeKey,
+        ParametricPathBase.typeKey,
+        PathBase.typeKey,
+        NodeBase.typeKey,
+        TransformComponentBase.typeKey,
+        WorldTransformComponentBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Points field with key 125.

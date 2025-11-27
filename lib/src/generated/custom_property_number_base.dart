@@ -2,16 +2,20 @@
 // lib/src/generated/custom_property_number_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/rive_core/custom_property.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/rive_core/custom_property.dart';
 
 abstract class CustomPropertyNumberBase extends CustomProperty {
   static const int typeKey = 127;
   @override
   int get coreType => CustomPropertyNumberBase.typeKey;
   @override
-  Set<int> get coreTypes => {CustomPropertyNumberBase.typeKey, CustomPropertyBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes => {
+        CustomPropertyNumberBase.typeKey,
+        CustomPropertyBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// PropertyValue field with key 243.

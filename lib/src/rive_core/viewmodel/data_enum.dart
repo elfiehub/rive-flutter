@@ -1,6 +1,6 @@
-import 'package:rive_legacy/src/generated/viewmodel/data_enum_base.dart';
+import 'package:rive/src/generated/viewmodel/data_enum_base.dart';
 
-export 'package:rive_legacy/src/generated/viewmodel/data_enum_base.dart';
+export 'package:rive/src/generated/viewmodel/data_enum_base.dart';
 
 class DataEnum extends DataEnumBase {
   @override

@@ -1,7 +1,7 @@
-import 'package:rive_legacy/src/generated/animation/nested_linear_animation_base.dart';
-import 'package:rive_legacy/src/rive_core/nested_artboard.dart';
+import 'package:rive/src/generated/animation/nested_linear_animation_base.dart';
+import 'package:rive/src/rive_core/nested_artboard.dart';
 
-export 'package:rive_legacy/src/generated/animation/nested_linear_animation_base.dart';
+export 'package:rive/src/generated/animation/nested_linear_animation_base.dart';
 
 /// Need this abstraction to not depend on package:rive in rive_core.
 // ignore: one_member_abstracts
@@ -18,7 +18,8 @@ abstract class NestedLinearAnimationInstance {
 
 abstract class NestedLinearAnimation extends NestedLinearAnimationBase {
   NestedLinearAnimationInstance? _linearAnimationInstance;
-  NestedLinearAnimationInstance? get linearAnimationInstance => _linearAnimationInstance;
+  NestedLinearAnimationInstance? get linearAnimationInstance =>
+      _linearAnimationInstance;
   set linearAnimationInstance(NestedLinearAnimationInstance? value) {
     if (_linearAnimationInstance == value) {
       return;
@@ -28,7 +29,8 @@ abstract class NestedLinearAnimation extends NestedLinearAnimationBase {
     linearAnimationInstanceChanged(from, value);
   }
 
-  void linearAnimationInstanceChanged(NestedLinearAnimationInstance? from, NestedLinearAnimationInstance? to) {}
+  void linearAnimationInstanceChanged(
+      NestedLinearAnimationInstance? from, NestedLinearAnimationInstance? to) {}
 
   @override
   bool get isEnabled => true;

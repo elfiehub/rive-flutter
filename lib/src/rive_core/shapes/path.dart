@@ -1,18 +1,18 @@
 import 'dart:math';
 import 'dart:ui' as ui;
 
-import 'package:rive_legacy/src/generated/shapes/path_base.dart';
-import 'package:rive_legacy/src/rive_core/bounds_provider.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/component_flags.dart';
-import 'package:rive_legacy/src/rive_core/shapes/cubic_vertex.dart';
-import 'package:rive_legacy/src/rive_core/shapes/path_vertex.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape.dart';
-import 'package:rive_legacy/src/rive_core/shapes/straight_vertex.dart';
+import 'package:rive/src/generated/shapes/path_base.dart';
+import 'package:rive/src/rive_core/bounds_provider.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/component_flags.dart';
+import 'package:rive/src/rive_core/shapes/cubic_vertex.dart';
+import 'package:rive/src/rive_core/shapes/path_vertex.dart';
+import 'package:rive/src/rive_core/shapes/shape.dart';
+import 'package:rive/src/rive_core/shapes/straight_vertex.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/shapes/path_base.dart';
+export 'package:rive/src/generated/shapes/path_base.dart';
 
 enum Axis { horizontal, vertical }
 
@@ -158,30 +158,39 @@ abstract class Path extends PathBase implements BoundsProvider {
 
         var pos = point.renderTranslation;
 
-        var toPrev = (prev is CubicVertex ? prev.renderOut : prev.renderTranslation) - pos;
+        var toPrev =
+            (prev is CubicVertex ? prev.renderOut : prev.renderTranslation) -
+                pos;
         var toPrevLength = toPrev.length();
         toPrev.x /= toPrevLength;
         toPrev.y /= toPrevLength;
 
         var next = vertices[1];
 
-        var toNext = (next is CubicVertex ? next.renderIn : next.renderTranslation) - pos;
+        var toNext =
+            (next is CubicVertex ? next.renderIn : next.renderTranslation) -
+                pos;
         var toNextLength = toNext.length();
         toNext.x /= toNextLength;
         toNext.y /= toNextLength;
 
         var renderRadius = min(toPrevLength / 2, min(toNextLength / 2, radius));
-        var idealDistance = _computeIdealControlPointDistance(toPrev, toNext, renderRadius);
+        var idealDistance =
+            _computeIdealControlPointDistance(toPrev, toNext, renderRadius);
 
         var translation = Vec2D.scaleAndAdd(Vec2D(), pos, toPrev, renderRadius);
-        path.moveTo(startInX = startX = translation.x, startInY = startY = translation.y);
+        path.moveTo(startInX = startX = translation.x,
+            startInY = startY = translation.y);
 
-        var outPoint = Vec2D.scaleAndAdd(Vec2D(), pos, toPrev, renderRadius - idealDistance);
+        var outPoint = Vec2D.scaleAndAdd(
+            Vec2D(), pos, toPrev, renderRadius - idealDistance);
 
-        var inPoint = Vec2D.scaleAndAdd(Vec2D(), pos, toNext, renderRadius - idealDistance);
+        var inPoint = Vec2D.scaleAndAdd(
+            Vec2D(), pos, toNext, renderRadius - idealDistance);
 
         var posNext = Vec2D.scaleAndAdd(Vec2D(), pos, toNext, renderRadius);
-        path.cubicTo(outPoint.x, outPoint.y, inPoint.x, inPoint.y, outX = posNext.x, outY = posNext.y);
+        path.cubicTo(outPoint.x, outPoint.y, inPoint.x, inPoint.y,
+            outX = posNext.x, outY = posNext.y);
         prevIsCubic = false;
       } else {
         var translation = point.renderTranslation;
@@ -197,7 +206,8 @@ abstract class Path extends PathBase implements BoundsProvider {
       if (vertex is CubicVertex) {
         var inPoint = vertex.renderIn;
         var translation = vertex.renderTranslation;
-        path.cubicTo(outX, outY, inPoint.x, inPoint.y, translation.x, translation.y);
+        path.cubicTo(
+            outX, outY, inPoint.x, inPoint.y, translation.x, translation.y);
 
         prevIsCubic = true;
         var outPoint = vertex.renderOut;
@@ -211,7 +221,9 @@ abstract class Path extends PathBase implements BoundsProvider {
           var prev = vertices[i - 1];
 
           var pos = point.renderTranslation;
-          var toPrev = (prev is CubicVertex ? prev.renderOut : prev.renderTranslation) - pos;
+          var toPrev =
+              (prev is CubicVertex ? prev.renderOut : prev.renderTranslation) -
+                  pos;
 
           var toPrevLength = toPrev.length();
           toPrev.x /= toPrevLength;
@@ -219,28 +231,37 @@ abstract class Path extends PathBase implements BoundsProvider {
 
           var next = vertices[(i + 1) % length];
 
-          var toNext = (next is CubicVertex ? next.renderIn : next.renderTranslation) - pos;
+          var toNext =
+              (next is CubicVertex ? next.renderIn : next.renderTranslation) -
+                  pos;
           var toNextLength = toNext.length();
           toNext.x /= toNextLength;
           toNext.y /= toNextLength;
 
-          var renderRadius = min(toPrevLength / 2, min(toNextLength / 2, radius));
+          var renderRadius =
+              min(toPrevLength / 2, min(toNextLength / 2, radius));
 
-          var idealDistance = _computeIdealControlPointDistance(toPrev, toNext, renderRadius);
+          var idealDistance =
+              _computeIdealControlPointDistance(toPrev, toNext, renderRadius);
 
-          var translation = Vec2D.scaleAndAdd(Vec2D(), pos, toPrev, renderRadius);
+          var translation =
+              Vec2D.scaleAndAdd(Vec2D(), pos, toPrev, renderRadius);
           if (prevIsCubic) {
-            path.cubicTo(outX, outY, translation.x, translation.y, translation.x, translation.y);
+            path.cubicTo(outX, outY, translation.x, translation.y,
+                translation.x, translation.y);
           } else {
             path.lineTo(translation.x, translation.y);
           }
 
-          var outPoint = Vec2D.scaleAndAdd(Vec2D(), pos, toPrev, renderRadius - idealDistance);
+          var outPoint = Vec2D.scaleAndAdd(
+              Vec2D(), pos, toPrev, renderRadius - idealDistance);
 
-          var inPoint = Vec2D.scaleAndAdd(Vec2D(), pos, toNext, renderRadius - idealDistance);
+          var inPoint = Vec2D.scaleAndAdd(
+              Vec2D(), pos, toNext, renderRadius - idealDistance);
 
           var posNext = Vec2D.scaleAndAdd(Vec2D(), pos, toNext, renderRadius);
-          path.cubicTo(outPoint.x, outPoint.y, inPoint.x, inPoint.y, outX = posNext.x, outY = posNext.y);
+          path.cubicTo(outPoint.x, outPoint.y, inPoint.x, inPoint.y,
+              outX = posNext.x, outY = posNext.y);
           prevIsCubic = false;
         } else if (prevIsCubic) {
           var translation = point.renderTranslation;
@@ -271,9 +292,19 @@ abstract class Path extends PathBase implements BoundsProvider {
   @override
   AABB get localBounds => _renderPath.preciseComputeBounds();
   @override
-  AABB computeBounds(Mat2D relativeTo) =>
-      preciseComputeBounds(transform: Mat2D.multiply(Mat2D(), relativeTo, pathTransform));
-  AABB preciseComputeBounds({Mat2D? transform}) => _renderPath.preciseComputeBounds(transform: transform);
+  AABB computeBounds(Mat2D relativeTo) => preciseComputeBounds(
+        transform: Mat2D.multiply(
+          Mat2D(),
+          relativeTo,
+          pathTransform,
+        ),
+      );
+  AABB preciseComputeBounds({
+    Mat2D? transform,
+  }) =>
+      _renderPath.preciseComputeBounds(
+        transform: transform,
+      );
   bool get hasBounds => _renderPath.hasBounds;
 
   @override
@@ -351,13 +382,16 @@ class RenderPath implements PathInterface {
     _uiPath.close();
   }
 
-  bool get isClosed => _commands.isNotEmpty && _commands.last == _PathCommand.close;
+  bool get isClosed =>
+      _commands.isNotEmpty && _commands.last == _PathCommand.close;
 
   bool get hasBounds {
     return _commands.length > 1;
   }
 
-  AABB preciseComputeBounds({Mat2D? transform}) {
+  AABB preciseComputeBounds({
+    Mat2D? transform,
+  }) {
     if (_commands.isEmpty) {
       return AABB.empty();
     }
@@ -399,8 +433,22 @@ class RenderPath implements PathInterface {
             inPoint.apply(transform);
             point.apply(transform);
           }
-          _expandBoundsForAxis(bounds, Axis.horizontal, penPosition.x, outPoint.x, inPoint.x, point.x);
-          _expandBoundsForAxis(bounds, Axis.vertical, penPosition.y, outPoint.y, inPoint.y, point.y);
+          _expandBoundsForAxis(
+            bounds,
+            Axis.horizontal,
+            penPosition.x,
+            outPoint.x,
+            inPoint.x,
+            point.x,
+          );
+          _expandBoundsForAxis(
+            bounds,
+            Axis.vertical,
+            penPosition.y,
+            outPoint.y,
+            inPoint.y,
+            point.y,
+          );
           penPosition = point;
 
           break;
@@ -413,10 +461,14 @@ class RenderPath implements PathInterface {
 }
 
 /// Expand our bounds to a point (in normalized T space) on the Cubic.
-void _expandBoundsToCubicPoint(AABB bounds, Axis axis, double t, double a, double b, double c, double d) {
+void _expandBoundsToCubicPoint(
+    AABB bounds, Axis axis, double t, double a, double b, double c, double d) {
   if (t >= 0 && t <= 1) {
     var ti = 1 - t;
-    double extremaY = ((ti * ti * ti) * a) + ((3 * ti * ti * t) * b) + ((3 * ti * t * t) * c) + (t * t * t * d);
+    double extremaY = ((ti * ti * ti) * a) +
+        ((3 * ti * ti * t) * b) +
+        ((3 * ti * t * t) * c) +
+        (t * t * t * d);
     __expandBounds(bounds, axis, extremaY);
   }
 }
@@ -439,7 +491,8 @@ void __expandBounds(AABB bounds, Axis axis, double value) {
   }
 }
 
-void _expandBoundsForAxis(AABB bounds, Axis axis, double start, double cp1, double cp2, double end) {
+void _expandBoundsForAxis(
+    AABB bounds, Axis axis, double start, double cp1, double cp2, double end) {
   // Check start/end as cubic goes through those.
   __expandBounds(bounds, axis, start);
   __expandBounds(bounds, axis, end);
@@ -457,10 +510,13 @@ void _expandBoundsForAxis(AABB bounds, Axis axis, double start, double cp1, doub
     var m2 = -a + b;
 
     // First root.
-    _expandBoundsToCubicPoint(bounds, axis, -(m1 + m2) / d, start, cp1, cp2, end);
-    _expandBoundsToCubicPoint(bounds, axis, -(-m1 + m2) / d, start, cp1, cp2, end);
+    _expandBoundsToCubicPoint(
+        bounds, axis, -(m1 + m2) / d, start, cp1, cp2, end);
+    _expandBoundsToCubicPoint(
+        bounds, axis, -(-m1 + m2) / d, start, cp1, cp2, end);
   } else if (b != c && d == 0) {
-    _expandBoundsToCubicPoint(bounds, axis, (2 * b - c) / (2 * (b - c)), start, cp1, cp2, end);
+    _expandBoundsToCubicPoint(
+        bounds, axis, (2 * b - c) / (2 * (b - c)), start, cp1, cp2, end);
   }
 
   // Derive the first derivative to get the 2nd and use the root of
@@ -468,18 +524,24 @@ void _expandBoundsForAxis(AABB bounds, Axis axis, double start, double cp1, doub
   var d2a = 2 * (b - a);
   var d2b = 2 * (c - b);
   if (d2a != b) {
-    _expandBoundsToCubicPoint(bounds, axis, d2a / (d2a - d2b), start, cp1, cp2, end);
+    _expandBoundsToCubicPoint(
+        bounds, axis, d2a / (d2a - d2b), start, cp1, cp2, end);
   }
 }
 
 /// Compute an ideal control point distance to create a curve of the given
 /// radius.
-double _computeIdealControlPointDistance(Vec2D toPrev, Vec2D toNext, double radius) {
+double _computeIdealControlPointDistance(
+    Vec2D toPrev, Vec2D toNext, double radius) {
   // Get the angle between next and prev
-  var angle = atan2(toPrev.x * toNext.y - toPrev.y * toNext.x, toPrev.x * toNext.x + toPrev.y * toNext.y).abs();
+  var angle = atan2(toPrev.x * toNext.y - toPrev.y * toNext.x,
+          toPrev.x * toNext.x + toPrev.y * toNext.y)
+      .abs();
 
   return min(
-    radius,
-    (4 / 3) * tan(pi / (2 * ((2 * pi) / angle))) * radius * (angle < pi / 2 ? 1 + cos(angle) : 2 - sin(angle)),
-  );
+      radius,
+      (4 / 3) *
+          tan(pi / (2 * ((2 * pi) / angle))) *
+          radius *
+          (angle < pi / 2 ? 1 + cos(angle) : 2 - sin(angle)));
 }

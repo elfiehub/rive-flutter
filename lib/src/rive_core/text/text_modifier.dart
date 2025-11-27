@@ -1,7 +1,7 @@
-import 'package:rive_legacy/src/generated/text/text_modifier_base.dart';
-import 'package:rive_legacy/src/rive_core/text/text_modifier_group.dart';
+import 'package:rive/src/generated/text/text_modifier_base.dart';
+import 'package:rive/src/rive_core/text/text_modifier_group.dart';
 
-export 'package:rive_legacy/src/generated/text/text_modifier_base.dart';
+export 'package:rive/src/generated/text/text_modifier_base.dart';
 
 abstract class TextModifier extends TextModifierBase {
   TextModifierGroup? get modifierGroup => parent as TextModifierGroup?;

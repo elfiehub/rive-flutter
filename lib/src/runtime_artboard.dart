@@ -1,16 +1,18 @@
 import 'package:flutter/scheduler.dart';
-import 'package:rive_legacy/rive.dart';
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/notifier.dart';
+import 'package:rive/rive.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/notifier.dart';
 
 /// Adds getters for linear animations and state machines
 extension RuntimeArtboardGetters on RuntimeArtboard {
   /// Returns an iterable of linear animations in the artboard
-  Iterable<LinearAnimation> get linearAnimations => animations.whereType<LinearAnimation>();
+  Iterable<LinearAnimation> get linearAnimations =>
+      animations.whereType<LinearAnimation>();
 
   /// Returns an iterable of state machines in the artboard
-  Iterable<StateMachine> get stateMachines => animations.whereType<StateMachine>();
+  Iterable<StateMachine> get stateMachines =>
+      animations.whereType<StateMachine>();
 }
 
 extension ArtboardRuntimeExtensions on Artboard {
@@ -27,7 +29,8 @@ extension ArtboardRuntimeExtensions on Artboard {
     const delimiter = '/';
     final dIndex = path.indexOf(delimiter);
     final artboardName = dIndex == -1 ? path : path.substring(0, dIndex);
-    final restOfPath = dIndex == -1 ? '' : path.substring(dIndex + 1, path.length);
+    final restOfPath =
+        dIndex == -1 ? '' : path.substring(dIndex + 1, path.length);
     if (artboardName.isNotEmpty) {
       final nested = nestedArtboard(artboardName);
       if (nested != null) {
@@ -45,7 +48,8 @@ extension ArtboardRuntimeExtensions on Artboard {
     final nested = nestedArtboardAtPath(path);
     if (nested != null) {
       if (nested.mountedArtboard is RuntimeMountedArtboard) {
-        final runtimeMountedArtboard = nested.mountedArtboard as RuntimeMountedArtboard;
+        final runtimeMountedArtboard =
+            nested.mountedArtboard as RuntimeMountedArtboard;
         final controllers = runtimeMountedArtboard.controllers;
         for (final controller in controllers) {
           for (final input in controller.inputs) {
@@ -60,15 +64,18 @@ extension ArtboardRuntimeExtensions on Artboard {
   }
 
   /// Find a boolean input with a given name on a nested artboard at path.
-  SMIBool? getBoolInput(String name, String path) => findSMI<SMIBool>(name, path);
+  SMIBool? getBoolInput(String name, String path) =>
+      findSMI<SMIBool>(name, path);
 
   /// Find a trigger input with a given name on a nested artboard at path.
-  SMITrigger? getTriggerInput(String name, String path) => findSMI<SMITrigger>(name, path);
+  SMITrigger? getTriggerInput(String name, String path) =>
+      findSMI<SMITrigger>(name, path);
 
   /// Find a number input with a given name on a nested artboard at path.
   ///
   /// See [triggerInput] to directly fire a trigger by its name.
-  SMINumber? getNumberInput(String name, String path) => findSMI<SMINumber>(name, path);
+  SMINumber? getNumberInput(String name, String path) =>
+      findSMI<SMINumber>(name, path);
 
   /// Convenience method for firing a trigger input with a given name
   /// on a nested artboard at path.
@@ -76,7 +83,8 @@ extension ArtboardRuntimeExtensions on Artboard {
   /// Also see [getTriggerInput] to get a reference to the trigger input. If the
   /// trigger happens frequently, it's more efficient to get a reference to the
   /// trigger input and call `trigger.fire()` directly.
-  void triggerInput(String name, String path) => getTriggerInput(name, path)?.fire();
+  void triggerInput(String name, String path) =>
+      getTriggerInput(name, path)?.fire();
 }
 
 /// This artboard type is purely for use by the runtime system and should not be
@@ -127,7 +135,8 @@ class RuntimeArtboard extends Artboard implements CoreContext {
     if (_needDependenciesBuilt.isNotEmpty) {
       // Copy it in case it is changed during the building (meaning this process
       // needs to recurse).
-      Set<Component> needDependenciesBuilt = Set<Component>.from(_needDependenciesBuilt);
+      Set<Component> needDependenciesBuilt =
+          Set<Component>.from(_needDependenciesBuilt);
       _needDependenciesBuilt.clear();
 
       // First resolve the artboards
@@ -170,7 +179,8 @@ class RuntimeArtboard extends Artboard implements CoreContext {
   }
 
   @override
-  Core<CoreContext>? makeCoreInstance(int typeKey) => RiveCoreContext.makeCoreInstance(typeKey);
+  Core<CoreContext>? makeCoreInstance(int typeKey) =>
+      RiveCoreContext.makeCoreInstance(typeKey);
 
   @override
   void dirty(void Function() dirt) {
@@ -198,7 +208,8 @@ class RuntimeArtboard extends Artboard implements CoreContext {
 
     // Then run the onAddedDirty loop.
     for (final object in artboard.objects.skip(1)) {
-      if (object is Component && object.parentId == ComponentBase.parentIdInitialValue) {
+      if (object is Component &&
+          object.parentId == ComponentBase.parentIdInitialValue) {
         object.parent = artboard;
       }
       object?.onAddedDirty();
@@ -218,16 +229,18 @@ class RuntimeArtboard extends Artboard implements CoreContext {
   void addNestedEventListener(StateMachineController controller) {
     activeNestedArtboards.forEach((artboard) {
       if (artboard.mountedArtboard is RuntimeMountedArtboard) {
-        (artboard.mountedArtboard as RuntimeMountedArtboard).eventCallback = (event, target) =>
-            _handleNestedEvent(event, target, controller);
+        (artboard.mountedArtboard as RuntimeMountedArtboard).eventCallback =
+            (event, target) => _handleNestedEvent(event, target, controller);
       }
     });
   }
 
-  void _handleNestedEvent(Event event, NestedArtboard target, StateMachineController controller) {
+  void _handleNestedEvent(
+      Event event, NestedArtboard target, StateMachineController controller) {
     if (controller.hasListenerWithTarget(target)) {
       controller.reportNestedEvent(event, target);
-      SchedulerBinding.instance.addPostFrameCallback((_) => controller.isActive = true);
+      SchedulerBinding.instance
+          .addPostFrameCallback((_) => controller.isActive = true);
     }
   }
 

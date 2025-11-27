@@ -1,11 +1,12 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/keyframe_interpolator_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/interpolator.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/keyframe_interpolator_base.dart';
+import 'package:rive/src/rive_core/animation/interpolator.dart';
+import 'package:rive/src/rive_core/artboard.dart';
 
-export 'package:rive_legacy/src/generated/animation/keyframe_interpolator_base.dart';
+export 'package:rive/src/generated/animation/keyframe_interpolator_base.dart';
 
-abstract class KeyFrameInterpolator extends KeyFrameInterpolatorBase implements Interpolator {
+abstract class KeyFrameInterpolator extends KeyFrameInterpolatorBase
+    implements Interpolator {
   @override
   void onAdded() => updateInterpolator();
 

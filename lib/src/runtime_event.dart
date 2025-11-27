@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:rive_legacy/src/rive_core/custom_property_boolean.dart';
-import 'package:rive_legacy/src/rive_core/custom_property_number.dart';
-import 'package:rive_legacy/src/rive_core/custom_property_string.dart';
-import 'package:rive_legacy/src/rive_core/event.dart';
-import 'package:rive_legacy/src/rive_core/open_url_event.dart';
-import 'package:rive_legacy/src/rive_core/open_url_target.dart';
+import 'package:rive/src/rive_core/custom_property_boolean.dart';
+import 'package:rive/src/rive_core/custom_property_number.dart';
+import 'package:rive/src/rive_core/custom_property_string.dart';
+import 'package:rive/src/rive_core/event.dart';
+import 'package:rive/src/rive_core/open_url_event.dart';
+import 'package:rive/src/rive_core/open_url_target.dart';
 
 /// A Rive Event that is reported from an StateMachineController.
 ///
@@ -21,7 +21,11 @@ class RiveEvent {
   final double secondsDelay;
   final Map<String, dynamic> properties;
 
-  const RiveEvent({required this.name, required this.secondsDelay, required this.properties});
+  const RiveEvent({
+    required this.name,
+    required this.secondsDelay,
+    required this.properties,
+  });
 
   factory RiveEvent.fromCoreEvent(Event event) {
     final Map<String, dynamic> properties = {};
@@ -52,7 +56,11 @@ class RiveEvent {
         properties: properties,
       );
     } else {
-      return RiveGeneralEvent(name: event.name, secondsDelay: event.secondsDelay, properties: properties);
+      return RiveGeneralEvent(
+        name: event.name,
+        secondsDelay: event.secondsDelay,
+        properties: properties,
+      );
     }
   }
 
@@ -63,11 +71,15 @@ class RiveEvent {
 /// A general Rive event that provides information about the event.
 @immutable
 class RiveGeneralEvent extends RiveEvent {
-  const RiveGeneralEvent({required String name, required double secondsDelay, required Map<String, dynamic> properties})
-    : super(name: name, secondsDelay: secondsDelay, properties: properties);
+  const RiveGeneralEvent({
+    required String name,
+    required double secondsDelay,
+    required Map<String, dynamic> properties,
+  }) : super(name: name, secondsDelay: secondsDelay, properties: properties);
 
   @override
-  String toString() => 'Rive GeneralEvent - name: $name, properties: $properties';
+  String toString() =>
+      'Rive GeneralEvent - name: $name, properties: $properties';
 }
 
 /// An Open URL Rive event that provides information about the URL and target.
@@ -88,5 +100,6 @@ class RiveOpenURLEvent extends RiveEvent {
   }) : super(name: name, secondsDelay: secondsDelay, properties: properties);
 
   @override
-  String toString() => 'Rive OpenURLEvent - name: $name, properties: $properties';
+  String toString() =>
+      'Rive OpenURLEvent - name: $name, properties: $properties';
 }

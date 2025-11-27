@@ -2,9 +2,9 @@
 // lib/src/generated/animation/advanceable_state_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/state_machine_layer_component_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/layer_state.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/state_machine_layer_component_base.dart';
+import 'package:rive/src/rive_core/animation/layer_state.dart';
 
 abstract class AdvanceableStateBase extends LayerState {
   static const int typeKey = 145;
@@ -12,10 +12,10 @@ abstract class AdvanceableStateBase extends LayerState {
   int get coreType => AdvanceableStateBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    AdvanceableStateBase.typeKey,
-    LayerStateBase.typeKey,
-    StateMachineLayerComponentBase.typeKey,
-  };
+        AdvanceableStateBase.typeKey,
+        LayerStateBase.typeKey,
+        StateMachineLayerComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Speed field with key 292.

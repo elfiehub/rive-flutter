@@ -1,10 +1,10 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/blend_animation_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/layer_state.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/blend_animation_base.dart';
+import 'package:rive/src/rive_core/animation/layer_state.dart';
+import 'package:rive/src/rive_core/animation/linear_animation.dart';
+import 'package:rive/src/rive_core/artboard.dart';
 
-export 'package:rive_legacy/src/generated/animation/blend_animation_base.dart';
+export 'package:rive/src/generated/animation/blend_animation_base.dart';
 
 abstract class BlendAnimation extends BlendAnimationBase {
   LinearAnimation? _animation;
@@ -23,16 +23,19 @@ abstract class BlendAnimation extends BlendAnimationBase {
 
   @override
   bool import(ImportStack importStack) {
-    var importer = importStack.latest<LayerStateImporter>(LayerStateBase.typeKey);
+    var importer =
+        importStack.latest<LayerStateImporter>(LayerStateBase.typeKey);
     if (importer == null || !importer.addBlendAnimation(this)) {
       return false;
     }
-    var artboardImporter = importStack.latest<ArtboardImporter>(ArtboardBase.typeKey);
+    var artboardImporter =
+        importStack.latest<ArtboardImporter>(ArtboardBase.typeKey);
     if (artboardImporter == null) {
       return false;
     }
 
-    if (animationId >= 0 && animationId < artboardImporter.artboard.animations.length) {
+    if (animationId >= 0 &&
+        animationId < artboardImporter.artboard.animations.length) {
       var found = artboardImporter.artboard.animations[animationId];
       if (found is LinearAnimation) {
         _animation = found;

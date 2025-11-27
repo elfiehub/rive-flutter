@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/shapes/cubic_detached_vertex_base.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/shapes/cubic_detached_vertex_base.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/shapes/cubic_detached_vertex_base.dart';
+export 'package:rive/src/generated/shapes/cubic_detached_vertex_base.dart';
 
 class CubicDetachedVertex extends CubicDetachedVertexBase {
   Vec2D? _inPoint;
@@ -31,9 +31,8 @@ class CubicDetachedVertex extends CubicDetachedVertexBase {
 
   @override
   Vec2D get outPoint => _outPoint ??= Vec2D.fromValues(
-    translation.x + cos(outRotation) * outDistance,
-    translation.y + sin(outRotation) * outDistance,
-  );
+      translation.x + cos(outRotation) * outDistance,
+      translation.y + sin(outRotation) * outDistance);
 
   @override
   set outPoint(Vec2D value) {
@@ -42,9 +41,8 @@ class CubicDetachedVertex extends CubicDetachedVertexBase {
 
   @override
   Vec2D get inPoint => _inPoint ??= Vec2D.fromValues(
-    translation.x + cos(inRotation) * inDistance,
-    translation.y + sin(inRotation) * inDistance,
-  );
+      translation.x + cos(inRotation) * inDistance,
+      translation.y + sin(inRotation) * inDistance);
 
   @override
   set inPoint(Vec2D value) {

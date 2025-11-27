@@ -2,16 +2,20 @@
 // lib/src/generated/layout/grid_track_sizing_group_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/container_component.dart';
 
 abstract class GridTrackSizingGroupBase extends ContainerComponent {
   static const int typeKey = 177;
   @override
   int get coreType => GridTrackSizingGroupBase.typeKey;
   @override
-  Set<int> get coreTypes => {GridTrackSizingGroupBase.typeKey, ContainerComponentBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes => {
+        GridTrackSizingGroupBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// TrackTag field with key 465.

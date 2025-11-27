@@ -1,23 +1,23 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/nested_artboard_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_remap_animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_simple_animation.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_state_machine.dart';
-import 'package:rive_legacy/src/rive_core/backboard.dart';
-import 'package:rive_legacy/src/rive_core/bounds_provider.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/data_bind/data_bind.dart';
-import 'package:rive_legacy/src/rive_core/data_bind/data_context.dart';
-import 'package:rive_legacy/src/rive_core/nested_animation.dart';
-import 'package:rive_legacy/src/rive_core/viewmodel/viewmodel_instance.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/nested_artboard_base.dart';
+import 'package:rive/src/rive_core/animation/nested_remap_animation.dart';
+import 'package:rive/src/rive_core/animation/nested_simple_animation.dart';
+import 'package:rive/src/rive_core/animation/nested_state_machine.dart';
+import 'package:rive/src/rive_core/backboard.dart';
+import 'package:rive/src/rive_core/bounds_provider.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/data_bind/data_bind.dart';
+import 'package:rive/src/rive_core/data_bind/data_context.dart';
+import 'package:rive/src/rive_core/nested_animation.dart';
+import 'package:rive/src/rive_core/viewmodel/viewmodel_instance.dart';
 import 'package:rive_common/math.dart';
 import 'package:rive_common/utilities.dart';
 
-export 'package:rive_legacy/src/generated/nested_artboard_base.dart';
+export 'package:rive/src/generated/nested_artboard_base.dart';
 
 enum NestedArtboardFitType {
   // ignore: lines_longer_than_80_chars
@@ -64,8 +64,10 @@ abstract class MountedArtboard {
   void artboardHeightIntrinsicallySizeOverride(bool intrinsic);
   void updateLayoutBounds(bool animate);
   void dispose();
-  void setDataContextFromInstance(ViewModelInstance viewModelInstance, DataContext? dataContextValue, bool isRoot);
-  void internalDataContext(DataContext dataContextValue, DataContext? parentDataContext, bool isRoot);
+  void setDataContextFromInstance(ViewModelInstance viewModelInstance,
+      DataContext? dataContextValue, bool isRoot);
+  void internalDataContext(DataContext dataContextValue,
+      DataContext? parentDataContext, bool isRoot);
   void populateDataBinds(List<DataBind> globalDataBinds);
 }
 
@@ -77,9 +79,11 @@ class NestedArtboard extends NestedArtboardBase implements Sizable {
   List<int> dataBindPath = [];
 
   NestedArtboardFitType get fitType => NestedArtboardFitType.values[fit];
-  NestedArtboardAlignmentType get alignmentType => NestedArtboardAlignmentType.values[alignment];
+  NestedArtboardAlignmentType get alignmentType =>
+      NestedArtboardAlignmentType.values[alignment];
 
-  bool get hasNestedStateMachine => _animations.any((animation) => animation is NestedStateMachine);
+  bool get hasNestedStateMachine =>
+      _animations.any((animation) => animation is NestedStateMachine);
 
   List<NestedStateMachine> get nestedStateMachines =>
       _animations.whereType<NestedStateMachine>().toList(growable: false);
@@ -200,8 +204,10 @@ class NestedArtboard extends NestedArtboardBase implements Sizable {
       if (fitType == NestedArtboardFitType.resizeArtboard) {
         // resizeArtboard is a special case because we actually change the
         // width/height of the RuntimeArtboard rather than scaling it
-        mountedArtboard.artboardWidth = scaleX * mountedArtboard.originalArtboardWidth;
-        mountedArtboard.artboardHeight = scaleY * mountedArtboard.originalArtboardHeight;
+        mountedArtboard.artboardWidth =
+            scaleX * mountedArtboard.originalArtboardWidth;
+        mountedArtboard.artboardHeight =
+            scaleY * mountedArtboard.originalArtboardHeight;
         double computedScaleX = scaleX == 0 ? 0 : (1 / scaleX);
         double computedScaleY = scaleY == 0 ? 0 : (1 / scaleY);
         Mat2D.scaleByValues(transform, computedScaleX, computedScaleY);
@@ -230,8 +236,10 @@ class NestedArtboard extends NestedArtboardBase implements Sizable {
             break;
         }
         if (scaleMultiplier != null) {
-          double computedScaleX = scaleX == 0 ? 0 : (1 / scaleX) * scaleMultiplier;
-          double computedScaleY = scaleY == 0 ? 0 : (1 / scaleY) * scaleMultiplier;
+          double computedScaleX =
+              scaleX == 0 ? 0 : (1 / scaleX) * scaleMultiplier;
+          double computedScaleY =
+              scaleY == 0 ? 0 : (1 / scaleY) * scaleMultiplier;
           Mat2D.scaleByValues(transform, computedScaleX, computedScaleY);
           // Only do alignment if we are not using fit type Fill
           double translateX = 0;
@@ -242,21 +250,26 @@ class NestedArtboard extends NestedArtboardBase implements Sizable {
           if (alignmentType == NestedArtboardAlignmentType.topCenter ||
               alignmentType == NestedArtboardAlignmentType.center ||
               alignmentType == NestedArtboardAlignmentType.bottomCenter) {
-            translateX = (artboardWidth * scaleX - artboardWidth * scaleMultiplier) / 2;
+            translateX =
+                (artboardWidth * scaleX - artboardWidth * scaleMultiplier) / 2;
           } else if (alignmentType == NestedArtboardAlignmentType.topRight ||
               alignmentType == NestedArtboardAlignmentType.centerRight ||
               alignmentType == NestedArtboardAlignmentType.bottomRight) {
-            translateX = artboardWidth * scaleX - artboardWidth * scaleMultiplier;
+            translateX =
+                artboardWidth * scaleX - artboardWidth * scaleMultiplier;
           }
           // Adjust y position if we're aligned center or bottom
           if (alignmentType == NestedArtboardAlignmentType.centerLeft ||
               alignmentType == NestedArtboardAlignmentType.center ||
               alignmentType == NestedArtboardAlignmentType.centerRight) {
-            translateY = (artboardHeight * scaleY - artboardHeight * scaleMultiplier) / 2;
+            translateY =
+                (artboardHeight * scaleY - artboardHeight * scaleMultiplier) /
+                    2;
           } else if (alignmentType == NestedArtboardAlignmentType.bottomLeft ||
               alignmentType == NestedArtboardAlignmentType.bottomCenter ||
               alignmentType == NestedArtboardAlignmentType.bottomRight) {
-            translateY = artboardHeight * scaleY - artboardHeight * scaleMultiplier;
+            translateY =
+                artboardHeight * scaleY - artboardHeight * scaleMultiplier;
           }
           if (translateX != 0) {
             transform[4] += translateX;
@@ -331,7 +344,8 @@ class NestedArtboard extends NestedArtboardBase implements Sizable {
 
   @override
   bool import(ImportStack stack) {
-    var backboardImporter = stack.latest<BackboardImporter>(BackboardBase.typeKey);
+    var backboardImporter =
+        stack.latest<BackboardImporter>(BackboardBase.typeKey);
     if (backboardImporter != null) {
       backboardImporter.addNestedArtboard(this);
     }

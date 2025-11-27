@@ -1,19 +1,19 @@
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:rive_legacy/src/generated/shapes/mesh_base.dart';
-import 'package:rive_legacy/src/rive_core/bones/skinnable.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/drawable.dart';
-import 'package:rive_legacy/src/rive_core/shapes/contour_mesh_vertex.dart';
-import 'package:rive_legacy/src/rive_core/shapes/image.dart';
-import 'package:rive_legacy/src/rive_core/shapes/mesh_vertex.dart';
-import 'package:rive_legacy/src/rive_core/transform_component.dart';
+import 'package:rive/src/generated/shapes/mesh_base.dart';
+import 'package:rive/src/rive_core/bones/skinnable.dart';
+import 'package:rive/src/rive_core/component.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/drawable.dart';
+import 'package:rive/src/rive_core/shapes/contour_mesh_vertex.dart';
+import 'package:rive/src/rive_core/shapes/image.dart';
+import 'package:rive/src/rive_core/shapes/mesh_vertex.dart';
+import 'package:rive/src/rive_core/transform_component.dart';
 import 'package:rive_common/math.dart';
 import 'package:rive_common/utilities.dart';
 
-export 'package:rive_legacy/src/generated/shapes/mesh_base.dart';
+export 'package:rive/src/generated/shapes/mesh_base.dart';
 
 class Mesh extends MeshBase with Skinnable<MeshVertex> {
   // When bound to bones pathTransform should be the identity as it'll already
@@ -45,7 +45,10 @@ class Mesh extends MeshBase with Skinnable<MeshVertex> {
   Drawable get drawable => parent as Drawable;
 
   @override
-  bool validate() => super.validate() && parent is TransformComponent && _areTriangleIndicesValid();
+  bool validate() =>
+      super.validate() &&
+      parent is TransformComponent &&
+      _areTriangleIndicesValid();
 
   bool _areTriangleIndicesValid() {
     var maxIndex = vertices.length;
@@ -106,7 +109,12 @@ class Mesh extends MeshBase with Skinnable<MeshVertex> {
       if (_triangleIndices.isEmpty) {
         _uiVertices = null;
       } else {
-        _uiVertices = ui.Vertices(ui.VertexMode.triangles, vertices, textureCoordinates: uv, indices: _triangleIndices);
+        _uiVertices = ui.Vertices(
+          ui.VertexMode.triangles,
+          vertices,
+          textureCoordinates: uv,
+          indices: _triangleIndices,
+        );
       }
     }
   }
@@ -137,8 +145,10 @@ class Mesh extends MeshBase with Skinnable<MeshVertex> {
   @override
   void markSkinDirty() => addDirt(ComponentDirt.vertices);
 
-  Mat2D get worldTransform => skin != null ? Mat2D.identity : transformComponent.worldTransform;
+  Mat2D get worldTransform =>
+      skin != null ? Mat2D.identity : transformComponent.worldTransform;
 
   @override
-  void triangleIndexBytesChanged(List<int> from, List<int> to) => _deserializeTriangleIndices();
+  void triangleIndexBytesChanged(List<int> from, List<int> to) =>
+      _deserializeTriangleIndices();
 }

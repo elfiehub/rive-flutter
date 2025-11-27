@@ -1,16 +1,17 @@
 // Core automatically generated lib/src/generated/shapes/mesh_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/container_component.dart';
 
 abstract class MeshBase extends ContainerComponent {
   static const int typeKey = 109;
   @override
   int get coreType => MeshBase.typeKey;
   @override
-  Set<int> get coreTypes => {MeshBase.typeKey, ContainerComponentBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes =>
+      {MeshBase.typeKey, ContainerComponentBase.typeKey, ComponentBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// TriangleIndexBytes field with key 223.

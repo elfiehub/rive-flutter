@@ -1,10 +1,10 @@
 import 'dart:ui';
 
-import 'package:rive_legacy/src/generated/shapes/paint/fill_base.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape_paint_container.dart';
+import 'package:rive/src/generated/shapes/paint/fill_base.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/shapes/shape_paint_container.dart';
 
-export 'package:rive_legacy/src/generated/shapes/paint/fill_base.dart';
+export 'package:rive/src/generated/shapes/paint/fill_base.dart';
 
 /// A fill Shape painter.
 class Fill extends FillBase {
@@ -15,7 +15,8 @@ class Fill extends FillBase {
   set fillType(PathFillType type) => fillRule = type.index;
 
   @override
-  void fillRuleChanged(int from, int to) => parent?.addDirt(ComponentDirt.paint);
+  void fillRuleChanged(int from, int to) =>
+      parent?.addDirt(ComponentDirt.paint);
 
   @override
   void update(int dirt) {

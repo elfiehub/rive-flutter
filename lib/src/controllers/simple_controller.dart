@@ -1,7 +1,7 @@
-import 'package:rive_legacy/src/extensions.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation_instance.dart';
-import 'package:rive_legacy/src/rive_core/rive_animation_controller.dart';
-import 'package:rive_legacy/src/runtime_artboard.dart';
+import 'package:rive/src/extensions.dart';
+import 'package:rive/src/rive_core/animation/linear_animation_instance.dart';
+import 'package:rive/src/rive_core/rive_animation_controller.dart';
+import 'package:rive/src/runtime_artboard.dart';
 
 /// A simple [RiveAnimationController] that plays back a LinearAnimation defined
 /// by an artist. All playback parameters (looping, speed, keyframes) are artist
@@ -27,7 +27,8 @@ class SimpleAnimation extends RiveAnimationController<RuntimeArtboard> {
   double _mix;
 
   // Controls the level of mix for the animation, clamped between 0 and 1
-  SimpleAnimation(this.animationName, {double mix = 1, this.autoplay = true}) : _mix = mix.clamp(0, 1).toDouble();
+  SimpleAnimation(this.animationName, {double mix = 1, this.autoplay = true})
+      : _mix = mix.clamp(0, 1).toDouble();
   LinearAnimationInstance? get instance => _instance;
   double get mix => _mix;
 

@@ -2,15 +2,16 @@
 // lib/src/generated/animation/linear_animation_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/animation.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/animation.dart';
 
 abstract class LinearAnimationBase extends Animation {
   static const int typeKey = 31;
   @override
   int get coreType => LinearAnimationBase.typeKey;
   @override
-  Set<int> get coreTypes => {LinearAnimationBase.typeKey, AnimationBase.typeKey};
+  Set<int> get coreTypes =>
+      {LinearAnimationBase.typeKey, AnimationBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// Fps field with key 56.

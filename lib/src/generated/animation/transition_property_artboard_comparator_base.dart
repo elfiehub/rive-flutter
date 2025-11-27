@@ -3,20 +3,21 @@
 // t.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/transition_comparator_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_property_comparator.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/transition_comparator_base.dart';
+import 'package:rive/src/rive_core/animation/transition_property_comparator.dart';
 
-abstract class TransitionPropertyArtboardComparatorBase extends TransitionPropertyComparator {
+abstract class TransitionPropertyArtboardComparatorBase
+    extends TransitionPropertyComparator {
   static const int typeKey = 496;
   @override
   int get coreType => TransitionPropertyArtboardComparatorBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    TransitionPropertyArtboardComparatorBase.typeKey,
-    TransitionPropertyComparatorBase.typeKey,
-    TransitionComparatorBase.typeKey,
-  };
+        TransitionPropertyArtboardComparatorBase.typeKey,
+        TransitionPropertyComparatorBase.typeKey,
+        TransitionComparatorBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// PropertyType field with key 677.

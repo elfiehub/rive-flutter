@@ -1,12 +1,12 @@
-import 'package:rive_legacy/src/generated/joystick_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
-import 'package:rive_legacy/src/rive_core/transform_component.dart';
-import 'package:rive_legacy/src/rive_core/world_transform_component.dart';
+import 'package:rive/src/generated/joystick_base.dart';
+import 'package:rive/src/rive_core/animation/linear_animation.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/container_component.dart';
+import 'package:rive/src/rive_core/transform_component.dart';
+import 'package:rive/src/rive_core/world_transform_component.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/joystick_base.dart';
+export 'package:rive/src/generated/joystick_base.dart';
 
 class JoystickFlags {
   /// Whether to invert the application of the x axis.
@@ -58,7 +58,8 @@ class Joystick extends JoystickBase {
     }
   }
 
-  bool get inWorldSpace => (joystickFlags & JoystickFlags.worldSpace) != 0 || handleSource != null;
+  bool get inWorldSpace =>
+      (joystickFlags & JoystickFlags.worldSpace) != 0 || handleSource != null;
   set inWorldSpace(bool value) {
     if (value) {
       joystickFlags |= JoystickFlags.worldSpace;
@@ -72,12 +73,18 @@ class Joystick extends JoystickBase {
 
     if (animation != null) {
       var value = invertX ? -x : x;
-      animation.apply((value + 1) / 2 * animation.durationSeconds, coreContext: context);
+      animation.apply(
+        (value + 1) / 2 * animation.durationSeconds,
+        coreContext: context,
+      );
     }
     animation = _yAnimation;
     if (animation != null) {
       var value = invertY ? -y : y;
-      animation.apply((value + 1) / 2 * animation.durationSeconds, coreContext: context);
+      animation.apply(
+        (value + 1) / 2 * animation.durationSeconds,
+        coreContext: context,
+      );
     }
   }
 
@@ -100,7 +107,8 @@ class Joystick extends JoystickBase {
   Mat2D computeWorldTransform() {
     var local = Mat2D.fromTranslation(position);
     if (parent is WorldTransformComponent) {
-      var world = Mat2D.multiply(Mat2D(), (parent as WorldTransformComponent).worldTransform, local);
+      var world = Mat2D.multiply(
+          Mat2D(), (parent as WorldTransformComponent).worldTransform, local);
       if (!inWorldSpace) {
         return Mat2D.fromTranslation(world.translation);
       }
@@ -109,7 +117,8 @@ class Joystick extends JoystickBase {
     return local;
   }
 
-  Mat2D get worldTransform => inWorldSpace ? _worldTransform : computeWorldTransform();
+  Mat2D get worldTransform =>
+      inWorldSpace ? _worldTransform : computeWorldTransform();
 
   @override
   void yChanged(double from, double to) {
@@ -196,11 +205,11 @@ class Joystick extends JoystickBase {
   double get stageHeight => isSliderX ? minStageSize : height;
 
   AABB get localBounds => AABB.fromValues(
-    -stageWidth * originX,
-    -stageHeight * originY,
-    -stageWidth * originX + stageWidth,
-    -stageHeight * originY + stageHeight,
-  );
+        -stageWidth * originX,
+        -stageHeight * originY,
+        -stageWidth * originX + stageWidth,
+        -stageHeight * originY + stageHeight,
+      );
 
   Mat2D get transform => Mat2D.fromTranslation(position);
 

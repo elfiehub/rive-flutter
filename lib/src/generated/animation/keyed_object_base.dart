@@ -2,7 +2,7 @@
 // lib/src/generated/animation/keyed_object_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
+import 'package:rive/src/core/core.dart';
 
 abstract class KeyedObjectBase<T extends CoreContext> extends Core<T> {
   static const int typeKey = 25;

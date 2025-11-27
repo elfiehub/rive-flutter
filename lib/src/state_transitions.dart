@@ -1,5 +1,5 @@
 import 'dart:collection';
-import 'package:rive_legacy/src/rive_core/animation/state_transition.dart';
+import 'package:rive/src/rive_core/animation/state_transition.dart';
 
 class StateTransitions extends ListBase<StateTransition> {
   final List<StateTransition?> _values = [];

@@ -1,8 +1,8 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/animation_base.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/animation_base.dart';
+import 'package:rive/src/rive_core/artboard.dart';
 
-export 'package:rive_legacy/src/generated/animation/animation_base.dart';
+export 'package:rive/src/generated/animation/animation_base.dart';
 
 class Animation extends AnimationBase<RuntimeArtboard> {
   Artboard? _artboard;

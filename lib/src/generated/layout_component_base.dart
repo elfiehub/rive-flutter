@@ -1,10 +1,10 @@
 // Core automatically generated lib/src/generated/layout_component_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/world_transform_component.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/world_transform_component.dart';
 
 abstract class LayoutComponentBase extends WorldTransformComponent {
   static const int typeKey = 409;
@@ -12,11 +12,11 @@ abstract class LayoutComponentBase extends WorldTransformComponent {
   int get coreType => LayoutComponentBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    LayoutComponentBase.typeKey,
-    WorldTransformComponentBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        LayoutComponentBase.typeKey,
+        WorldTransformComponentBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Clip field with key 196.

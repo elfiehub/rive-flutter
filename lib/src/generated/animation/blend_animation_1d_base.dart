@@ -2,15 +2,16 @@
 // lib/src/generated/animation/blend_animation_1d_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/blend_animation.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/blend_animation.dart';
 
 abstract class BlendAnimation1DBase extends BlendAnimation {
   static const int typeKey = 75;
   @override
   int get coreType => BlendAnimation1DBase.typeKey;
   @override
-  Set<int> get coreTypes => {BlendAnimation1DBase.typeKey, BlendAnimationBase.typeKey};
+  Set<int> get coreTypes =>
+      {BlendAnimation1DBase.typeKey, BlendAnimationBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// Value field with key 166.

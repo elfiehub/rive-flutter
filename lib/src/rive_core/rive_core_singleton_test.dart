@@ -1,7 +1,8 @@
-import 'package:rive_legacy/src/rive_core/animation/linear_animation.dart';
+import 'package:rive/src/rive_core/animation/linear_animation.dart';
 
 class RiveCoreSingletonTest {
-  static final RiveCoreSingletonTest _instance = RiveCoreSingletonTest._internal();
+  static final RiveCoreSingletonTest _instance =
+      RiveCoreSingletonTest._internal();
 
   final double num = 1.23;
   // bool isDebug = false;

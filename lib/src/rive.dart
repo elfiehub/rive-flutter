@@ -2,11 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:rive_legacy/src/controllers/state_machine_controller.dart';
-import 'package:rive_legacy/src/rive_core/artboard.dart';
-import 'package:rive_legacy/src/rive_core/state_machine_controller.dart' show HitResult;
-import 'package:rive_legacy/src/rive_render_box.dart';
-import 'package:rive_legacy/src/runtime_artboard.dart';
+import 'package:rive/src/controllers/state_machine_controller.dart';
+import 'package:rive/src/rive_core/artboard.dart';
+import 'package:rive/src/rive_core/state_machine_controller.dart'
+    show HitResult;
+import 'package:rive/src/rive_render_box.dart';
+import 'package:rive/src/runtime_artboard.dart';
 import 'package:rive_common/math.dart';
 
 /// How to behave during hit tests on Rive Listeners (hit targets).
@@ -143,7 +144,8 @@ class Rive extends LeafRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, covariant RiveRenderObject renderObject) {
+  void updateRenderObject(
+      BuildContext context, covariant RiveRenderObject renderObject) {
     final tickerModeValue = TickerMode.of(context);
     artboard.antialiasing = antialiasing;
     renderObject
@@ -170,8 +172,8 @@ class RiveRenderObject extends RiveRenderBox implements MouseTrackerAnnotation {
     this.behavior = RiveHitTestBehavior.opaque,
     MouseCursor cursor = MouseCursor.defer,
     bool validForMouseTracker = true,
-  }) : _cursor = cursor,
-       _validForMouseTracker = validForMouseTracker {
+  })  : _cursor = cursor,
+        _validForMouseTracker = validForMouseTracker {
     _artboard.redraw.addListener(scheduleRepaint);
   }
 
@@ -202,9 +204,11 @@ class RiveRenderObject extends RiveRenderBox implements MouseTrackerAnnotation {
   }
 
   /// Helper to manage hit testing
-  void _hitHelper(PointerEvent event, void Function(StateMachineController, Vec2D) callback) {
+  void _hitHelper(PointerEvent event,
+      void Function(StateMachineController, Vec2D) callback) {
     final artboardPosition = _toArtboard(event.localPosition);
-    final stateMachineControllers = _artboard.animationControllers.whereType<StateMachineController>();
+    final stateMachineControllers =
+        _artboard.animationControllers.whereType<StateMachineController>();
     for (final stateMachineController in stateMachineControllers) {
       callback(stateMachineController, artboardPosition);
     }
@@ -242,7 +246,8 @@ class RiveRenderObject extends RiveRenderBox implements MouseTrackerAnnotation {
         {
           // test to see if any Rive animation listeners were hit
           final artboardPosition = _toArtboard(screenOffset);
-          final stateMachineControllers = _artboard.animationControllers.whereType<StateMachineController>();
+          final stateMachineControllers = _artboard.animationControllers
+              .whereType<StateMachineController>();
           for (final stateMachineController in stateMachineControllers) {
             if (stateMachineController.hitTest(artboardPosition)) {
               return true;
@@ -283,27 +288,47 @@ class RiveRenderObject extends RiveRenderBox implements MouseTrackerAnnotation {
       });
     }
     if (event is PointerUpEvent) {
-      _hitHelper(event, (controller, artboardPosition) => controller.pointerUp(artboardPosition));
+      _hitHelper(
+        event,
+        (controller, artboardPosition) =>
+            controller.pointerUp(artboardPosition),
+      );
     }
     if (event is PointerMoveEvent) {
-      _hitHelper(event, (controller, artboardPosition) => controller.pointerMove(artboardPosition));
+      _hitHelper(
+        event,
+        (controller, artboardPosition) =>
+            controller.pointerMove(artboardPosition),
+      );
     }
     if (event is PointerHoverEvent) {
-      _hitHelper(event, (controller, artboardPosition) => controller.pointerMove(artboardPosition));
+      _hitHelper(
+        event,
+        (controller, artboardPosition) =>
+            controller.pointerMove(artboardPosition),
+      );
     }
   }
 
   @override
   PointerEnterEventListener? get onEnter => (event) {
-    if (!enableHitTests) return;
-    _hitHelper(event, (controller, artboardPosition) => controller.pointerEnter(artboardPosition));
-  };
+        if (!enableHitTests) return;
+        _hitHelper(
+          event,
+          (controller, artboardPosition) =>
+              controller.pointerEnter(artboardPosition),
+        );
+      };
 
   @override
   PointerExitEventListener? get onExit => (event) {
-    if (!enableHitTests) return;
-    _hitHelper(event, (controller, artboardPosition) => controller.pointerExit(artboardPosition));
-  };
+        if (!enableHitTests) return;
+        _hitHelper(
+          event,
+          (controller, artboardPosition) =>
+              controller.pointerExit(artboardPosition),
+        );
+      };
 
   @override
   MouseCursor get cursor => _cursor;
@@ -355,7 +380,8 @@ class RiveRenderObject extends RiveRenderBox implements MouseTrackerAnnotation {
 
   @override
   bool advance(double elapsedSeconds) =>
-      _artboard.isPlaying && _artboard.advance(elapsedSeconds * _speedMultiplier, nested: true);
+      _artboard.isPlaying &&
+      _artboard.advance(elapsedSeconds * _speedMultiplier, nested: true);
 
   @override
   void beforeDraw(Canvas canvas, Offset offset) {

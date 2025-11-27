@@ -1,8 +1,8 @@
 // Core automatically generated lib/src/generated/assets/file_asset_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/assets/asset.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/assets/asset.dart';
 
 abstract class FileAssetBase extends Asset {
   static const int typeKey = 103;
@@ -62,7 +62,8 @@ abstract class FileAssetBase extends Asset {
   /// --------------------------------------------------------------------------
   /// CdnBaseUrl field with key 362.
   static const int cdnBaseUrlPropertyKey = 362;
-  static const String cdnBaseUrlInitialValue = 'https://public.rive.app/cdn/uuid';
+  static const String cdnBaseUrlInitialValue =
+      'https://public.rive.app/cdn/uuid';
   String _cdnBaseUrl = cdnBaseUrlInitialValue;
 
   /// Set the base url of our cdn.

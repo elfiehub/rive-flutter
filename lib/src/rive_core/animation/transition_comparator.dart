@@ -1,10 +1,11 @@
-import 'package:rive_legacy/src/generated/animation/transition_comparator_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_condition.dart';
+import 'package:rive/src/generated/animation/transition_comparator_base.dart';
+import 'package:rive/src/rive_core/animation/transition_condition.dart';
 
-export 'package:rive_legacy/src/generated/animation/transition_comparator_base.dart';
+export 'package:rive/src/generated/animation/transition_comparator_base.dart';
 
 abstract class TransitionComparator extends TransitionComparatorBase {
-  bool compareNumbers(double left, double right, TransitionConditionOp operation) {
+  bool compareNumbers(
+      double left, double right, TransitionConditionOp operation) {
     switch (operation) {
       case TransitionConditionOp.equal:
         return left == right;
@@ -32,7 +33,8 @@ abstract class TransitionComparator extends TransitionComparatorBase {
     }
   }
 
-  bool compare(TransitionComparator comparand, TransitionConditionOp operation) {
+  bool compare(
+      TransitionComparator comparand, TransitionConditionOp operation) {
     return false;
   }
 }

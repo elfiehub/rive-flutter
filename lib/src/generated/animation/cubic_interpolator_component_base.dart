@@ -2,15 +2,16 @@
 // lib/src/generated/animation/cubic_interpolator_component_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/component.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/component.dart';
 
 abstract class CubicInterpolatorComponentBase extends Component {
   static const int typeKey = 163;
   @override
   int get coreType => CubicInterpolatorComponentBase.typeKey;
   @override
-  Set<int> get coreTypes => {CubicInterpolatorComponentBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes =>
+      {CubicInterpolatorComponentBase.typeKey, ComponentBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// X1 field with key 337.

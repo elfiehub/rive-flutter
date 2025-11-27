@@ -1,17 +1,17 @@
 import 'dart:ui' as ui;
 
 import 'package:collection/collection.dart';
-import 'package:rive_legacy/src/generated/shapes/shape_base.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/shapes/paint/linear_gradient.dart' as core;
-import 'package:rive_legacy/src/rive_core/shapes/paint/shape_paint_mutator.dart';
-import 'package:rive_legacy/src/rive_core/shapes/paint/stroke.dart';
-import 'package:rive_legacy/src/rive_core/shapes/path.dart';
-import 'package:rive_legacy/src/rive_core/shapes/path_composer.dart';
-import 'package:rive_legacy/src/rive_core/shapes/shape_paint_container.dart';
+import 'package:rive/src/generated/shapes/shape_base.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/shapes/paint/linear_gradient.dart' as core;
+import 'package:rive/src/rive_core/shapes/paint/shape_paint_mutator.dart';
+import 'package:rive/src/rive_core/shapes/paint/stroke.dart';
+import 'package:rive/src/rive_core/shapes/path.dart';
+import 'package:rive/src/rive_core/shapes/path_composer.dart';
+import 'package:rive/src/rive_core/shapes/shape_paint_container.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/shapes/shape_base.dart';
+export 'package:rive/src/generated/shapes/shape_base.dart';
 
 class Shape extends ShapeBase with ShapePaintContainer {
   final Set<Path> paths = {};
@@ -156,7 +156,10 @@ class Shape extends ShapeBase with ShapePaintContainer {
 
       // Gradients almost always fill in local space, unless they are bound to
       // bones.
-      var mustFillLocal = fills.firstWhereOrNull((fill) => fill.paintMutator is core.LinearGradient) != null;
+      var mustFillLocal = fills.firstWhereOrNull(
+            (fill) => fill.paintMutator is core.LinearGradient,
+          ) !=
+          null;
       if (mustFillLocal) {
         _fillInWorld = false;
         _wantLocalPath = true;
@@ -191,7 +194,8 @@ class Shape extends ShapeBase with ShapePaintContainer {
     var path = boundsPaths.first;
     AABB worldBounds = path.preciseComputeBounds(transform: path.pathTransform);
     for (final path in boundsPaths.skip(1)) {
-      AABB.combine(worldBounds, worldBounds, path.preciseComputeBounds(transform: path.pathTransform));
+      AABB.combine(worldBounds, worldBounds,
+          path.preciseComputeBounds(transform: path.pathTransform));
     }
     return worldBounds;
   }
@@ -203,13 +207,25 @@ class Shape extends ShapeBase with ShapePaintContainer {
     }
     var path = boundsPaths.first;
 
-    AABB localBounds = path.preciseComputeBounds(transform: Mat2D.multiply(Mat2D(), relativeTo, path.pathTransform));
+    AABB localBounds = path.preciseComputeBounds(
+      transform: Mat2D.multiply(
+        Mat2D(),
+        relativeTo,
+        path.pathTransform,
+      ),
+    );
 
     for (final path in paths.skip(1)) {
       AABB.combine(
         localBounds,
         localBounds,
-        path.preciseComputeBounds(transform: Mat2D.multiply(Mat2D(), relativeTo, path.pathTransform)),
+        path.preciseComputeBounds(
+          transform: Mat2D.multiply(
+            Mat2D(),
+            relativeTo,
+            path.pathTransform,
+          ),
+        ),
       );
     }
     return localBounds;
@@ -248,7 +264,9 @@ class Shape extends ShapeBase with ShapePaintContainer {
     for (final stroke in strokes) {
       // stroke.draw(canvas, _pathComposer);
       var transformAffectsStroke = stroke.transformAffectsStroke;
-      var path = transformAffectsStroke ? pathComposer.localPath : pathComposer.worldPath;
+      var path = transformAffectsStroke
+          ? pathComposer.localPath
+          : pathComposer.worldPath;
 
       if (transformAffectsStroke) {
         // Get into world space.

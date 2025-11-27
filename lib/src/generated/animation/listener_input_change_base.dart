@@ -2,15 +2,16 @@
 // lib/src/generated/animation/listener_input_change_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/rive_core/animation/listener_action.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/rive_core/animation/listener_action.dart';
 
 abstract class ListenerInputChangeBase extends ListenerAction {
   static const int typeKey = 116;
   @override
   int get coreType => ListenerInputChangeBase.typeKey;
   @override
-  Set<int> get coreTypes => {ListenerInputChangeBase.typeKey, ListenerActionBase.typeKey};
+  Set<int> get coreTypes =>
+      {ListenerInputChangeBase.typeKey, ListenerActionBase.typeKey};
 
   /// --------------------------------------------------------------------------
   /// InputId field with key 227.

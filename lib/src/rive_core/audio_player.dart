@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:rive_legacy/src/rive_core/assets/audio_asset.dart';
+import 'package:rive/src/rive_core/assets/audio_asset.dart';
 import 'package:rive_common/rive_audio.dart';
 
 class AudioPlayer {
@@ -51,11 +51,16 @@ class AudioPlayer {
     isPlaying.value = true;
 
     var sound = engine.play(
-      source,
-      engineTime,
-      endTime == null ? 0 : (engineTime + (endTime - startTime).inMicroseconds * 1e-6 * engine.sampleRate).round(),
-      (startTime.inMicroseconds * 1e-6 * engine.sampleRate).round(),
-    );
+        source,
+        engineTime,
+        endTime == null
+            ? 0
+            : (engineTime +
+                    (endTime - startTime).inMicroseconds *
+                        1e-6 *
+                        engine.sampleRate)
+                .round(),
+        (startTime.inMicroseconds * 1e-6 * engine.sampleRate).round());
     if (volume != 1) {
       sound.volume = volume;
     }

@@ -2,7 +2,7 @@
 // lib/src/generated/data_bind/converters/data_converter_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
+import 'package:rive/src/core/core.dart';
 
 abstract class DataConverterBase<T extends CoreContext> extends Core<T> {
   static const int typeKey = 488;

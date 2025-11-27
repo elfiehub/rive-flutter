@@ -1,8 +1,8 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/nested_trigger_base.dart';
-import 'package:rive_legacy/src/rive_core/notifier.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/nested_trigger_base.dart';
+import 'package:rive/src/rive_core/notifier.dart';
 
-export 'package:rive_legacy/src/generated/animation/nested_trigger_base.dart';
+export 'package:rive/src/generated/animation/nested_trigger_base.dart';
 
 class NestedTrigger extends NestedTriggerBase {
   final Notifier firedTrigger = Notifier();

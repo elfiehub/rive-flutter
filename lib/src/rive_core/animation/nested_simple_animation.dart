@@ -1,8 +1,8 @@
-import 'package:rive_legacy/src/generated/animation/nested_simple_animation_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/nested_artboard.dart';
+import 'package:rive/src/generated/animation/nested_simple_animation_base.dart';
+import 'package:rive/src/rive_core/animation/nested_linear_animation.dart';
+import 'package:rive/src/rive_core/nested_artboard.dart';
 
-export 'package:rive_legacy/src/generated/animation/nested_simple_animation_base.dart';
+export 'package:rive/src/generated/animation/nested_simple_animation_base.dart';
 
 class NestedSimpleAnimation extends NestedSimpleAnimationBase {
   @override
@@ -14,7 +14,8 @@ class NestedSimpleAnimation extends NestedSimpleAnimationBase {
   }
 
   @override
-  void linearAnimationInstanceChanged(NestedLinearAnimationInstance? from, NestedLinearAnimationInstance? to) {
+  void linearAnimationInstanceChanged(
+      NestedLinearAnimationInstance? from, NestedLinearAnimationInstance? to) {
     to?.speed = speed;
   }
 

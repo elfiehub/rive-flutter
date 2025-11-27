@@ -1,17 +1,17 @@
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
-import 'package:rive_legacy/src/generated/text/text_modifier_group_base.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
-import 'package:rive_legacy/src/rive_core/text/text.dart';
-import 'package:rive_legacy/src/rive_core/text/text_modifier.dart';
-import 'package:rive_legacy/src/rive_core/text/text_modifier_range.dart';
-import 'package:rive_legacy/src/rive_core/text/text_shape_modifier.dart';
-import 'package:rive_legacy/src/rive_core/text/text_variation_modifier.dart';
+import 'package:rive/src/generated/text/text_modifier_group_base.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
+import 'package:rive/src/rive_core/text/text.dart';
+import 'package:rive/src/rive_core/text/text_modifier.dart';
+import 'package:rive/src/rive_core/text/text_modifier_range.dart';
+import 'package:rive/src/rive_core/text/text_shape_modifier.dart';
+import 'package:rive/src/rive_core/text/text_variation_modifier.dart';
 import 'package:rive_common/math.dart';
 import 'package:rive_common/rive_text.dart';
 
-export 'package:rive_legacy/src/generated/text/text_modifier_group_base.dart';
+export 'package:rive/src/generated/text/text_modifier_group_base.dart';
 
 class TextModifierFlags {
   static const int modifyOrigin = 1 << 0;
@@ -31,12 +31,14 @@ class TextModifierGroup extends TextModifierGroupBase {
   List<TextModifier> get modifiers => _modifiers;
   Iterable<TextModifierRange> get ranges => _ranges;
 
-  bool get needsShape => _shapeModifiers.isNotEmpty || _ranges.any((range) => range.needsShape);
+  bool get needsShape =>
+      _shapeModifiers.isNotEmpty || _ranges.any((range) => range.needsShape);
 
   void _syncModifiers() {
     _ranges = children.whereType<TextModifierRange>().toList(growable: false);
     _modifiers = children.whereType<TextModifier>().toList(growable: false);
-    _shapeModifiers = _modifiers.whereType<TextShapeModifier>().toList(growable: false);
+    _shapeModifiers =
+        _modifiers.whereType<TextShapeModifier>().toList(growable: false);
   }
 
   @override
@@ -77,7 +79,8 @@ class TextModifierGroup extends TextModifierGroupBase {
   @visibleForTesting
   Float32List get coverageValues => _coverage;
 
-  void computeRangeMap(String text, TextShapeResult? shape, BreakLinesResult? lines, GlyphLookup glyphLookup) {
+  void computeRangeMap(String text, TextShapeResult? shape,
+      BreakLinesResult? lines, GlyphLookup glyphLookup) {
     for (final range in _ranges) {
       range.computeRange(text, shape, lines, glyphLookup);
     }
@@ -130,30 +133,45 @@ class TextModifierGroup extends TextModifierGroupBase {
     double fontSize = run.fontSize;
     for (final modifier in _shapeModifiers) {
       // ignore: parameter_assignments
-      fontSize = modifier.modify(text, font, axisVariations, fontSize, strength);
+      fontSize =
+          modifier.modify(text, font, axisVariations, fontSize, strength);
     }
 
     if (axisVariations.isNotEmpty) {
-      var varFont = font.withOptions(axisVariations.entries.map((entry) => FontAxisCoord(entry.key, entry.value)), []);
+      var varFont = font.withOptions(
+        axisVariations.entries
+            .map((entry) => FontAxisCoord(entry.key, entry.value)),
+        [],
+      );
       if (varFont != null) {
         _cleanupFonts.add(varFont);
         font = varFont;
       }
     }
-    return run.copyWith(font: font, userData: axisVariations, fontSize: fontSize);
+    return run.copyWith(
+      font: font,
+      userData: axisVariations,
+      fontSize: fontSize,
+    );
   }
 
-  bool get modifiesOpacity => (modifierFlags & TextModifierFlags.modifyOpacity) != 0;
+  bool get modifiesOpacity =>
+      (modifierFlags & TextModifierFlags.modifyOpacity) != 0;
 
-  bool get opacityInverted => (modifierFlags & TextModifierFlags.invertOpacity) != 0;
+  bool get opacityInverted =>
+      (modifierFlags & TextModifierFlags.invertOpacity) != 0;
 
-  bool get modifiesTranslation => (modifierFlags & TextModifierFlags.modifyTranslation) != 0;
+  bool get modifiesTranslation =>
+      (modifierFlags & TextModifierFlags.modifyTranslation) != 0;
 
-  bool get modifiesOrigin => (modifierFlags & TextModifierFlags.modifyOrigin) != 0;
+  bool get modifiesOrigin =>
+      (modifierFlags & TextModifierFlags.modifyOrigin) != 0;
 
-  bool get modifiesScale => (modifierFlags & TextModifierFlags.modifyScale) != 0;
+  bool get modifiesScale =>
+      (modifierFlags & TextModifierFlags.modifyScale) != 0;
 
-  bool get modifiesRotation => (modifierFlags & TextModifierFlags.modifyRotation) != 0;
+  bool get modifiesRotation =>
+      (modifierFlags & TextModifierFlags.modifyRotation) != 0;
 
   bool get modifiesTransform =>
       (modifierFlags &
@@ -163,7 +181,9 @@ class TextModifierGroup extends TextModifierGroupBase {
               TextModifierFlags.modifyOrigin)) !=
       0;
 
-  bool modifiesAxes(int tag) => modifiers.whereType<TextVariationModifier>().any((modifier) => modifier.axisTag == tag);
+  bool modifiesAxes(int tag) => modifiers
+      .whereType<TextVariationModifier>()
+      .any((modifier) => modifier.axisTag == tag);
 
   double computeOpacity(double current, double t) {
     if (opacityInverted) {
@@ -198,7 +218,8 @@ class TextModifierGroup extends TextModifierGroupBase {
       transform[5] = y * t;
     }
     if (modifiesScale) {
-      Mat2D.scaleByValues(transform, (1 - t) + scaleX * t, (1 - t) + scaleY * t);
+      Mat2D.scaleByValues(
+          transform, (1 - t) + scaleX * t, (1 - t) + scaleY * t);
     }
     if (modifiesOrigin) {
       glyphTransform[4] += originX;
@@ -238,9 +259,13 @@ class TextModifierGroup extends TextModifierGroupBase {
           if (index - extractRunIndex != 0) {
             // Add new run from extractRunStart to index (exclusive)
             if (lastCoverage == 0) {
-              nextTextRuns.add(run.copyWith(unicharCount: index - extractRunIndex));
+              nextTextRuns
+                  .add(run.copyWith(unicharCount: index - extractRunIndex));
             } else {
-              nextTextRuns.add(modifyShape(text, run.copyWith(unicharCount: index - extractRunIndex), lastCoverage));
+              nextTextRuns.add(modifyShape(
+                  text,
+                  run.copyWith(unicharCount: index - extractRunIndex),
+                  lastCoverage));
             }
           }
           lastCoverage = coverage;
@@ -254,7 +279,8 @@ class TextModifierGroup extends TextModifierGroupBase {
       if (lastCoverage == 0) {
         nextTextRuns.add(run.copyWith(unicharCount: end - extractRunIndex));
       } else {
-        nextTextRuns.add(modifyShape(text, run.copyWith(unicharCount: end - extractRunIndex), lastCoverage));
+        nextTextRuns.add(modifyShape(text,
+            run.copyWith(unicharCount: end - extractRunIndex), lastCoverage));
       }
       extractRunIndex = end;
     }
@@ -267,14 +293,18 @@ class TextModifierGroup extends TextModifierGroupBase {
   }
 
   @override
-  void opacityChanged(double from, double to) => textComponent?.markPaintDirty();
+  void opacityChanged(double from, double to) =>
+      textComponent?.markPaintDirty();
   @override
-  void originXChanged(double from, double to) => textComponent?.markPaintDirty();
+  void originXChanged(double from, double to) =>
+      textComponent?.markPaintDirty();
 
   @override
-  void originYChanged(double from, double to) => textComponent?.markPaintDirty();
+  void originYChanged(double from, double to) =>
+      textComponent?.markPaintDirty();
   @override
-  void rotationChanged(double from, double to) => textComponent?.markPaintDirty();
+  void rotationChanged(double from, double to) =>
+      textComponent?.markPaintDirty();
 
   @override
   void scaleXChanged(double from, double to) => textComponent?.markPaintDirty();

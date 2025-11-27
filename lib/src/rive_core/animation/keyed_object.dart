@@ -1,20 +1,22 @@
 import 'dart:collection';
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/animation/keyed_object_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/keyed_property.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/animation/keyed_object_base.dart';
+import 'package:rive/src/rive_core/animation/keyed_property.dart';
 
 import 'linear_animation.dart';
 
-export 'package:rive_legacy/src/generated/animation/keyed_object_base.dart';
+export 'package:rive/src/generated/animation/keyed_object_base.dart';
 
 // ignore: one_member_abstracts
 abstract class KeyedCallbackReporter {
-  void reportKeyedCallback(int objectId, int propertyKey, double elapsedSeconds);
+  void reportKeyedCallback(
+      int objectId, int propertyKey, double elapsedSeconds);
 }
 
 class KeyedObject extends KeyedObjectBase<RuntimeArtboard> {
-  final HashMap<int, KeyedProperty> _keyedProperties = HashMap<int, KeyedProperty>();
+  final HashMap<int, KeyedProperty> _keyedProperties =
+      HashMap<int, KeyedProperty>();
 
   Iterable<KeyedProperty> get keyedProperties => _keyedProperties.values;
 
@@ -71,7 +73,8 @@ class KeyedObject extends KeyedObjectBase<RuntimeArtboard> {
     required KeyedCallbackReporter reporter,
     bool isAtStartFrame = false,
   }) {
-    for (final keyedProperty in _keyedProperties.values.where((property) => property.isCallback)) {
+    for (final keyedProperty
+        in _keyedProperties.values.where((property) => property.isCallback)) {
       keyedProperty.reportKeyedCallbacks(
         objectId,
         secondsFrom,
@@ -82,7 +85,11 @@ class KeyedObject extends KeyedObjectBase<RuntimeArtboard> {
     }
   }
 
-  void apply(double time, double mix, CoreContext coreContext) {
+  void apply(
+    double time,
+    double mix,
+    CoreContext coreContext,
+  ) {
     Core? object = coreContext.resolve(objectId);
     if (object == null) {
       return;
@@ -100,7 +107,8 @@ class KeyedObject extends KeyedObjectBase<RuntimeArtboard> {
 
   @override
   bool import(ImportStack stack) {
-    var animationHelper = stack.latest<LinearAnimationImporter>(LinearAnimationBase.typeKey);
+    var animationHelper =
+        stack.latest<LinearAnimationImporter>(LinearAnimationBase.typeKey);
     if (animationHelper == null) {
       return false;
     }

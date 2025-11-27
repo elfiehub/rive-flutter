@@ -2,16 +2,20 @@
 // lib/src/generated/shapes/paint/linear_gradient_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/container_component.dart';
 
 abstract class LinearGradientBase extends ContainerComponent {
   static const int typeKey = 22;
   @override
   int get coreType => LinearGradientBase.typeKey;
   @override
-  Set<int> get coreTypes => {LinearGradientBase.typeKey, ContainerComponentBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes => {
+        LinearGradientBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// StartX field with key 42.

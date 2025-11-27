@@ -1,9 +1,9 @@
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/draw_target_base.dart';
-import 'package:rive_legacy/src/rive_core/drawable.dart';
-import 'package:rive_legacy/src/rive_core/enum_helper.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/draw_target_base.dart';
+import 'package:rive/src/rive_core/drawable.dart';
+import 'package:rive/src/rive_core/enum_helper.dart';
 
-export 'package:rive_legacy/src/generated/draw_target_base.dart';
+export 'package:rive/src/generated/draw_target_base.dart';
 
 enum DrawTargetPlacement { before, after }
 
@@ -23,7 +23,8 @@ class DrawTarget extends DrawTargetBase {
     drawableId = value?.id ?? Core.missingId;
   }
 
-  DrawTargetPlacement get placement => enumAt(DrawTargetPlacement.values, placementValue);
+  DrawTargetPlacement get placement =>
+      enumAt(DrawTargetPlacement.values, placementValue);
   set placement(DrawTargetPlacement value) => placementValue = value.index;
 
   @override

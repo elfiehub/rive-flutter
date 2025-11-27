@@ -2,10 +2,10 @@
 // lib/src/generated/constraints/distance_constraint_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/constraints/constraint_base.dart';
-import 'package:rive_legacy/src/rive_core/constraints/targeted_constraint.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/constraints/constraint_base.dart';
+import 'package:rive/src/rive_core/constraints/targeted_constraint.dart';
 
 abstract class DistanceConstraintBase extends TargetedConstraint {
   static const int typeKey = 82;
@@ -13,11 +13,11 @@ abstract class DistanceConstraintBase extends TargetedConstraint {
   int get coreType => DistanceConstraintBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    DistanceConstraintBase.typeKey,
-    TargetedConstraintBase.typeKey,
-    ConstraintBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        DistanceConstraintBase.typeKey,
+        TargetedConstraintBase.typeKey,
+        ConstraintBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Distance field with key 177.

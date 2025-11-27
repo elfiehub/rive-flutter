@@ -2,23 +2,24 @@
 // lib/src/generated/animation/nested_linear_animation_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/linear_animation.dart';
-import 'package:rive_legacy/src/rive_core/nested_animation.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/animation/linear_animation.dart';
+import 'package:rive/src/rive_core/nested_animation.dart';
 
-abstract class NestedLinearAnimationBase extends NestedAnimation<LinearAnimation> {
+abstract class NestedLinearAnimationBase
+    extends NestedAnimation<LinearAnimation> {
   static const int typeKey = 97;
   @override
   int get coreType => NestedLinearAnimationBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    NestedLinearAnimationBase.typeKey,
-    NestedAnimationBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        NestedLinearAnimationBase.typeKey,
+        NestedAnimationBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Mix field with key 200.

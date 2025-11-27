@@ -1,10 +1,11 @@
-import 'package:rive_legacy/src/generated/animation/transition_value_color_comparator_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_comparator.dart';
-import 'package:rive_legacy/src/rive_core/animation/transition_condition.dart';
+import 'package:rive/src/generated/animation/transition_value_color_comparator_base.dart';
+import 'package:rive/src/rive_core/animation/transition_comparator.dart';
+import 'package:rive/src/rive_core/animation/transition_condition.dart';
 
-export 'package:rive_legacy/src/generated/animation/transition_value_color_comparator_base.dart';
+export 'package:rive/src/generated/animation/transition_value_color_comparator_base.dart';
 
-class TransitionValueColorComparator extends TransitionValueColorComparatorBase {
+class TransitionValueColorComparator
+    extends TransitionValueColorComparatorBase {
   @override
   void valueChanged(int from, int to) {}
 
@@ -15,7 +16,8 @@ class TransitionValueColorComparator extends TransitionValueColorComparatorBase 
   void onAddedDirty() {}
 
   @override
-  bool compare(TransitionComparator comparand, TransitionConditionOp operation) {
+  bool compare(
+      TransitionComparator comparand, TransitionConditionOp operation) {
     return false;
   }
 }

@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/shapes/cubic_asymmetric_vertex_base.dart';
-import 'package:rive_legacy/src/rive_core/component_dirt.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/shapes/cubic_asymmetric_vertex_base.dart';
+import 'package:rive/src/rive_core/component_dirt.dart';
 import 'package:rive_common/math.dart';
 
-export 'package:rive_legacy/src/generated/shapes/cubic_asymmetric_vertex_base.dart';
+export 'package:rive/src/generated/shapes/cubic_asymmetric_vertex_base.dart';
 
 class CubicAsymmetricVertex extends CubicAsymmetricVertexBase {
   CubicAsymmetricVertex();
@@ -36,9 +36,8 @@ class CubicAsymmetricVertex extends CubicAsymmetricVertexBase {
   @override
   Vec2D get outPoint {
     return _outPoint ??= Vec2D.fromValues(
-      translation.x + cos(rotation) * outDistance,
-      translation.y + sin(rotation) * outDistance,
-    );
+        translation.x + cos(rotation) * outDistance,
+        translation.y + sin(rotation) * outDistance);
   }
 
   @override
@@ -49,9 +48,8 @@ class CubicAsymmetricVertex extends CubicAsymmetricVertexBase {
   @override
   Vec2D get inPoint {
     return _inPoint ??= Vec2D.fromValues(
-      translation.x + cos(rotation) * -inDistance,
-      translation.y + sin(rotation) * -inDistance,
-    );
+        translation.x + cos(rotation) * -inDistance,
+        translation.y + sin(rotation) * -inDistance);
   }
 
   @override

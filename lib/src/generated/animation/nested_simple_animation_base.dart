@@ -2,11 +2,11 @@
 // lib/src/generated/animation/nested_simple_animation_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/core/core.dart';
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/generated/nested_animation_base.dart';
-import 'package:rive_legacy/src/rive_core/animation/nested_linear_animation.dart';
+import 'package:rive/src/core/core.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/generated/nested_animation_base.dart';
+import 'package:rive/src/rive_core/animation/nested_linear_animation.dart';
 
 abstract class NestedSimpleAnimationBase extends NestedLinearAnimation {
   static const int typeKey = 96;
@@ -14,12 +14,12 @@ abstract class NestedSimpleAnimationBase extends NestedLinearAnimation {
   int get coreType => NestedSimpleAnimationBase.typeKey;
   @override
   Set<int> get coreTypes => {
-    NestedSimpleAnimationBase.typeKey,
-    NestedLinearAnimationBase.typeKey,
-    NestedAnimationBase.typeKey,
-    ContainerComponentBase.typeKey,
-    ComponentBase.typeKey,
-  };
+        NestedSimpleAnimationBase.typeKey,
+        NestedLinearAnimationBase.typeKey,
+        NestedAnimationBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// Speed field with key 199.

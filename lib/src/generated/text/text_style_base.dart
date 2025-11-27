@@ -1,16 +1,20 @@
 // Core automatically generated lib/src/generated/text/text_style_base.dart.
 // Do not modify manually.
 
-import 'package:rive_legacy/src/generated/component_base.dart';
-import 'package:rive_legacy/src/generated/container_component_base.dart';
-import 'package:rive_legacy/src/rive_core/container_component.dart';
+import 'package:rive/src/generated/component_base.dart';
+import 'package:rive/src/generated/container_component_base.dart';
+import 'package:rive/src/rive_core/container_component.dart';
 
 abstract class TextStyleBase extends ContainerComponent {
   static const int typeKey = 137;
   @override
   int get coreType => TextStyleBase.typeKey;
   @override
-  Set<int> get coreTypes => {TextStyleBase.typeKey, ContainerComponentBase.typeKey, ComponentBase.typeKey};
+  Set<int> get coreTypes => {
+        TextStyleBase.typeKey,
+        ContainerComponentBase.typeKey,
+        ComponentBase.typeKey
+      };
 
   /// --------------------------------------------------------------------------
   /// FontSize field with key 274.
